@@ -11,18 +11,18 @@ function PCard({ product }) {
       onClick={() => {
         navigate("/cart", { state: { product } });
       }}
-      className="transform hover:scale-105 transition duration-400 flex flex-col px-2 shadow-md w-48 my-2 border border-gray-200 pb-3 cursor-pointer bg-white rounded-sm"
+      className="transform hover:scale-105 transition h-48 md:h-60 duration-400 flex flex-col px-2 shadow-md w-40 md:w-48 my-2 border border-gray-200 pb-3 cursor-pointer bg-white rounded-sm"
     >
       <div className="relative">
-        <img src={`http://localhost:3001${image}`} alt="" className="w-full h-32" />
-        <span className="absolute top-0 bg-red-500 p-0.5 px-2 m-1 ml-0 rounded-md text-white text-xs">
+        <img src={`http://localhost:3001${image}`} alt="" className="w-full h-24 md:h-32 " />
+        <span className="absolute top-0 bg-red-500 px-0.5 md:p-0.5 md:px-2 md:m-1 -ml-2 md:ml-0 rounded-sm md:rounded-md text-white text-xs">
           {offer_percentage}% OFF
         </span>
       </div>
 
       <div className="mt-1">
-        <p className="text-sm pr-4 capitalize">
-          {title}...
+        <p className="text-xs md:text-sm md:pr-4 capitalize">
+          {title.substring(0, 45)}...
         </p>
       </div>
       <div className="flex items-center justify-between">
@@ -33,8 +33,8 @@ function PCard({ product }) {
         </p>
         <BsFillCartFill className="text-lg text-orange-600" />
       </div>
-      <div className="my-2 mt-3">
-        <span className="text-white bg-green-500 p-0.5 px-2 rounded-md text-sm">
+      <div className="my-1 md:my-2 md:mt-3">
+        <span className="text-white bg-green-500 px-1 md:p-0.5 pb-0.5 md:px-2 rounded-sm md:rounded-md text-xs md:text-sm">
           Free delivery
         </span>
       </div>

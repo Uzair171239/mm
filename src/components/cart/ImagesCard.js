@@ -29,12 +29,12 @@ function ImagesCard({ product }) {
   const { discount } = product;
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col flex-1 pb-2 border border-gray-300  shadow-sm cursor-zoom-in bg-white ">
+      <div className="flex flex-col flex-1 pb-2 border border-gray-300  shadow-sm  bg-white ">
         <div className="flex-1">
           <img
             src={`http://localhost:3001${prev}`}
             alt=""
-            className="w-full h-96 cursor-zoom-in"
+            className="w-full h-72 md:h-96 "
           />
         </div>
         <div className="flex justify-between items-center">
@@ -48,23 +48,23 @@ function ImagesCard({ product }) {
       </div>
 
       <div className="flex   items-center space-x-1 mt-2 ">
-        <div className="border-2 border-green-400 w-28 cursor-pointer">
+        <div className="border-2 border-green-400 w-16 md:w-28 cursor-pointer">
           <img
             src={`http://localhost:3001${product.image}`}
             alt=""
-            className="w-full h-24 bg-contain"
+            className="w-full h-16 md:h-24 bg-contain"
             onClick={() => setPrev(product.image)}
           />
         </div>
         {images.map((image) => (
           <div
-            className="border-2 border-green-400 w-28 cursor-pointer"
+            className="border-2 border-green-400 w-16 md:w-28 cursor-pointer"
             key={image.id}
           >
             <img
               src={`http://localhost:3001${image.image}`}
               alt=""
-              className="w-full h-24 bg-contain"
+              className="w-full h-16 md:h-24 bg-contain"
               onClick={() => setPrev(image.image)}
             />
           </div>
