@@ -1,0 +1,29 @@
+@tailwind base;
+body {
+  background-color: #f6f7f9;
+  overflow-x: hidden;
+}
+.custom_scrollbar_hide::-webkit-scrollbar {
+  display: none;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 50px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 50px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 50px;
+}
+
+@import "react-slideshow-image/dist/styles.css";
+@tailwind components;
+@tailwind utilities;
