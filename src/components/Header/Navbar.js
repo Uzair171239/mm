@@ -3,7 +3,7 @@ import React from "react";
 function Navbar({filter}) {
   return (
     <div
-      className="flex px-5 py-4 justify-between items-center  whitespace-nowrap
+      className="flex px-0 md:px-5 py-4 justify-between items-center  whitespace-nowrap
      overflow-x-scroll  custom_scrollbar_hide space-x-4 lg:space-x-0"
     >
       <button

@@ -28,23 +28,24 @@ function ImagesCard({ product }) {
   }, []);
   const { discount } = product;
   return (
-    <div className="flex flex-col">
-      <div className="flex flex-col flex-1 pb-2 border border-gray-300  shadow-sm  bg-white ">
+    <div className="flex flex-col ">
+      <div className="flex-1 border border-gray-300  shadow-sm  bg-white relative">
+      <div className="flex justify-between items-center absolute w-full">
+      <span className="text-white bg-green-500 px-3 w-fit text-sm">
+        Free delivery
+      </span>
+      <span className="bg-red-600 px-3 text-white text-sm w-fit">
+        {discount}% OFF
+      </span>
+    </div>
         <div className="flex-1">
           <img
             src={`http://localhost:3001${prev}`}
             alt=""
-            className="w-full h-72 md:h-96 "
+            className="w-full h-full object-cover "
           />
         </div>
-        <div className="flex justify-between items-center">
-          <span className="text-white bg-green-500  px-3 rounded-md w-fit">
-            Free delivery
-          </span>
-          <span className=" bg-red-600 px-2 rounded-md  text-white text-sm">
-            {discount}% OFF
-          </span>
-        </div>
+       
       </div>
 
       <div className="flex   items-center space-x-1 mt-2 ">

@@ -19,7 +19,7 @@ function Searchbar(filter) {
           className="flex-1 pl-2   placeholder:text-gray-300  placeholder:font-sance outline-none"
           placeholder="Search"
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => filter(e.target.value)}
         />
       </div>
       <div>

@@ -4,6 +4,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 // import Select from "react-select";
 // import countryList from "react-select-country-list";
+import {BsCartCheckFill} from "react-icons/bs";
 
 const schema = yup.object({
   fullName: yup
@@ -29,9 +30,9 @@ function Form({ product }) {
   const { price, oldPrice } = product;
   // const options = useMemo(() => countryList().getData(), []);
   return (
-    <div className="flex flex-col space-y-1 px-2 bg-white border border-gray-300 shadow-sm py-2">
+    <div className="flex flex-col space-y-1 px-3 bg-white border border-gray-300 shadow-sm py-10 h-fit">
       <h1 className="text-3xl font-semibold ">IVD Glucometer Set</h1>
-      <p className="text-green-500 text-sm font-semibold">671 sold</p>
+      <p className="text-green-500 text-sm font-semibold flex items-baseline "><BsCartCheckFill className="mr-2"/>671 sold</p>
       <div className="flex space-x-4 py-1">
         <h2 className="font-semibold">{price} AED</h2>
         <p className="text-gray-500 line-through">{oldPrice} AED</p>

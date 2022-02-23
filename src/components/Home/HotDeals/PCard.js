@@ -11,8 +11,8 @@ function PCard({ product }) {
       onClick={() => {
         navigate("/cart", { state: { product } });
       }}
-      className="transform hover:scale-105 transition h-48 md:h-60 duration-400 flex flex-col px-2 shadow-md w-40 md:w-48 my-2 border border-gray-200 pb-3 cursor-pointer bg-white rounded-sm"
-    >
+      className="transform hover:scale-105  transition duration-400 h-48 md:h-60  flex flex-col px-2 shadow-md w-40 md:w-48 my-2 border border-gray-200  cursor-pointer bg-white rounded-sm"
+     >
       <div className="relative">
         <img src={`http://localhost:3001${image}`} alt="" className="w-full h-24 md:h-32 " />
         <span className="absolute top-0 bg-red-500 px-0.5 md:p-0.5 md:px-2 md:m-1 -ml-2 md:ml-0 rounded-sm md:rounded-md text-white text-xs">
@@ -22,7 +22,7 @@ function PCard({ product }) {
 
       <div className="mt-1">
         <p className="text-xs md:text-sm md:pr-4 capitalize">
-          {title.substring(0, 45)}...
+          {title.substring(0, 22)}...
         </p>
       </div>
       <div className="flex items-center justify-between">

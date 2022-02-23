@@ -1,8 +1,10 @@
 @tailwind base;
 body {
-  background-color: #f6f7f9;
+  background-color: #f2f4f7;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
+
 .custom_scrollbar_hide::-webkit-scrollbar {
   display: none;
 }
@@ -23,7 +25,9 @@ body {
   background: #888;
   border-radius: 50px;
 }
+.animation-play-state:hover{
+  animation-play-state: paused;
+}
 
-@import "react-slideshow-image/dist/styles.css";
 @tailwind components;
 @tailwind utilities;
