@@ -1,18 +1,33 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import { Formik } from "formik";
 import * as yup from "yup";
+import Select from "react-select";
+import countryList from "react-select-country-list";
 
 const schema = yup.object({
-  fullName: yup.string().required("Full Name is required").min(4),
-  Mobile: yup.string().required("Mobile is required").min(10),
+  fullName: yup
+    .string()
+    .required("Please enter Your Full Name ")
+    .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
+  Mobile: yup
+    .string()
+    .required("Mobile Number is Required")
+    .matches(
+      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+      "Phone number is not valid"
+    ),
   quantity: yup.string().required("Quantity is required"),
   city: yup.string().required("City is required"),
-  deliveryAddress: yup.string().required("Delivery Address is required"),
+  deliveryAddress: yup
+    .string()
+    .required("Delivery Address is required")
+    .min(12),
 });
 
 function Form({ product }) {
   const { price, oldPrice } = product;
+  const options = useMemo(() => countryList().getData(), []);
   return (
     <div className="flex flex-col space-y-1 px-2 bg-white border border-gray-300 shadow-sm py-2">
       <h1 className="text-3xl font-semibold ">IVD Glucometer Set</h1>
@@ -37,68 +52,116 @@ function Form({ product }) {
       >
         {(props) => (
           <div className="space-y-3">
-            <div className="flex flex-col ">
-              <label htmlFor="fullName">
-                Full Name<span className="text-red-500">*</span>
-              </label>
+            <div className="flex flex-col mt-2 space-y-1">
+              <div className="flex justify-between items-center">
+                <label htmlFor="fullName">
+                  Full Name<span className="text-red-500">*</span>
+                </label>
+                <span className="text-red-600">
+                  {props.touched.fullName && props.errors.fullName}
+                </span>
+              </div>
               <input
                 type="text"
                 onChange={props.handleChange("fullName")}
                 value={props.values.fullName}
                 placeholder="Full Name"
-                className="border border-gray-300 rounded-md p-2 outline-none"
+                className="border border-gray-300 rounded-sm p-2 outline-none"
+                onBlur={props.handleBlur("fullName")}
               />
-              <span>{props.errors.fullName}</span>
             </div>
-            <div className="flex flex-col ">
-              <label htmlFor="fullName">
-                Mobile<span className="text-red-500">*</span>
-              </label>
+            <div className="flex flex-col space-y-1">
+              <div className="flex justify-between items-center">
+                <label htmlFor="fullName">
+                  Mobile<span className="text-red-500">*</span>
+                </label>
+                <span className="text-red-600">
+                  {props.touched.Mobile && props.errors.Mobile}
+                </span>
+              </div>
               <input
                 type="text"
                 onChange={props.handleChange("Mobile")}
                 value={props.values.Mobile}
                 placeholder="Mobile"
-                className="border border-gray-300 rounded-md p-2 outline-none"
+                className="border border-gray-300 rounded-sm p-2 outline-none"
+                onBlur={props.handleBlur("Mobile")}
               />
             </div>
-            <div className="flex flex-col ">
-              <label htmlFor="fullName">
-                Quantity<span className="text-red-500">*</span>
-              </label>
-              <input
+            <div className="flex flex-col space-y-1">
+              <div className="flex justify-between items-center">
+                <label htmlFor="fullName">
+                  Quantity<span className="text-red-500">*</span>
+                </label>
+                <span className="text-red-600">
+                  {props.touched.quantity && props.errors.quantity}
+                </span>
+              </div>
+              <select
+                name="quantity"
+                onChange={props.handleChange("quantity")}
+                value={props.values.quantity}
+                className="border border-gray-300 rounded-sm p-2 outline-none"
+                onBlur={props.handleBlur("quantity")}
+              >
+                <option>-Select-</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+              {/* <select
                 type="text"
                 name="quantity"
                 onChange={props.handleChange("quantity")}
                 value={props.values.quantity}
                 placeholder="-Select-"
-                className="border border-gray-300 rounded-md p-2 outline-none"
-              />
+                className="border border-gray-300 rounded-sm p-2 outline-none"
+                onBlur={props.handleBlur("quantity")}
+              /> */}
             </div>
             <div className="flex flex-col space-y-1">
-              <label htmlFor="fullName">
-                Emirate<span className="text-red-500">*</span>
-              </label>
-              <input
+              <div className="flex justify-between items-center">
+                <label htmlFor="fullName">
+                  Emirate<span className="text-red-500">*</span>
+                </label>
+                <span className="text-red-600">
+                  {props.touched.city && props.errors.city}
+                </span>
+              </div>
+              <Select
+                options={options}
+                value={props.values.city}
+                onBlur={props.handleBlur("city")}
+                onChange={props.handleChange("city")}
+                // className="border border-gray-300 rounded-sm p-2 outline-none"
+              />
+              {/* <input
                 type="text"
                 name="city"
                 onChange={props.handleChange("city")}
                 value={props.values.city}
                 placeholder="-Select-"
-                className="border border-gray-300 rounded-md p-2 outline-none"
-              />
+                className="border border-gray-300 rounded-sm p-2 outline-none"
+                onBlur={props.handleBlur("city")}
+              /> */}
             </div>
             <div className="flex flex-col space-y-1">
-              <label htmlFor="fullName">
-                Delivery Address<span className="text-red-500">*</span>
-              </label>
+              <div className="flex justify-between items-center">
+                <label htmlFor="fullName">
+                  Delivery Address<span className="text-red-500">*</span>
+                </label>
+                <span className="text-red-600">
+                  {props.touched.deliveryAddress &&
+                    props.errors.deliveryAddress}
+                </span>
+              </div>
               <textarea
-                rows={5}
+                rows={4}
                 name="deliveryAddress"
                 onChange={props.handleChange("deliveryAddress")}
                 value={props.values.deliveryAddress}
                 placeholder="Delivery Address"
-                className="border border-gray-300 rounded-md p-2 outline-none"
+                className="border border-gray-300 rounded-sm p-2 pt-1 outline-none"
+                onBlur={props.handleBlur("deliveryAddress")}
               />
             </div>
             <button

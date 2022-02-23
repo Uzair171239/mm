@@ -22,7 +22,11 @@ function ImagesCard({ product }) {
     <div className="flex flex-col">
       <div className="flex flex-col flex-1 pb-2 border border-gray-300  shadow-sm cursor-zoom-in bg-white ">
         <div className="flex-1">
-          <img src={prev} alt="" className="w-full h-96 cursor-zoom-in" />
+          <img
+            src={prev}
+            alt=""
+            className="w-full h-72 md:h-96 cursor-zoom-in"
+          />
         </div>
         <div className="flex justify-between items-center">
           <span className="text-white bg-green-500  px-3 rounded-md w-fit">
@@ -34,15 +38,25 @@ function ImagesCard({ product }) {
         </div>
       </div>
       <div className="flex   items-center space-x-1 mt-2 ">
+        <div
+          className="border-2 border-green-400 w-16 md:w-28 cursor-pointer"
+          onClick={() => setPrev(product.image)}
+        >
+          <img
+            src={product.image}
+            alt=""
+            className="w-full h-16 md:h-24 bg-contain"
+          />
+        </div>
         {images.map((image) => (
           <div
-            className="border-2 border-green-400 w-28 cursor-pointer"
+            className="border-2 border-green-400 w-16 md:w-28 cursor-pointer"
             key={image.id}
           >
             <img
               src={image.image}
               alt=""
-              className="w-full h-24 bg-contain"
+              className="w-full h-16 md:h-24 bg-contain"
               onClick={() => setPrev(image.image)}
             />
           </div>
