@@ -1,71 +1,81 @@
 import React from "react";
 
-function Navbar() {
+function Navbar({filter}) {
   return (
     <div
       className="flex px-5 py-4 justify-between items-center  whitespace-nowrap
      overflow-x-scroll  custom_scrollbar_hide space-x-4 lg:space-x-0"
     >
-      <a
-        href="#"
+      <button
+        onClick={e => filter(e.target.name)}
         className="hover:text-red-600 md:hover:scale-150 transition duration-300 ease-in-out "
+        name="Home"
       >
         Home
-      </a>
-      <a
-        href="#"
+      </button>
+      <button
+        onClick={e => filter(e.target.name)}
         className="hover:text-red-600 md:hover:scale-150 transition duration-300 ease-in-out"
+        name="*Hot Deals*"
       >
         Hot Deals
-      </a>
-      <a
-        href="#"
+      </button>
+      <button
+        onClick={e => filter(e.target.name)}
         className="hover:text-red-600 md:hover:scale-150 transition duration-300 ease-in-out"
+        name="Women"
       >
         Women
-      </a>
-      <a
-        href="#"
+      </button>
+      <button
+        onClick={e => filter(e.target.name)}
         className="hover:text-red-600 md:hover:scale-150 transition duration-300 ease-in-out"
+        name="Men"
       >
         Men
-      </a>
-      <a
-        href="#"
+      </button>
+      <button
+        onClick={e => filter(e.target.name)}
         className="hover:text-red-600 md:hover:scale-150 transition duration-300 ease-in-out"
+        name="Kids"
       >
         Kids
-      </a>
-      <a
-        href="#"
+      </button>
+      <button
+        onClick={e => filter(e.target.name)}
         className="hover:text-red-600 md:hover:scale-150 transition duration-300 ease-in-out"
+        name="Kitchenware"
       >
         Kitchenware
-      </a>
-      <a
-        href="#"
+      </button>
+      <button
+        onClick={e => filter(e.target.name)}
+        name="Electronics"
         className="hover:text-red-600 md:hover:scale-150 transition duration-300 ease-in-out"
       >
         Electronics
-      </a>
-      <a
-        href="#"
+      </button>
+      <button
+        onClick={e => filter(e.target.name)}
         className="hover:text-red-600 md:hover:scale-150 transition duration-300 ease-in-out"
+        name="Health & Fitness"
       >
         Health & Fitness
-      </a>
-      <a
-        href="#"
+      </button>
+      <button
+        onClick={e => filter(e.target.name)}
         className="hover:text-red-600 md:hover:scale-150 transition duration-300 ease-in-out"
+        name="Homeware"
       >
         Homeware
-      </a>
-      <a
-        href="#"
+      </button>
+      <button
+        onClick={e => filter(e.target.name)}
         className="hover:text-red-600 md:hover:scale-150 transition duration-300 ease-in-out"
+        name="Gadgets"
       >
         Gadgets
-      </a>
+      </button>
     </div>
   );
 }

@@ -3,7 +3,8 @@ import { BsFillCartFill } from "react-icons/bs";
 import { useNavigate } from "react-router";
 
 function PCard({ product }) {
-  const { name, price, discount, image, description, oldPrice } = product;
+  const {price, offer_percentage, image, title, old_price } = product;
+
   const navigate = useNavigate();
   return (
     <div
@@ -13,22 +14,22 @@ function PCard({ product }) {
       className="transform hover:scale-105 transition duration-400 flex flex-col px-2 shadow-md w-48 my-2 border border-gray-200 pb-3 cursor-pointer bg-white rounded-sm"
     >
       <div className="relative">
-        <img src={image} alt="" className="w-full h-32" />
+        <img src={`http://localhost:3001${image}`} alt="" className="w-full h-32" />
         <span className="absolute top-0 bg-red-500 p-0.5 px-2 m-1 ml-0 rounded-md text-white text-xs">
-          {discount}% OFF
+          {offer_percentage}% OFF
         </span>
       </div>
 
       <div className="mt-1">
         <p className="text-sm pr-4 capitalize">
-          {description.substring(0, 50)}...
+          {title}...
         </p>
       </div>
       <div className="flex items-center justify-between">
         <p className="text-sm font-semibold">{price} AED</p>
 
         <p className="text-sm text-gray-600 font-semibold line-through">
-          {oldPrice} AED
+          {old_price} AED
         </p>
         <BsFillCartFill className="text-lg text-orange-600" />
       </div>

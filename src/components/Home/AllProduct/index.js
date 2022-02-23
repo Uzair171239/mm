@@ -1,8 +1,8 @@
 import React from "react";
-import { data } from "../../data";
+
 import ProductCard from "./ProductCard";
 
-function AllProduct() {
+function AllProduct({data}) {
   return (
     <>
       <h1 className="mx-3 text-3xl font-bold font-sans my-4">

@@ -3,7 +3,7 @@ import { BsFillCartFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 function ProductCard({ product }) {
-  const { name, price, discount, image, description, oldPrice } = product;
+  const {price, offer_percentage, image, title, old_price } = product;
   const navigate = useNavigate();
   return (
     <div
@@ -14,10 +14,10 @@ function ProductCard({ product }) {
     >
       <div className="relative">
         <span className="absolute bg-red-600 px-2 rounded-md m-2 ml-0 z-10 text-white text-sm">
-          {discount}% OFF
+          {offer_percentage}% OFF
         </span>
         <img
-          src={image}
+          src={`http://localhost:3001${image}`}
           alt="product"
           className="w-full h-60 transform hover:scale-110 transition-all duration-400 ease-in-out  "
         />
@@ -26,12 +26,11 @@ function ProductCard({ product }) {
         <span className="text-white bg-green-500  px-3 rounded-md w-fit">
           Free delivery
         </span>
-        <p className="text-gray-500">{name}</p>
-        <p className="text-gray-900 hover:text-red-500">{description}</p>
+        <p className="text-gray-900 hover:text-red-500">{title}</p>
         <div className="flex justify-between items-center">
           <h4 className="text-MD font-bold">{price} AED</h4>
           <p className="text-sm text-gray-600 font-semibold line-through">
-            {oldPrice} AED
+            {old_price} AED
           </p>
           <BsFillCartFill className="text-lg text-orange-600" />
         </div>

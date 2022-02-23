@@ -1,8 +1,8 @@
 import React from "react";
 import PCard from "./PCard";
-import { data } from "../../data";
 
-function HotDeals() {
+
+function HotDeals({data}) {
   return (
     <div className="px-3 w-full">
       <h1 className="text-3xl font-bold font-sance ">Hot Deals</h1>
