@@ -23,6 +23,9 @@ body {
   background: #888;
   border-radius: 50px;
 }
+.mui-data-table {
+  height: 70vh;
+}
 
 @import "react-slideshow-image/dist/styles.css";
 @tailwind components;

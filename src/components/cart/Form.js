@@ -47,7 +47,6 @@ function Form({ product }) {
         validationSchema={schema}
         onSubmit={(values, actions) => {
           actions.resetForm();
-          console.log(values);
         }}
       >
         {(props) => (
