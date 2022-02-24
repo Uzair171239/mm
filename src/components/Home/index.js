@@ -17,7 +17,7 @@ function Home() {
     value === "Home" && setFilteredData([]);
   }
   const filterByTitle = (value) => {
-
+    setFilteredData(init_data.filter((item)=>item.title.toLocaleLowerCase().includes(value.toLocaleLowerCase())));
   }
   
   useEffect(() => {
@@ -28,8 +28,6 @@ function Home() {
       set_initData(data);
     })
     .catch(err=>{console.log(err)});
-
-
   } , [])
 
 
@@ -37,7 +35,7 @@ function Home() {
   return (
     <div>
       {/* Header *******************/}
-      <Header filterByCategory={filterByCategory} filterByTitle={filterByTitle} />
+      <Header filterByCategory={filterByCategory} filterByTitle={filterByTitle} data={init_data}/>
       {/* Banner ******************** */}
       <Banner />
       {/* Hot Deals *************************/}
