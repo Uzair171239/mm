@@ -17,19 +17,17 @@ function Home() {
     value === "Home" && setFilteredData([]);
   }
   const filterByTitle = (value) => {
-
+    setFilteredData(init_data.filter((item)=>item.title.toLocaleLowerCase().includes(value.toLocaleLowerCase())));
   }
   
   useEffect(() => {
     
-    axios.get("http://localhost:3001/getproducts").then(({data})=>{
+    axios.get("http://localhost:3001/products").then(({data})=>{
       setHotDeals(data.filter((item)=>item.cattegory_name === "*Hot Deals*"));
       setGeneralProducts(data.filter((item)=> item.cattegory_name !== "*Hot Deals*"));
       set_initData(data);
     })
-    .catch(err=>{console.log(err)});
-
-
+    .catch(err=>{alert(err.message)});
   } , [])
 
 
@@ -37,7 +35,7 @@ function Home() {
   return (
     <div>
       {/* Header *******************/}
-      <Header filterByCategory={filterByCategory} filterByTitle={filterByTitle} />
+      <Header filterByCategory={filterByCategory} filterByTitle={filterByTitle} data={init_data}/>
       {/* Banner ******************** */}
       <Banner />
       {/* Hot Deals *************************/}

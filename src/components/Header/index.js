@@ -2,13 +2,15 @@ import React from "react";
 import Navbar from "./Navbar";
 import Searchbar from "./Searchbar";
 
-function Header({filterByTitle, filterByCategory}) {
+function Header({filterByTitle, filterByCategory, data}) {
+  const getData = data && data.map((item)=> item.cattegory_name);
+  const unique = getData.filter((d, i) => getData.indexOf(d) === i);
   return (
     <div className="w-full bg-white px-3 pt-4 shadow-md">
       {/* Header search bar */}
       <Searchbar filter={filterByTitle} />
       {/* menu bar  */}
-      <Navbar filter={filterByCategory} />
+      <Navbar filter={filterByCategory} data={unique} />
     </div>
   );
 }
