@@ -12,7 +12,7 @@ const Dashboard = () => {
       </div>
       {/* main content */}
       <div className="flex-1">
-        <Header />
+        <Header title="dashboard" />
         <DComp />
       </div>
     </div>

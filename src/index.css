@@ -24,7 +24,18 @@ body {
   border-radius: 50px;
 }
 .mui-data-table {
-  height: 70vh;
+  height: 74vh;
+}
+
+.mui-data-table thead tr th {
+  text-align: center;
+}
+.mui-data-table tbody tr td {
+  text-align: center;
+  cursor: pointer;
+}
+.custom_class_zindex {
+  z-index: 999;
 }
 
 @import "react-slideshow-image/dist/styles.css";

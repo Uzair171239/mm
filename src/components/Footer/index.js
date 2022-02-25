@@ -4,43 +4,90 @@ import { AiOutlineWhatsApp } from "react-icons/ai";
 import { FiMail } from "react-icons/fi";
 import { RiFacebookCircleLine } from "react-icons/ri";
 
+const data = [
+  {
+    id: 1,
+    country_name: "United Arab Emirates",
+    address: "A-Shop uae Muscat, Sultanate Of uae",
+    facebook: "facebook.com/ashop02",
+    instagram: "AShop",
+    email: "info@ashop-uae.com",
+    whatsapp: "+971 56 567 567",
+  },
+  {
+    id: 2,
+    country_name: "Oman",
+    address: "A-Shop Oman Muscat, Sultanate Of Oman",
+    facebook: "facebook.com/ashop02",
+    instagram: "AShop",
+    email: "info@ashop-oman.com",
+    whatsapp: "+971 56 567 333",
+  },
+  {
+    id: 3,
+    country_name: "Qatar",
+    address: "A-Shop qatar Muscat, Sultanate Of qatar",
+    facebook: "facebook.com/ashop02",
+    instagram: "AShop",
+    email: "info@ashop-qatar.com",
+    whatsapp: "+971 56 567 567",
+  },
+];
+
 function Footer() {
   return (
-    <div className="w-full bg-gray-900 text-white px-5 md:px-12 lg:px-28 py-10 ">
-      <div className="flex justify-between items-baseline">
+    <div className="w-full bg-gray-900 text-white px-5 md:px-12 lg:px-28 py-10 pt-5 ">
+      <h1 className="text-xl md:text-2xl md:font-bold text-center mb-3">
+        Contact Us
+      </h1>
+      <hr className=" w-60 mx-auto mb-5" />
+      <div className="grid grid-cols-2 md:flex justify-between items-baseline">
         {/* contact us **************/}
-        <div className="space-y-3">
-          <h1 className="md:text-2xl md:font-bold">Contact Us</h1>
-          <p className="text-sm md:text-lg">
-            Shams Free Zone, Sharjah Media City, Jetronics LLC
-          </p>
-          <div className="flex items-center space-x-2 group cursor-pointer w-fit">
-            <RiFacebookCircleLine className="w-7 h-7 -ml-1 text-red-500 group-hover:scale-105 group-hover:text-gray-400" />
-            <p className="group-hover:scale-105 group-hover:text-red-500">
-              Ashop-Oman
+        {data.map((data) => (
+          <div className="space-y-3">
+            <p className="text-sm md:text-lg mt-2 lg:mt-0">
+              {data.country_name}
             </p>
+            <a
+              href={data.facebook}
+              className="flex items-center space-x-2 group cursor-pointer w-fit"
+            >
+              <RiFacebookCircleLine className="w-7 h-7 -ml-1 text-red-500 group-hover:scale-105 group-hover:text-gray-400" />
+              <p className="text-sm md:text-base group-hover:scale-105 group-hover:text-red-500">
+                {data.facebook}
+              </p>
+            </a>
+            <a
+              href={data.email}
+              className="flex items-center space-x-2 group cursor-pointer w-fit"
+            >
+              <FiMail className="w-6 h-6  text-red-500 group-hover:scale-105 group-hover:text-gray-400" />
+              <p className="text-sm md:text-base group-hover:scale-105 group-hover:text-red-500">
+                {data.email}
+              </p>
+            </a>
+            <a
+              href={data.instagram}
+              className="flex items-center space-x-2 group cursor-pointer w-fit"
+            >
+              <BsInstagram className="w-6 h-6  text-red-500 group-hover:scale-105 group-hover:text-gray-400" />
+              <p className="text-sm md:text-base group-hover:scale-105 group-hover:text-red-500">
+                {data.instagram}
+              </p>
+            </a>
+            <a
+              href={data.whatsapp}
+              className="flex items-center space-x-2 group cursor-pointer w-fit"
+            >
+              <AiOutlineWhatsApp className="w-6 h-6  text-red-500 group-hover:scale-105 group-hover:text-gray-400" />
+              <p className="text-sm md:text-base group-hover:scale-105 group-hover:text-red-500">
+                {data.whatsapp}
+              </p>
+            </a>
           </div>
-          <div className="flex items-center space-x-2 group cursor-pointer w-fit">
-            <FiMail className="w-6 h-6  text-red-500 group-hover:scale-105 group-hover:text-gray-400" />
-            <p className="group-hover:scale-105 group-hover:text-red-500">
-              Ashop@Oman.com
-            </p>
-          </div>
-          <div className="flex items-center space-x-2 group cursor-pointer w-fit">
-            <BsInstagram className="w-6 h-6  text-red-500 group-hover:scale-105 group-hover:text-gray-400" />
-            <p className="group-hover:scale-105 group-hover:text-red-500">
-              Ashop-Oman
-            </p>
-          </div>
-          <div className="flex items-center space-x-2 group cursor-pointer w-fit">
-            <AiOutlineWhatsApp className="w-6 h-6  text-red-500 group-hover:scale-105 group-hover:text-gray-400" />
-            <p className="group-hover:scale-105 group-hover:text-red-500">
-              +971 4 456 789
-            </p>
-          </div>
-        </div>
+        ))}
         {/* social media **************/}
-        <div className=" space-y-3">
+        {/* <div className=" space-y-3">
           <h1 className="md:text-2xl md:font-bold">
             Follow Us On Social Media
           </h1>
@@ -71,7 +118,7 @@ function Footer() {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="h-1 bg-red-500 w-full rounded-md my-3" />
       {/* term and conditions ********** */}

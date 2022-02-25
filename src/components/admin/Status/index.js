@@ -1,40 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { MdContactMail } from "react-icons/md";
 import { TiPlus } from "react-icons/ti";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
+import Form from "./Form";
 
 const Status = () => {
+  const [formshow, setFormshow] = useState(false);
+  const [dataTable, setDataTable] = useState({});
+  const [sidebar, setSidebar] = useState(false);
+
   const data = [
     {
       id: 1,
       title: "New",
       description: "When order is created",
+      color: "#00bcd4",
       created_on: "25/10/2021",
     },
     {
       id: 2,
       title: "Cancelled",
       description: "Cancelled orders",
+      color: "#ffffff",
       created_on: "31/10/2021",
     },
     {
       id: 3,
       title: "Delivered",
       description: "When item is delivered",
+      color: "#000000",
       created_on: "25/10/2021",
     },
   ];
+
+  const rowClick = (id) => {
+    setDataTable(data.find((data) => data.id === id));
+    setFormshow(!formshow);
+    console.log(data.find((item) => item.id === id));
+  };
+
   return (
     <div className="flex ">
+      {/* crud operation form */}
+      {formshow ? (
+        <div className=" flex w-full h-screen absolute justify-center pt-20 backdrop-blur-sm  bg-white/5 custom_class_zindex">
+          <Form setFormshow={setFormshow} dataTable={dataTable} />
+        </div>
+      ) : (
+        ""
+      )}
       {/* side bar  */}
-      <div className="w-1/5 bg-white shadow-md shadow-gray-400 h-screen">
+      <div className="hidden md:block w-1/5 bg-white shadow-md shadow-gray-400 h-screen">
         <Sidebar />
       </div>
+      {sidebar && (
+        <div className="absolute  w-fit md:w-1/5 bg-white shadow-md shadow-gray-400 h-screen">
+          <Sidebar />
+        </div>
+      )}
       {/* main content */}
       <div className="flex-1">
-        <Header />
+        <Header title="status" setSidebar={setSidebar} />
         <div className="rounded-md shadow-lg m-5 bg-white p-5">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
@@ -44,9 +72,12 @@ const Status = () => {
               </p>
             </div>
             <div>
-              <button className="flex items-center bg-green-500 font-semibold font-mono text-lg text-white p-2 rounded-sm">
+              <button
+                onClick={() => setFormshow(!formshow)}
+                className="flex items-center bg-green-500 font-semibold font-mono text-lg text-white p-2 rounded-sm"
+              >
                 <TiPlus className="w-5 h-5 " />
-                New Contact
+                New Status
               </button>
             </div>
           </div>
@@ -83,11 +114,19 @@ const Status = () => {
                       </td>
                       <td className="px-4 py-2">
                         <p className=" font-mono text-gray-700 text-center">
+                          {d.color}
+                        </p>
+                      </td>
+                      <td className="px-4 py-2">
+                        <p className=" font-mono text-gray-700 text-center">
                           {d.created_on}
                         </p>
                       </td>
                       <td className="px-4 py-2">
-                        <button className="mx-auto rounded-sm bg-red-500 p-2 py-1 text-white flex items-center">
+                        <button
+                          onClick={(e) => rowClick(d.id)}
+                          className="mx-auto rounded-sm bg-red-500 p-2 py-1 text-white flex items-center"
+                        >
                           <FaRegEdit className="mx-auto" />
                           Edit
                         </button>

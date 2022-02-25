@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { MdSpaceDashboard } from "react-icons/md";
 import { RiShoppingBasket2Fill } from "react-icons/ri";
@@ -11,6 +11,8 @@ import { HiLocationMarker } from "react-icons/hi";
 import { MdCategory } from "react-icons/md";
 
 function Sidebar() {
+  const title = useLocation();
+
   return (
     <div className="flex flex-col">
       <img
@@ -22,63 +24,91 @@ function Sidebar() {
       <div className="flex flex-1 flex-col space-y-2 px-2">
         <Link
           to={"/admin-dashboard"}
-          className="flex items-center pl-8 space-x-3 w-full bg-slate-100 py-2 hover:bg-slate-200"
+          className={`flex items-center pl-8 space-x-3 w-full  py-2 ${
+            title.pathname === "/admin-dashboard"
+              ? "bg-slate-500 text-white"
+              : "bg-slate-200 text-gray-800"
+          }`}
         >
-          <MdSpaceDashboard className="text-gray-800 text-xl" />{" "}
-          <span className="text-lg font-semibold text-gray-800">Dashboard</span>
+          <MdSpaceDashboard className=" text-xl" />
+          <span className="text-lg font-semibold ">Dashboard</span>
         </Link>
         <Link
           to={"/admin-orders"}
-          className="flex items-center pl-8 space-x-3 w-full bg-slate-100 py-2 hover:bg-slate-200"
+          className={`flex items-center pl-8 space-x-3 w-full  py-2 ${
+            title.pathname === "/admin-orders"
+              ? "bg-slate-500 text-white"
+              : "bg-slate-200 text-gray-800"
+          }`}
         >
-          <RiShoppingBag2Fill className="text-gray-800 text-xl" />{" "}
-          <span className="text-lg font-semibold text-gray-800">Order</span>
+          <RiShoppingBag2Fill className=" text-xl" />
+          <span className="text-lg font-semibold ">Order</span>
         </Link>
         <Link
           to={"/admin-missingorder"}
-          className="flex items-center pl-8 space-x-3 w-full bg-slate-100 py-2 hover:bg-slate-200"
+          className={`flex items-center pl-8 space-x-3 w-full  py-2 ${
+            title.pathname === "/admin-missingorder"
+              ? "bg-slate-500 text-white"
+              : "bg-slate-200 text-gray-800"
+          }`}
         >
-          <RiShoppingBasket2Fill className="text-gray-800 text-xl" />{" "}
-          <span className="text-lg font-semibold text-gray-800">
-            Missing Order
-          </span>
+          <RiShoppingBasket2Fill className=" text-xl" />{" "}
+          <span className="text-lg font-semibold ">Missing Order</span>
         </Link>
         <Link
           to={"/admin-product"}
-          className="flex items-center pl-8 space-x-3 w-full bg-slate-100 py-2 hover:bg-slate-200"
+          className={`flex items-center pl-8 space-x-3 w-full  py-2 ${
+            title.pathname === "/admin-product"
+              ? "bg-slate-500 text-white"
+              : "bg-slate-200 text-gray-800"
+          }`}
         >
-          <BsImage className="text-gray-800 text-xl" />{" "}
-          <span className="text-lg font-semibold text-gray-800">Products</span>
+          <BsImage className="text-xl" />
+          <span className="text-lg font-semibold ">Products</span>
         </Link>
         <Link
           to={"/admin-contactus"}
-          className="flex items-center pl-8 space-x-3 w-full bg-slate-100 py-2 hover:bg-slate-200"
+          className={`flex items-center pl-8 space-x-3 w-full  py-2 ${
+            title.pathname === "/admin-contactus"
+              ? "bg-slate-500 text-white"
+              : "bg-slate-200 text-gray-800"
+          }`}
         >
-          <MdContactMail className="text-gray-800 text-xl" />{" "}
-          <span className="text-lg font-semibold text-gray-800">
-            Contact us
-          </span>
+          <MdContactMail className=" text-xl" />{" "}
+          <span className="text-lg font-semibold ">Contact us</span>
         </Link>
         <Link
           to={"/admin-countries"}
-          className="flex items-center pl-8 space-x-3 w-full bg-slate-100 py-2 hover:bg-slate-200"
+          className={`flex items-center pl-8 space-x-3 w-full  py-2 ${
+            title.pathname === "/admin-countries"
+              ? "bg-slate-500 text-white"
+              : "bg-slate-200 text-gray-800"
+          }`}
         >
-          <MdCategory className="text-gray-800 text-xl" />{" "}
-          <span className="text-lg font-semibold text-gray-800">Countries</span>
+          <MdCategory className=" text-xl" />{" "}
+          <span className="text-lg font-semibold ">Countries</span>
         </Link>
         <Link
           to={"/admin-status"}
-          className="flex items-center pl-8 space-x-3 w-full bg-slate-100 py-2 hover:bg-slate-200"
+          className={`flex items-center pl-8 space-x-3 w-full  py-2 ${
+            title.pathname === "/admin-status"
+              ? "bg-slate-500 text-white"
+              : "bg-slate-200 text-gray-800"
+          }`}
         >
-          <HiLocationMarker className="text-gray-800 text-xl" />{" "}
-          <span className="text-lg font-semibold text-gray-800">Status</span>
+          <HiLocationMarker className=" text-xl" />{" "}
+          <span className="text-lg font-semibold ">Status</span>
         </Link>
         <Link
           to={"/admin-settings"}
-          className="flex items-center pl-8 space-x-3 w-full bg-slate-100 py-2 hover:bg-slate-200"
+          className={`flex items-center pl-8 space-x-3 w-full  py-2 ${
+            title.pathname === "/admin-settings"
+              ? "bg-slate-500 text-white"
+              : "bg-slate-200 text-gray-800"
+          }`}
         >
-          <AiFillSetting className="text-gray-800 text-xl" />{" "}
-          <span className="text-lg font-semibold text-gray-800">Settings</span>
+          <AiFillSetting className=" text-xl" />{" "}
+          <span className="text-lg font-semibold">Settings</span>
         </Link>
       </div>
     </div>

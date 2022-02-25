@@ -10,7 +10,7 @@ const schema = yup.object({
 function LoginForm() {
   const navigate = useNavigate();
   return (
-    <div className="flex h-screen justify-center items-center bg-gray-700">
+    <div className="flex h-screen justify-center items-center bg-gray-200">
       <div className="bg-gray-900 p-10 shadow-2xl shadow-gray-600 rounded-sm py-16 ">
         <h1 className="text-white border-b-2 border-gray-300 w-fit text-xl pb-0.5 ">
           Sign In
@@ -57,7 +57,7 @@ function LoginForm() {
               <button
                 onClick={props.handleSubmit}
                 type="submit"
-                className="bg-red-700 text-white p-2 rounded-sm font-semibold hover:bg-red-800"
+                className="bg-red-700 active:animate-ping transition ease-linear duration-100 text-white p-2 rounded-sm font-semibold hover:bg-red-800"
               >
                 Sign In
               </button>
