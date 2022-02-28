@@ -6,7 +6,7 @@ function Header({filterByTitle, filterByCategory, data}) {
   const getData = data && data.map((item)=> item.cattegory_name);
   const unique = getData.filter((d, i) => getData.indexOf(d) === i);
   return (
-    <div className="w-full bg-white px-3 pt-4 shadow-md">
+    <div className="w-full bg-white px-3  shadow-md">
       {/* Header search bar */}
       <Searchbar filter={filterByTitle} />
       {/* menu bar  */}

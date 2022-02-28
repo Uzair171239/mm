@@ -22,7 +22,7 @@ function Home() {
   
   useEffect(() => {
     
-    axios.get("http://localhost:3001/products").then(({data})=>{
+    axios.get("http://localhost:3001/products/false").then(({data})=>{
       setHotDeals(data.filter((item)=>item.cattegory_name === "*Hot Deals*"));
       setGeneralProducts(data.filter((item)=> item.cattegory_name !== "*Hot Deals*"));
       set_initData(data);

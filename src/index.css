@@ -1,10 +1,8 @@
 @tailwind base;
 body {
-  background-color: #f2f4f7;
+  background-color: #f6f7f9;
   overflow-x: hidden;
-  scroll-behavior: smooth;
 }
-
 .custom_scrollbar_hide::-webkit-scrollbar {
   display: none;
 }
@@ -25,9 +23,18 @@ body {
   background: #888;
   border-radius: 50px;
 }
-.animation-play-state:hover{
-  animation-play-state: paused;
+
+.mui-data-table thead tr th {
+  text-align: center;
+}
+.mui-data-table tbody tr td {
+  text-align: center;
+  cursor: pointer;
+}
+.custom_class_zindex {
+  z-index: 999;
 }
 
+@import "react-slideshow-image/dist/styles.css";
 @tailwind components;
 @tailwind utilities;

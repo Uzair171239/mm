@@ -7,16 +7,16 @@ function Searchbar({filter}) {
     <div className="md:flex justify-between items-center border-b border-gray-200 pb-4">
       <div>
         <img
-          src="https://www.ashop.tv/frontend/images/home_logo.svg"
+          src="/company_logo.png"
           alt="logo"
-          className="w-28"
+          className="w-22 h-20"
         />
       </div>
       <div className="flex items-center group hover:shadow-md shadow-red-600 flex-1 border-2 border-red-600 rounded-md px-3 md:mx-2 md:ml-8 py-2 my-2 md:my-0">
         <GrFormSearch className="w-6 h-6" color="gray" />
         <input
           type="text"
-          className="flex-1 pl-2   placeholder:text-gray-300  placeholder:font-sance outline-none"
+          className="flex-1 pl-2 placeholder:text-gray-300 placeholder:font-sance outline-none"
           placeholder="Search"
           value={value}
           onChange={(e) => setValue(e.target.value)}
