@@ -15,7 +15,7 @@ const Product = () => {
     responsive: "scroll",
     rowsPerPage: 10,
     onRowClick: (rowData) => {
-      setDataTable(data.find((data) => data.id === rowData[0]));
+      setDataTable(data.find((d) => d.id === rowData[0]));
       setFormshow(!formshow);
     },
   };
@@ -27,9 +27,9 @@ const Product = () => {
           <Form setFormshow={setFormshow} dataTable={dataTable} />
         </div>
       )}
+
       {/* side bar  */}
-      {/* side bar  */}
-      <div className="w-1/5 bg-white shadow-md shadow-gray-400 h-screen">
+      <div className="sticky top-0 left-0 w-1/5 bg-white shadow-md shadow-gray-400 h-screen">
         <Sidebar />
       </div>
       {/* main content */}
@@ -49,7 +49,7 @@ const Product = () => {
             </button>
           </div>
           <MUIDataTable
-            title={"Employee List"}
+            title={"Product List"}
             data={data}
             columns={columns}
             options={options}

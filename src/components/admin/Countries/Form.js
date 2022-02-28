@@ -4,7 +4,8 @@ import React from "react";
 import { CgClose } from "react-icons/cg";
 
 function Form({ setFormshow, dataTable }) {
-  const { country, country_code, currency_symbol } = dataTable;
+  const { country, country_code, currency_symbol, with_vat, view_vat } =
+    dataTable;
   return (
     <div className="bg-gray-700 z-50 rounded-sm py-2  h-fit w-fit px-4 pb-4 shadow-lg shadow-gray-600 text-white">
       <div className="flex justify-end pt-2 ">
@@ -20,9 +21,12 @@ function Form({ setFormshow, dataTable }) {
           country_name: country ? country : "",
           country_code: country_code ? country_code : "",
           currency_symbol: currency_symbol ? currency_symbol : "",
+          with_vat: with_vat ? with_vat : "",
+          view_vat: view_vat ? view_vat : "",
         }}
         onSubmit={(values, actions) => {
           actions.resetForm();
+          setFormshow(false);
         }}
       >
         {(props) => (
@@ -56,7 +60,7 @@ function Form({ setFormshow, dataTable }) {
                 <label className="text-white">Currency Symbol</label>
                 <input
                   type="text"
-                  name="color"
+                  name="currency_symbol"
                   value={props.values.currency_symbol}
                   onChange={props.handleChange("currency_symbol")}
                   onBlur={props.handleBlur("  currency_symbol")}
@@ -64,17 +68,43 @@ function Form({ setFormshow, dataTable }) {
                   className="w-full p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
                 />
               </div>
+              <div className="flex flex-col">
+                <label className="text-white">With Vat</label>
+                <input
+                  type="text"
+                  name="with_vat"
+                  value={props.values.with_vat}
+                  onChange={props.handleChange("with_vat")}
+                  onBlur={props.handleBlur("  with_vat")}
+                  placeholder="With VAT"
+                  className="w-full p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label className="text-white">View Vat</label>
+                <input
+                  type="text"
+                  name="view_vat"
+                  value={props.values.view_vat}
+                  onChange={props.handleChange("view_vat")}
+                  onBlur={props.handleBlur("view_vat")}
+                  placeholder="View VAT"
+                  className="w-full p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
+                />
+              </div>
               <div className="flex justify-end space-x-3 py-4">
-                <button
-                  onClick={() => setFormshow(false)}
-                  className="bg-inherit border border-gray-200  active:animate-ping transition ease-linear duration-100 text-white p-1 px-5 rounded-sm"
-                >
-                  CLOSE
-                </button>
+                {dataTable.id && (
+                  <button
+                    onClick={() => setFormshow(false)}
+                    className="bg-inherit border border-gray-200  active:animate-ping transition ease-linear duration-100 text-white p-1 px-5 rounded-sm"
+                  >
+                    DELETE
+                  </button>
+                )}
                 <button
                   type="submit"
                   onClick={props.handleSubmit}
-                  className="bg-inherit border border-gray-200 text-white p-1 px-5 rounded-sm"
+                  className="bg-inherit border border-gray-200  active:animate-ping transition ease-linear duration-100 text-white p-1 px-5 rounded-sm"
                 >
                   SAVE
                 </button>

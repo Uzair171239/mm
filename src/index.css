@@ -23,9 +23,6 @@ body {
   background: #888;
   border-radius: 50px;
 }
-.mui-data-table {
-  height: 74vh;
-}
 
 .mui-data-table thead tr th {
   text-align: center;

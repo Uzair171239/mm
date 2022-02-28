@@ -1,23 +1,47 @@
 import React, { useState } from "react";
+import { FaRegEdit } from "react-icons/fa";
+import { MdContactMail } from "react-icons/md";
+import { TiPlus } from "react-icons/ti";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
-import { GoSettings } from "react-icons/go";
-import { FaRegEdit } from "react-icons/fa";
 import Form from "./Form";
 
-const Settings = () => {
+const Categories = () => {
   const [formshow, setFormshow] = useState(false);
   const [dataTable, setDataTable] = useState({});
   const data = [
     {
       id: 1,
-      delivery: 1,
-      mobile_discount: 5,
-      new_status: 5,
-      dispatch_status: 5145,
-      track_status: 848,
+      category_name: "United Arab Emirates",
+      description: "AE",
+      created_on: "AED",
+    },
+    {
+      id: 2,
+      category_name: "Qatar",
+      description: "QA",
+      created_on: "QR",
+    },
+    {
+      id: 3,
+      category_name: "Oman",
+      description: "some description here",
+      created_on: "OMR",
+    },
+    {
+      id: 4,
+      category_name: "United Arab Emirates",
+      description: "OM",
+      created_on: "OMR",
+    },
+    {
+      id: 5,
+      category_name: "Oman",
+      description: "OM",
+      created_on: "OMR",
     },
   ];
+
   const rowClick = (id) => {
     setDataTable(data.find((data) => data.id === id));
     setFormshow(!formshow);
@@ -39,12 +63,27 @@ const Settings = () => {
       </div>
       {/* main content */}
       <div className="flex-1">
-        <Header title="settings" />
-
-        <div className="rounded-md shadow-lg m-5 bg-white p-5 border border-gray-200">
-          <div className="flex items-center space-x-2 text-lg font-semibold">
-            <GoSettings className="text-gray-700 text-2xl" />
-            <p>Settings</p>
+        <Header title="categories" />
+        <div className="rounded-md shadow-lg m-5 bg-white p-5">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center space-x-2">
+              <MdContactMail className="text-gray-700 text-xl" />
+              <p className="text-lg font-semibold font-mono text-gray-700">
+                Categories
+              </p>
+            </div>
+            <div>
+              <button
+                onClick={() => {
+                  setFormshow(!formshow);
+                  setDataTable({});
+                }}
+                className="flex items-center shadow-lg bg-green-500 font-semibold font-mono text-lg text-white p-2 rounded-sm"
+              >
+                <TiPlus className="w-5 h-5 " />
+                New Category
+              </button>
+            </div>
           </div>
           <div className="py-8">
             <table className="w-full border-collapse">
@@ -52,12 +91,10 @@ const Settings = () => {
                 <tr className="border-b-2 border-gray-200">
                   {Object.keys(data[0]).map((d) => {
                     return (
-                      <th className="px-4 py-2 text-sm font-semibold">
-                        {d.toUpperCase()}
-                      </th>
+                      <th className="px-4 py-2 text-sm">{d.toUpperCase()}</th>
                     );
                   })}
-                  <th className="px-4 py-2 text-sm font-semibold">ACTION</th>
+                  <th className="px-4 py-2 text-sm">ACTION</th>
                 </tr>
               </thead>
               <tbody>
@@ -71,30 +108,19 @@ const Settings = () => {
                       </td>
                       <td className="px-4 py-2">
                         <p className=" font-mono text-gray-700 text-center">
-                          {d.delivery}
+                          {d.category_name}
                         </p>
                       </td>
                       <td className="px-4 py-2">
                         <p className=" font-mono text-gray-700 text-center">
-                          {d.mobile_discount}
+                          {d.description}
                         </p>
                       </td>
                       <td className="px-4 py-2">
                         <p className=" font-mono text-gray-700 text-center">
-                          {d.new_status}
+                          {d.created_on}
                         </p>
                       </td>
-                      <td className="px-4 py-2">
-                        <p className=" font-mono text-gray-700 text-center">
-                          {d.dispatch_status}
-                        </p>
-                      </td>
-                      <td className="px-4 py-2">
-                        <p className=" font-mono text-gray-700 text-center">
-                          {d.track_status}
-                        </p>
-                      </td>
-
                       <td className="px-4 py-2">
                         <button
                           onClick={(e) => rowClick(d.id)}
@@ -116,4 +142,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default Categories;

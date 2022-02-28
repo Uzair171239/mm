@@ -37,7 +37,7 @@ const ContactUs = () => {
         ""
       )}
       {/* side bar  */}
-      <div className="w-1/5 bg-white shadow-md shadow-gray-400 h-screen">
+      <div className="sticky top-0 left-0 w-1/5 bg-white shadow-md shadow-gray-400 h-screen">
         <Sidebar />
       </div>
       {/* main content */}
@@ -48,7 +48,7 @@ const ContactUs = () => {
             <div className="flex items-center space-x-2">
               <MdContactMail className="text-gray-700 text-xl" />
               <p className="text-lg font-semibold font-mono text-gray-700">
-                Contact
+                Contacts
               </p>
             </div>
             <div>
@@ -57,7 +57,7 @@ const ContactUs = () => {
                   setFormshow(!formshow);
                   setDataTable({});
                 }}
-                className="flex items-center bg-green-500 font-semibold font-mono text-lg text-white p-2 rounded-sm"
+                className="flex items-center shadow-lg bg-green-500 font-semibold font-mono text-lg text-white p-2 rounded-sm"
               >
                 <TiPlus className="w-5 h-5 " />
                 New Contact
@@ -114,7 +114,7 @@ const ContactUs = () => {
                       <td className="px-1 py-2 text-center">
                         <button
                           onClick={(e) => rowClick(d.id)}
-                          className="rounded-sm bg-red-500 p-2 py-1 text-white flex items-center"
+                          className="rounded-sm shadow-lg bg-red-500 p-2 py-1 text-white flex items-center"
                         >
                           <FaRegEdit className="mx-auto" />
                           Edit

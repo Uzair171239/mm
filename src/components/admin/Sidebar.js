@@ -9,6 +9,7 @@ import { MdContactMail } from "react-icons/md";
 import { AiFillSetting } from "react-icons/ai";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdCategory } from "react-icons/md";
+import { BiWorld } from "react-icons/bi";
 
 function Sidebar() {
   const title = useLocation();
@@ -24,7 +25,7 @@ function Sidebar() {
       <div className="flex flex-1 flex-col space-y-2 px-2">
         <Link
           to={"/admin-dashboard"}
-          className={`flex items-center pl-8 space-x-3 w-full  py-2 ${
+          className={`flex items-center pl-3 lg:pl-8 space-x-3 w-full  py-2 ${
             title.pathname === "/admin-dashboard"
               ? "bg-slate-500 text-white"
               : "bg-slate-200 text-gray-800"
@@ -35,7 +36,7 @@ function Sidebar() {
         </Link>
         <Link
           to={"/admin-orders"}
-          className={`flex items-center pl-8 space-x-3 w-full  py-2 ${
+          className={`flex items-center pl-3 lg:pl-8 space-x-3 w-full  py-2 ${
             title.pathname === "/admin-orders"
               ? "bg-slate-500 text-white"
               : "bg-slate-200 text-gray-800"
@@ -46,7 +47,7 @@ function Sidebar() {
         </Link>
         <Link
           to={"/admin-missingorder"}
-          className={`flex items-center pl-8 space-x-3 w-full  py-2 ${
+          className={`flex items-center pl-3 lg:pl-8 space-x-3 w-full  py-2 ${
             title.pathname === "/admin-missingorder"
               ? "bg-slate-500 text-white"
               : "bg-slate-200 text-gray-800"
@@ -56,8 +57,19 @@ function Sidebar() {
           <span className="text-lg font-semibold ">Missing Order</span>
         </Link>
         <Link
+          to={"/admin-categories"}
+          className={`flex items-center pl-3 lg:pl-8 space-x-3 w-full  py-2 ${
+            title.pathname === "/admin-categories"
+              ? "bg-slate-500 text-white"
+              : "bg-slate-200 text-gray-800"
+          }`}
+        >
+          <MdCategory className=" text-xl" />
+          <span className="text-lg font-semibold ">Categories</span>
+        </Link>
+        <Link
           to={"/admin-product"}
-          className={`flex items-center pl-8 space-x-3 w-full  py-2 ${
+          className={`flex items-center pl-3 lg:pl-8 space-x-3 w-full  py-2 ${
             title.pathname === "/admin-product"
               ? "bg-slate-500 text-white"
               : "bg-slate-200 text-gray-800"
@@ -68,7 +80,7 @@ function Sidebar() {
         </Link>
         <Link
           to={"/admin-contactus"}
-          className={`flex items-center pl-8 space-x-3 w-full  py-2 ${
+          className={`flex items-center pl-3 lg:pl-8 space-x-3 w-full  py-2 ${
             title.pathname === "/admin-contactus"
               ? "bg-slate-500 text-white"
               : "bg-slate-200 text-gray-800"
@@ -79,18 +91,18 @@ function Sidebar() {
         </Link>
         <Link
           to={"/admin-countries"}
-          className={`flex items-center pl-8 space-x-3 w-full  py-2 ${
+          className={`flex items-center pl-3 lg:pl-8 space-x-3 w-full  py-2 ${
             title.pathname === "/admin-countries"
               ? "bg-slate-500 text-white"
               : "bg-slate-200 text-gray-800"
           }`}
         >
-          <MdCategory className=" text-xl" />{" "}
+          <BiWorld className=" text-xl" />{" "}
           <span className="text-lg font-semibold ">Countries</span>
         </Link>
         <Link
           to={"/admin-status"}
-          className={`flex items-center pl-8 space-x-3 w-full  py-2 ${
+          className={`flex items-center pl-3 lg:pl-8 space-x-3 w-full  py-2 ${
             title.pathname === "/admin-status"
               ? "bg-slate-500 text-white"
               : "bg-slate-200 text-gray-800"
@@ -101,7 +113,7 @@ function Sidebar() {
         </Link>
         <Link
           to={"/admin-settings"}
-          className={`flex items-center pl-8 space-x-3 w-full  py-2 ${
+          className={`flex items-center pl-3 lg:pl-8 space-x-3 w-full  py-2 ${
             title.pathname === "/admin-settings"
               ? "bg-slate-500 text-white"
               : "bg-slate-200 text-gray-800"

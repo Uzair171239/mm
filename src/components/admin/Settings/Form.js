@@ -102,7 +102,7 @@ function Form({ setFormshow, dataTable }) {
                   onClick={() => setFormshow(false)}
                   className="bg-inherit border border-gray-200  active:animate-ping transition ease-linear duration-100 text-white p-1 px-5 rounded-sm"
                 >
-                  CLOSE
+                  DELETE
                 </button>
                 <button
                   type="submit"

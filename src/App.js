@@ -12,6 +12,7 @@ import Countries from "./components/admin/Countries";
 import ContactUs from "./components/admin/ContactUs";
 import Product from "./components/admin/Product";
 import MissingOrder from "./components/admin/MissingOrder";
+import Categories from "./components/admin/Categories";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Route path="admin-dashboard" element={<Dashboard />} />
       <Route path="admin-orders" element={<Order />} />
       <Route path="admin-missingorder" element={<MissingOrder />} />
+      <Route path="admin-categories" element={<Categories />} />
       <Route path="admin-product" element={<Product />} />
       <Route path="admin-contactus" element={<ContactUs />} />
       <Route path="admin-countries" element={<Countries />} />

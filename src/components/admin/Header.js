@@ -8,13 +8,11 @@ import { MdContactMail } from "react-icons/md";
 import { AiFillSetting } from "react-icons/ai";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdCategory } from "react-icons/md";
+import { BiWorld } from "react-icons/bi";
 
-function Header({ title, setSidebar }) {
+function Header({ title }) {
   return (
     <div className="w-full py-4 bg-white shadow-md flex justify-between items-center px-2">
-      <p onClick={() => setSidebar(true)} className="md:hidden">
-        button
-      </p>
       <div className="flex items-center space-x-1 flex-1">
         {title === "dashboard" && (
           <MdSpaceDashboard className="text-2xl text-gray-800" />
@@ -29,9 +27,10 @@ function Header({ title, setSidebar }) {
         {title === "contact" && (
           <MdContactMail className="text-2xl text-gray-800" />
         )}
-        {title === "country" && (
+        {title === "categories" && (
           <MdCategory className="text-2xl text-gray-800" />
         )}
+        {title === "country" && <BiWorld className="text-2xl text-gray-800" />}
         {title === "status" && (
           <HiLocationMarker className="text-2xl text-gray-800" />
         )}

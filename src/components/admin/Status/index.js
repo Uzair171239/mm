@@ -9,7 +9,6 @@ import Form from "./Form";
 const Status = () => {
   const [formshow, setFormshow] = useState(false);
   const [dataTable, setDataTable] = useState({});
-  const [sidebar, setSidebar] = useState(false);
 
   const data = [
     {
@@ -52,29 +51,28 @@ const Status = () => {
         ""
       )}
       {/* side bar  */}
-      <div className="hidden md:block w-1/5 bg-white shadow-md shadow-gray-400 h-screen">
+      <div className="sticky top-0 left-0 w-1/5 bg-white shadow-md shadow-gray-400 h-screen">
         <Sidebar />
       </div>
-      {sidebar && (
-        <div className="absolute  w-fit md:w-1/5 bg-white shadow-md shadow-gray-400 h-screen">
-          <Sidebar />
-        </div>
-      )}
+
       {/* main content */}
       <div className="flex-1">
-        <Header title="status" setSidebar={setSidebar} />
+        <Header title="status" />
         <div className="rounded-md shadow-lg m-5 bg-white p-5">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
               <MdContactMail className="text-gray-700 text-xl" />
               <p className="text-lg font-semibold font-mono text-gray-700">
-                Contact
+                Status
               </p>
             </div>
             <div>
               <button
-                onClick={() => setFormshow(!formshow)}
-                className="flex items-center bg-green-500 font-semibold font-mono text-lg text-white p-2 rounded-sm"
+                onClick={() => {
+                  setFormshow(!formshow);
+                  setDataTable({});
+                }}
+                className="flex items-center shadow-lg bg-green-500 font-semibold font-mono text-lg text-white p-2 rounded-sm"
               >
                 <TiPlus className="w-5 h-5 " />
                 New Status
@@ -125,7 +123,7 @@ const Status = () => {
                       <td className="px-4 py-2">
                         <button
                           onClick={(e) => rowClick(d.id)}
-                          className="mx-auto rounded-sm bg-red-500 p-2 py-1 text-white flex items-center"
+                          className="mx-auto shadow-lg rounded-sm bg-red-500 p-2 py-1 text-white flex items-center"
                         >
                           <FaRegEdit className="mx-auto" />
                           Edit

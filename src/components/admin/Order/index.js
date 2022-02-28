@@ -33,7 +33,7 @@ const Order = () => {
         ""
       )}
       {/* side bar  */}
-      <div className="w-1/5 bg-white shadow-md shadow-gray-400 h-screen">
+      <div className="sticky top-0 left-0 w-1/5 bg-white shadow-md shadow-gray-400 h-screen">
         <Sidebar />
       </div>
       {/* main content */}
@@ -49,11 +49,11 @@ const Order = () => {
               className="flex items-center shadow-lg bg-green-500 font-semibold font-mono text-lg text-white p-2 rounded-sm"
             >
               <TiPlus className="w-5 h-5 " />
-              Add New Product
+              Add New Order
             </button>
           </div>
           <MUIDataTable
-            title={"Employee List"}
+            title={"Orders List"}
             data={data}
             columns={columns}
             options={options}

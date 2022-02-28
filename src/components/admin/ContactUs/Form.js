@@ -106,12 +106,14 @@ function Form({ setFormshow, dataTable }) {
               </div>
 
               <div className="flex justify-end space-x-3 py-4">
-                <button
-                  onClick={() => setFormshow(false)}
-                  className="bg-inherit border border-gray-200  active:animate-ping transition ease-linear duration-100 text-white p-1 px-5 rounded-sm"
-                >
-                  CLOSE
-                </button>
+                {dataTable.id && (
+                  <button
+                    onClick={() => setFormshow(false)}
+                    className="bg-inherit border border-gray-200  active:animate-ping transition ease-linear duration-100 text-white p-1 px-5 rounded-sm"
+                  >
+                    DELETE
+                  </button>
+                )}
                 <button
                   type="submit"
                   onClick={props.handleSubmit}

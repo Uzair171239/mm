@@ -46,7 +46,7 @@ const Countries = () => {
         ""
       )}
       {/* side bar  */}
-      <div className="w-1/5 bg-white shadow-md shadow-gray-400 h-screen">
+      <div className="sticky top-0 left-0 w-1/5 bg-white shadow-md shadow-gray-400 h-screen">
         <Sidebar />
       </div>
       {/* main content */}
@@ -57,7 +57,7 @@ const Countries = () => {
             <div className="flex items-center space-x-2">
               <MdContactMail className="text-gray-700 text-xl" />
               <p className="text-lg font-semibold font-mono text-gray-700">
-                Contact
+                Country
               </p>
             </div>
             <div>
@@ -66,7 +66,7 @@ const Countries = () => {
                   setFormshow(!formshow);
                   setDataTable({});
                 }}
-                className="flex items-center bg-green-500 font-semibold font-mono text-lg text-white p-2 rounded-sm"
+                className="flex items-center shadow-lg bg-green-500 font-semibold font-mono text-lg text-white p-2 rounded-sm"
               >
                 <TiPlus className="w-5 h-5 " />
                 New Country
@@ -112,7 +112,7 @@ const Countries = () => {
                       <td className="px-4 py-2">
                         <button
                           onClick={(e) => rowClick(d.id)}
-                          className="mx-auto rounded-sm bg-red-500 p-2 py-1 text-white flex items-center"
+                          className="mx-auto shadow-lg rounded-sm bg-red-500 p-2 py-1 text-white flex items-center"
                         >
                           <FaRegEdit className="mx-auto" />
                           Edit
