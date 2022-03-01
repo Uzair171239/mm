@@ -31,7 +31,6 @@ function Form({ setFormshow, dataTable }) {
               })
               .then((res) => {
                 alert("category updated successfully");
-                window.location.reload();
               })
               .catch((err) => alert(err.message));
           } else {
@@ -39,7 +38,6 @@ function Form({ setFormshow, dataTable }) {
               .post("http://localhost:3001/category/", values)
               .then((res) => {
                 alert("category inserted");
-                window.location.reload();
               })
               .catch((err) => alert(err.message));
           }
@@ -81,7 +79,6 @@ function Form({ setFormshow, dataTable }) {
                       .then(res => {
                         console.log(res);
                         alert("category Deleted")
-                        window.location.reload()
                       })
                       .catch(err => alert(err.message))
                       setFormshow(false)

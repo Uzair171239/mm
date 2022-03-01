@@ -12,7 +12,7 @@ const MissingOrder = () => {
   const [dataTable, setDataTable] = useState({});
   const options = {
     selectableRows: "none",
-    responsive: "scroll",
+ 
     rowsPerPage: 10,
     onRowClick: (rowData) => {
       setDataTable(data.find((data) => data.id === rowData[0]));

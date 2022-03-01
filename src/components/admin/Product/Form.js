@@ -1,10 +1,14 @@
 import { Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 
 import { CgClose } from "react-icons/cg";
 
 function Form({ setFormshow, dataTable }) {
-  console.log(dataTable);
+  const [checkboxes, setCheckboxes] = useState([]);
+  const [checkboxValues, setCheckboxValues] = useState([]);
+  const [disable_check_fields_1, set_disable_check_fields_1] = useState(true);
+  const [disable_check_fields_2, set_disable_check_fields_2] = useState(true);
+  const [disable_check_fields_3, set_disable_check_fields_3] = useState(true);
   const {
     price,
     description,
@@ -24,8 +28,21 @@ function Form({ setFormshow, dataTable }) {
     fake_order_sold,
     rank,
     status,
-    image,
   } = dataTable;
+  const check = [
+    {
+      id: 1,
+      country_name: "India",
+    },
+    {
+      id: 2,
+      country_name: "Pakistan",
+    },
+    {
+      id: 3,
+      country_name: "Iran",
+    },
+  ];
   const initialValues = {
     cattegory_name: cattegory_name || "",
     google_cattegory: google_cattegory || "",
@@ -33,9 +50,15 @@ function Form({ setFormshow, dataTable }) {
     title: title || "",
     code: code || "",
     purchase_price: purchase_price || "",
-    price: price || "",
-    price_list: price_list || "",
-    old_price: old_price || "",
+    price_1: price || "",
+    old_price_1: old_price || "",
+    price_list_1: price_list || "",
+    price_1: price || "",
+    old_price_1: old_price || "",
+    price_list_1: price_list || "",
+    price_1: price || "",
+    old_price_1: old_price || "",
+    price_list_1: price_list || "",
     color: color || "",
     size: size ? size : "",
     delivery_charges: delivery_charges || "",
@@ -61,7 +84,10 @@ function Form({ setFormshow, dataTable }) {
         initialValues={initialValues}
         onSubmit={(values, actions) => {
           actions.resetForm();
-          console.log(values);
+          console.log({
+            ...values,
+            countries: checkboxes.join(","),
+          });
           setFormshow(false);
         }}
       >
@@ -170,43 +196,18 @@ function Form({ setFormshow, dataTable }) {
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="flex flex-col">
-                    <label className="text-white">Price</label>
+                    <label className="text-white">Status</label>
                     <input
                       type="text"
-                      name="price"
-                      value={props.values.price}
-                      onChange={props.handleChange("price")}
-                      placeholder="Price"
-                      onBlur={props.handleBlur("price")}
+                      name="status"
+                      value={props.values.status}
+                      onChange={props.handleChange("status")}
+                      onBlur={props.handleBlur("status")}
+                      placeholder="Status"
                       className="w-80 p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
                     />
                   </div>
-                  <div className="flex flex-col">
-                    <label className="text-white">Price List</label>
-                    <input
-                      type="text"
-                      name="price_list"
-                      value={props.values.price_list}
-                      onChange={props.handleChange("price_list")}
-                      onBlur={props.handleBlur("price_list")}
-                      placeholder="Price List"
-                      className="w-80 p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
-                    />
-                  </div>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="flex flex-col">
-                    <label className="text-white">Old Price</label>
-                    <input
-                      type="text"
-                      name="old_price"
-                      value={props.values.old_price}
-                      onChange={props.handleChange("old_price")}
-                      placeholder="Old Price"
-                      onBlur={props.handleBlur("old_price")}
-                      className="w-80 p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
-                    />
-                  </div>
+
                   <div className="flex flex-col">
                     <label className="text-white">Color</label>
                     <input
@@ -298,58 +299,108 @@ function Form({ setFormshow, dataTable }) {
                     />
                   </div>
                 </div>
+
+                <div className="flex flex-col">
+                  
+                <label className="text-white">Countries</label>
+               
+                          <div className="flex justify-between space-x-2 border border-gray-200 p-2 my-1">
+                            <div className="flex items-center">
+                              <input
+                                type="checkbox"
+                                name="United Arab Emirates"
+                                value={"United Arab Emirates"}
+                                onChange={(e) => {
+                                  if(e.target.checked){
+                                    setCheckboxes(checkboxes.concat(1))
+                                    }
+                                    else { 
+                                      setCheckboxes(checkboxes.filter((check) => check !== 1));
+                                    }
+                                }}
+                                onBlur={props.handleBlur("checkboxes")}
+                                className="mr-2"
+                              />
+                              <label className="text-white">
+                              UAE
+                              </label>
+                            </div>
+                        
+                              
+                                <input
+                                  type="text"
+                                  name="price"
+                                  value={props.values.price}
+                                  onChange={e => {
+                                    setCheckboxValues([])
+                                  }}
+                                  placeholder="Price"
+                                  onBlur={props.handleBlur("price")}
+                                  className="w-20 p-1 rounded-sm bg-inherit border border-gray-200 outline-none"
+                                />
+                            
+                                <input
+                                  type="text"
+                                  name="old_price"
+                                  value={props.values.old_price}
+                                  onChange={props.handleChange("old_price")}
+                                  placeholder="Old Price"
+                                  onBlur={props.handleBlur("old_price")}
+                                  className="w-20 p-1 rounded-sm bg-inherit border border-gray-200 outline-none"
+                                />
+                            
+                                <input
+                                  type="text"
+                                  name="price_list"
+                                  value={props.values.price_list}
+                                  onChange={props.handleChange("price_list")}
+                                  onBlur={props.handleBlur("price_list")}
+                                  placeholder="Price List"
+                                  className="w-80 p-1 rounded-sm bg-inherit border border-gray-200 outline-none"
+                                /> 
+                          </div>
+                </div>
                 <div className="flex items-center space-x-3">
-                  <div className="flex flex-col">
+                  <div className="flex flex-col w-full">
                     <label className="text-white">Description</label>
                     <textarea
+                      rows={3}
                       name="description"
                       value={props.values.description}
                       onChange={props.handleChange("description")}
                       placeholder="Description"
                       onBlur={props.handleBlur("description")}
-                      className="w-80 p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
-                    />
-                  </div>
-                  <div className="flex flex-col">
-                    <label className="text-white">Status</label>
-                    <input
-                      type="text"
-                      name="status"
-                      value={props.values.status}
-                      onChange={props.handleChange("status")}
-                      onBlur={props.handleBlur("status")}
-                      placeholder="Status"
-                      className="w-80 p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
-                    />
-                  </div>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="flex flex-col">
-                    <label className="text-white">View Image</label>
-                    <input
-                      type="file"
-                      name="image"
-                      value={props.values.image}
-                      onChange={props.handleChange("image")}
-                      onBlur={props.handleBlur("image")}
-                      className="w-80 p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
-                    />
-                  </div>
-                  <div className="flex flex-col">
-                    <label className="text-white">Extra Image</label>
-                    <input
-                      type="file"
-                      name="extra_image"
-                      value={props.values.extra_image}
-                      onChange={props.handleChange("extra_image")}
-                      onBlur={props.handleBlur("extra_image")}
-                      placeholder="Extra Image"
-                      className="w-80 p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
+                      className="w-full p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
                     />
                   </div>
                 </div>
               </div>
 
+              <div className="flex items-center space-x-3 pl-2">
+                <div className="flex flex-col">
+                  <label className="text-white">View Image</label>
+                  <input
+                    type="file"
+                    name="image"
+                    value={props.values.image}
+                    onChange={props.handleChange("image")}
+                    onBlur={props.handleBlur("image")}
+                    className="w-80 p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <label className="text-white">Extra Image</label>
+                  <input
+                    type="file"
+                    name="extra_image"
+                    value={props.values.extra_image}
+                    onChange={props.handleChange("extra_image")}
+                    onBlur={props.handleBlur("extra_image")}
+                    placeholder="Extra Image"
+                    className="w-80 p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
+                  />
+                </div>
+              </div>
               <div className="flex justify-end space-x-3 py-2">
                 {dataTable.id && (
                   <button

@@ -17,11 +17,11 @@ const Order = () => {
 
   React.useEffect(() => {
     axios.get("http://localhost:3001/orders").then((res) => setData(res.data)).catch((err) => alert(err.message));
-  }, [])
+  }, [data])
  
   const options = {
     selectableRows: "none",
-    responsive: "scroll",
+
     rowsPerPage: 10,
     onRowClick: (rowData) => {
       setDataTable(data.find((data) => data.order_id === rowData[0]));

@@ -1,10 +1,10 @@
 import { Formik } from "formik";
 import React from "react";
-
+import axios from "axios";
 import { CgClose } from "react-icons/cg";
 
 function Form({ setFormshow, dataTable }) {
-  const { country, country_code, currency_symbol, with_vat, view_vat } =
+  const { country, country_code, currency, with_vat, view_vat } =
     dataTable;
   return (
     <div className="bg-gray-700 z-50 rounded-sm py-2  h-fit w-fit px-4 pb-4 shadow-lg shadow-gray-600 text-white">
@@ -18,13 +18,23 @@ function Form({ setFormshow, dataTable }) {
 
       <Formik
         initialValues={{
-          country_name: country ? country : "",
+          country: country ? country : "",
           country_code: country_code ? country_code : "",
-          currency_symbol: currency_symbol ? currency_symbol : "",
+          currency: currency ? currency : "",
           with_vat: with_vat ? with_vat : "",
           view_vat: view_vat ? view_vat : "",
         }}
         onSubmit={(values, actions) => {
+
+          if(dataTable.id){
+            axios.patch('http://localhost:3001/countries',{
+              ...values,
+              id: dataTable.id,
+            }).then(res => {alert('Country Updated')}).catch(err => alert(err.message))
+          }
+          else{
+            axios.post('http://localhost:3001/countries',values).then(res => {alert('Country Added')}).catch(err => alert(err.message))
+          }
           actions.resetForm();
           setFormshow(false);
         }}
@@ -37,10 +47,10 @@ function Form({ setFormshow, dataTable }) {
                 <input
                   type="text"
                   name="title"
-                  value={props.values.country_name}
-                  onChange={props.handleChange("country_name")}
-                  placeholder="Country Name"
-                  onBlur={props.handleBlur("country_name")}
+                  value={props.values.country}
+                  onChange={props.handleChange("country")}
+                  placeholder="Enter Country Name"
+                  onBlur={props.handleBlur("country")}
                   className="w-96 p-2 rounded-sm  bg-inherit border border-gray-200 outline-none"
                 />
               </div>
@@ -60,11 +70,11 @@ function Form({ setFormshow, dataTable }) {
                 <label className="text-white">Currency Symbol</label>
                 <input
                   type="text"
-                  name="currency_symbol"
-                  value={props.values.currency_symbol}
-                  onChange={props.handleChange("currency_symbol")}
-                  onBlur={props.handleBlur("  currency_symbol")}
-                  placeholder="Currency Symbol"
+                  name="currency"
+                  value={props.values.currency}
+                  onChange={props.handleChange("currency")}
+                  onBlur={props.handleBlur("currency")}
+                  placeholder="Enter Currency Symbol"
                   className="w-full p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
                 />
               </div>
@@ -95,7 +105,9 @@ function Form({ setFormshow, dataTable }) {
               <div className="flex justify-end space-x-3 py-4">
                 {dataTable.id && (
                   <button
-                    onClick={() => setFormshow(false)}
+                    onClick={() => {
+                      axios.delete(`http://localhost:3001/countries/${dataTable.id}`).then(res => {alert('Country Deleted')}).catch(err => alert(err.message))
+                      setFormshow(false)}}
                     className="bg-inherit border border-gray-200  active:animate-ping transition ease-linear duration-100 text-white p-1 px-5 rounded-sm"
                   >
                     DELETE

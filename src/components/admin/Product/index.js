@@ -12,7 +12,7 @@ const Product = () => {
   const [dataTable, setDataTable] = useState({});
   const options = {
     selectableRows: "none",
-    responsive: "scroll",
+
     rowsPerPage: 10,
     onRowClick: (rowData) => {
       setDataTable(data.find((d) => d.id === rowData[0]));

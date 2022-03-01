@@ -5,34 +5,39 @@ import { TiPlus } from "react-icons/ti";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 import Form from "./Form";
+import axios from "axios";
 
 const Status = () => {
   const [formshow, setFormshow] = useState(false);
   const [dataTable, setDataTable] = useState({});
+  const [data, setData] = useState([]);
 
-  const data = [
-    {
-      id: 1,
-      title: "New",
-      description: "When order is created",
-      color: "#00bcd4",
-      created_on: "25/10/2021",
-    },
-    {
-      id: 2,
-      title: "Cancelled",
-      description: "Cancelled orders",
-      color: "#ffffff",
-      created_on: "31/10/2021",
-    },
-    {
-      id: 3,
-      title: "Delivered",
-      description: "When item is delivered",
-      color: "#000000",
-      created_on: "25/10/2021",
-    },
-  ];
+  React.useEffect(() => {
+    axios.get("http://localhost:3001/status").then((res) => setData(res.data)).catch((err) => alert(err.message));
+  }, [data])
+  // const data = [
+  //   {
+  //     id: 1,
+  //     title: "New",
+  //     description: "When order is created",
+  //     color: "#00bcd4",
+  //     created_on: "25/10/2021",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Cancelled",
+  //     description: "Cancelled orders",
+  //     color: "#ffffff",
+  //     created_on: "31/10/2021",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Delivered",
+  //     description: "When item is delivered",
+  //     color: "#000000",
+  //     created_on: "25/10/2021",
+  //   },
+  // ];
 
   const rowClick = (id) => {
     setDataTable(data.find((data) => data.id === id));
@@ -83,7 +88,7 @@ const Status = () => {
             <table className="w-full border-collapse">
               <thead>
                 <tr className="border-b-2 border-gray-200">
-                  {Object.keys(data[0]).map((d) => {
+                  {data[0] && Object.keys(data[0]).map((d) => {
                     return (
                       <th className="px-4 py-2 text-sm">{d.toUpperCase()}</th>
                     );
@@ -102,7 +107,7 @@ const Status = () => {
                       </td>
                       <td className="px-4 py-2">
                         <p className=" font-mono text-gray-700 text-center">
-                          {d.title}
+                          {d.status}
                         </p>
                       </td>
                       <td className="px-4 py-2">
@@ -117,7 +122,12 @@ const Status = () => {
                       </td>
                       <td className="px-4 py-2">
                         <p className=" font-mono text-gray-700 text-center">
-                          {d.created_on}
+                          {d.created_at}
+                        </p>
+                      </td>
+                      <td className="px-4 py-2">
+                        <p className=" font-mono text-gray-700 text-center">
+                          {d.updated_at}
                         </p>
                       </td>
                       <td className="px-4 py-2">

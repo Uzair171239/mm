@@ -5,7 +5,15 @@ import React from "react";
 import { CgClose } from "react-icons/cg";
 
 function Form({ setFormshow, dataTable }) {
-  console.log(dataTable);
+  const [status_state, setStatus] = React.useState([]);
+
+  React.useEffect(() => {
+    axios.get("http://localhost:3001/status").then((res) => {
+      setStatus(res.data)
+    }).catch((err) => alert(err.message));
+  }, []);
+
+
   return (
     <div className="bg-gray-700 z-50 rounded-sm py-2  h-fit w-fit px-4 pb-4 shadow-lg shadow-gray-600 text-white">
       <div className="flex justify-end pt-2 ">
@@ -23,17 +31,18 @@ function Form({ setFormshow, dataTable }) {
           address: dataTable.address ? dataTable.address : "",
           city: dataTable.city ? dataTable.city : "",
           product: dataTable.title ? dataTable.title : "",
+          status: dataTable.status,
         }}
         onSubmit={(values, actions) => {
           actions.resetForm();
-          console.log(values);
           axios.patch("http://localhost:3001/orders/", {
             ...values,
             id: dataTable.client_id,
+            prod_id: dataTable.product_id,
           })
           .then(res => {
             alert("order updated successfully")
-            window.location.reload();
+            setFormshow(false)
           }).catch(err => alert(err.message))
         }}
       >
@@ -102,15 +111,32 @@ function Form({ setFormshow, dataTable }) {
                   className="w-full p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
                 />
               </div>
+              <div className="flex flex-col">
+                <label className="text-white">Status</label>
+                <select
+                  name="status"
+                  value={props.values.status}
+                  onChange={props.handleChange("status")}
+                  onBlur={props.handleBlur("status")}
+                  className="w-full p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
+                >
+                <option className='bg-gray-800 text-white'>
+                      --Select--
+                  </option>
+                  {status_state.map((item) => (
+                    <option key={item.id} value={item.id} className='bg-gray-800 text-white'>
+                      {item.status}
+                    </option>
+                  ))}
+                </select>
+              </div>
               <div className="flex justify-end space-x-3 py-4">
-                {dataTable.id && (
-                  <button
+                {dataTable.order_id && (
+                  <div
                     onClick={() => {
                       axios.delete("http://localhost:3001/orders/" + dataTable.order_id)
                       .then(res => {
-                        console.log(res);
                         alert("Order Deleted")
-                        window.location.reload()
                       })
                       .catch(err => alert(err.message))
                       setFormshow(false)
@@ -118,7 +144,7 @@ function Form({ setFormshow, dataTable }) {
                     className="bg-inherit border border-gray-200  active:animate-ping transition ease-linear duration-100 text-white p-1 px-5 rounded-sm"
                   >
                     DELETE
-                  </button>
+                  </div>
                 )}
                 <button
                   type="submit"

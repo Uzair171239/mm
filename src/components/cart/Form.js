@@ -72,7 +72,7 @@ function Form({ product }) {
             ...values,
             country,
           }).then((res)=> {
-            actions.resetForm()
+            // actions.resetForm()
             res.status === 200 && alert("Order Placed Successfully")
           }).catch(err => alert(err.message))
         }}

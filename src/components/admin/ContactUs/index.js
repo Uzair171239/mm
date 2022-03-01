@@ -1,25 +1,32 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 import { MdContactMail } from "react-icons/md";
 import { TiPlus } from "react-icons/ti";
 import { FaRegEdit } from "react-icons/fa";
 import Form from "./Form";
+import axios from "axios";
 
 const ContactUs = () => {
   const [formshow, setFormshow] = useState(false);
   const [dataTable, setDataTable] = useState({});
-  const data = [
-    {
-      id: 1,
-      country_name: "United Arab Emirates",
-      address: "A-Shop Oman Muscat, Sultanate Of Oman",
-      facebook: "facebook.com/ashop02",
-      instagram: "AShop",
-      email: "info@ashop-oman.com",
-      whatsapp: "+971 56 567 567",
-    },
-  ];
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:3001/contacts").then(res => {
+      setData(res.data);
+    }).catch(err => alert(err.message));
+  }, [data]);
+  // const data = [
+  //   {
+  //     id: 1,
+  //     country_name: "United Arab Emirates",
+  //     address: "A-Shop Oman Muscat, Sultanate Of Oman",
+  //     facebook: "facebook.com/ashop02",
+  //     instagram: "AShop",
+  //     email: "info@ashop-oman.com",
+  //     whatsapp: "+971 56 567 567",
+  //   },
+  // ];
 
   const rowClick = (id) => {
     setDataTable(data.find((data) => data.id === id));
@@ -74,6 +81,7 @@ const ContactUs = () => {
                   <th className="px-1 py-2 text-sm">INSTAGRAM</th>
                   <th className="px-1 py-2 text-sm">Email</th>
                   <th className="px-1 py-2 text-sm">WHATSAPP</th>
+                  <th className="px-1 py-2 text-sm">PHONE</th>
                   <th className="px-1 py-2 text-sm">ACTION</th>
                 </tr>
               </thead>
@@ -81,6 +89,11 @@ const ContactUs = () => {
                 {data.map((d) => {
                   return (
                     <tr className="border-b-2 border-gray-200">
+                      <td className="px-1 py-2">
+                        <p className=" font-mono text-gray-700 text-center">
+                          {d.id}
+                        </p>
+                      </td>
                       <td className="px-1 py-2">
                         <p className=" font-mono text-gray-700 text-center">
                           {d.country_name}

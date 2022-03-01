@@ -5,30 +5,36 @@ import { TiPlus } from "react-icons/ti";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 import Form from "./Form";
+import axios from 'axios';
 
 const Countries = () => {
   const [formshow, setFormshow] = useState(false);
   const [dataTable, setDataTable] = useState({});
-  const data = [
-    {
-      id: 1,
-      country: "United Arab Emirates",
-      country_code: "AE",
-      currency_symbol: "AED",
-    },
-    {
-      id: 2,
-      country: "Qatar",
-      country_code: "QA",
-      currency_symbol: "QR",
-    },
-    {
-      id: 3,
-      country: "Oman",
-      country_code: "OM",
-      currency_symbol: "OMR",
-    },
-  ];
+  const [data, setData] = useState([]);
+
+  React.useEffect(() => {
+    axios.get('http://localhost:3001/countries').then(res=>{setData(res.data)}).catch(err=>alert(err.message))
+  }, [data])
+    // const data = [
+  //   {
+  //     id: 1,
+  //     country: "United Arab Emirates",
+  //     country_code: "AE",
+  //     currency_symbol: "AED",
+  //   },
+  //   {
+  //     id: 2,
+  //     country: "Qatar",
+  //     country_code: "QA",
+  //     currency_symbol: "QR",
+  //   },
+  //   {
+  //     id: 3,
+  //     country: "Oman",
+  //     country_code: "OM",
+  //     currency_symbol: "OMR",
+  //   },
+  // ];
 
   const rowClick = (id) => {
     setDataTable(data.find((data) => data.id === id));
@@ -77,7 +83,7 @@ const Countries = () => {
             <table className="w-full border-collapse">
               <thead>
                 <tr className="border-b-2 border-gray-200">
-                  {Object.keys(data[0]).map((d) => {
+                  {data[0] && Object.keys(data[0]).map((d) => {
                     return (
                       <th className="px-4 py-2 text-sm">{d.toUpperCase()}</th>
                     );
@@ -106,7 +112,17 @@ const Countries = () => {
                       </td>
                       <td className="px-4 py-2">
                         <p className=" font-mono text-gray-700 text-center">
-                          {d.currency_symbol}
+                          {d.currency}
+                        </p>
+                      </td>
+                      <td className="px-4 py-2">
+                        <p className=" font-mono text-gray-700 text-center">
+                          {d.with_vat}
+                        </p>
+                      </td>
+                      <td className="px-4 py-2">
+                        <p className=" font-mono text-gray-700 text-center">
+                          {d.view_vat}
                         </p>
                       </td>
                       <td className="px-4 py-2">

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Formik } from "formik";
 import React from "react";
 
@@ -27,6 +28,13 @@ function Form({ setFormshow, dataTable }) {
         }}
         onSubmit={(values, actions) => {
           actions.resetForm();
+          if(dataTable.id){
+            axios.patch('http://localhost:3001/contacts',{
+              ...values,
+              id: dataTable.id,}).then(res => {alert('Contact Updated')}).catch(err => alert(err.message))}
+              else{
+                axios.post('http://localhost:3001/contacts',values).then(res => {alert('Contact Added')}).catch(err => alert(err.message))
+              }
           setFormshow(false);
         }}
       >
@@ -108,7 +116,10 @@ function Form({ setFormshow, dataTable }) {
               <div className="flex justify-end space-x-3 py-4">
                 {dataTable.id && (
                   <button
-                    onClick={() => setFormshow(false)}
+                    onClick={() => {
+                      axios.delete(`http://localhost:3001/contacts/${dataTable.id}`).then(res => {alert('Contact Deleted')}).catch(err => alert(err.message))
+                      setFormshow(false)
+                    }}
                     className="bg-inherit border border-gray-200  active:animate-ping transition ease-linear duration-100 text-white p-1 px-5 rounded-sm"
                   >
                     DELETE

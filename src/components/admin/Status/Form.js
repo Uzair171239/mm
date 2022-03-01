@@ -1,7 +1,7 @@
 import { Formik } from "formik";
 import React, { useState } from "react";
 import { SketchPicker } from "react-color";
-
+import axios from "axios";
 import { CgClose } from "react-icons/cg";
 
 function Form({ setFormshow, dataTable }) {
@@ -20,12 +20,21 @@ function Form({ setFormshow, dataTable }) {
 
       <Formik
         initialValues={{
-          title: dataTable.title ? dataTable.title : "",
+          status: dataTable.status ? dataTable.status : "",
           description: dataTable.description ? dataTable.description : "",
           color: dataTable.color ? dataTable.color : "#fff",
         }}
         onSubmit={(values, actions) => {
           actions.resetForm();
+          if(dataTable.id){
+            axios.patch('http://localhost:3001/status',{
+              ...values,
+              id: dataTable.id,
+            }).then(res=>{alert('status updated')}).catch(err=>alert(err.message))
+          }
+          else{
+              axios.post('http://localhost:3001/status',values).then(res=>{alert('status inserted')}).catch(err=>alert(err.message))
+          }
           setFormshow(false);
         }}
       >
@@ -33,14 +42,14 @@ function Form({ setFormshow, dataTable }) {
           <form onSubmit={props.handleSubmit}>
             <div className="flex flex-col space-y-4 pt-5">
               <div className="flex flex-col">
-                <label className="text-white">Title</label>
+                <label className="text-white">Status</label>
                 <input
                   type="text"
-                  name="title"
-                  value={props.values.title}
-                  onChange={props.handleChange("title")}
-                  placeholder="Title"
-                  onBlur={props.handleBlur("title")}
+                  name="status"
+                  value={props.values.status}
+                  onChange={props.handleChange("status")}
+                  placeholder="status"
+                  onBlur={props.handleBlur("status")}
                   className="w-96 p-2 rounded-sm  bg-inherit border border-gray-200 outline-none"
                 />
               </div>
@@ -60,9 +69,9 @@ function Form({ setFormshow, dataTable }) {
               <div className=" flex flex-col">
                 <label className="text-white">Color</label>
                 <div className="border border-gray-200 p-2 flex flex-col justify-center py-3">
-                  <button
-                    onClick={() => setColorshow(true)}
-                    className={`w-20 h-5`}
+                  <div
+                    onClick={() => setColorshow(!colorshow)}
+                    className={`w-20 h-5 cursor-pointer`}
                     style={{
                       backgroundColor: colorPicker,
                     }}
@@ -93,7 +102,10 @@ function Form({ setFormshow, dataTable }) {
               <div className="flex justify-end space-x-3 py-4">
                 {dataTable.id && (
                   <button
-                    onClick={() => setFormshow(false)}
+                    onClick={() => {
+                      axios.delete('http://localhost:3001/status/'+dataTable.id).then(res => alert("Status deleted")).catch(err => alert(err));
+                      setFormshow(false)
+                    }}
                     className="bg-inherit border border-gray-200  active:animate-ping transition ease-linear duration-100 text-white p-1 px-5 rounded-sm"
                   >
                     DELETE
