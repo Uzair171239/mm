@@ -7,7 +7,7 @@ const data = [
     purchase_price: null,
     code: "VB-001",
     title: "Electric Hair Clippers Profess",
-    status: 1,
+    status: "2",
     price_list: "6.5 : 1, 12 : 2, 18 : 2, 23 : 4, 27 : 5",
     price: 6.5,
     old_price: 8,
@@ -25,6 +25,7 @@ const data = [
     image: "/images/products/product1.png",
     created_at: "2022-02-23T04:43:53.000Z",
     updated_at: "2022-02-23T04:43:53.000Z",
+    available_in: "1,2",
   },
   {
     id: 2,

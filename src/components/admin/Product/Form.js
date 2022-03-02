@@ -1,16 +1,16 @@
 import { Formik } from "formik";
 import React, { useState } from "react";
-
+import axios from "axios";
 import { CgClose } from "react-icons/cg";
 
 function Form({ setFormshow, dataTable }) {
   const [checkboxes, setCheckboxes] = useState([]);
-  const [checkboxValues, setCheckboxValues] = useState([]);
-  const [disable_check_fields_1, set_disable_check_fields_1] = useState(true);
-  const [disable_check_fields_2, set_disable_check_fields_2] = useState(true);
-  const [disable_check_fields_3, set_disable_check_fields_3] = useState(true);
-  const {
-    price,
+  const [category, setCategory] = useState([]);
+  const [codee, setCode] = useState({});
+  const [multiImages, setMultiImages] = useState([]);
+  const [imageName, setImageName] = useState("");
+  let {
+    id,
     description,
     code,
     cattegory_name,
@@ -18,8 +18,6 @@ function Form({ setFormshow, dataTable }) {
     brand,
     title,
     purchase_price,
-    price_list,
-    old_price,
     color,
     size,
     delivery_charges,
@@ -28,21 +26,61 @@ function Form({ setFormshow, dataTable }) {
     fake_order_sold,
     rank,
     status,
+    available_in,
+    image,
   } = dataTable;
-  const check = [
-    {
-      id: 1,
-      country_name: "India",
+
+  const [checkboxValues, setCheckboxValues] = useState({
+    1: {
+      country_id: 0,
+      product_id: "2",
+      price: "",
+      old_price: "",
+      price_list: "",
     },
-    {
-      id: 2,
-      country_name: "Pakistan",
+    2: {
+      country_id: 0,
+      product_id: "2",
+      price: "",
+      old_price: "",
+      price_list: "",
     },
-    {
-      id: 3,
-      country_name: "Iran",
+    3: {
+      country_id: 0,
+      product_id: "2",
+      price: "",
+      old_price: "",
+      price_list: "",
     },
-  ];
+  });
+
+  React.useEffect(() => {
+    if(available_in) {
+      setCheckboxes(available_in.split(","));
+      axios
+        .post("http://localhost:3001/products/pricing", {
+          country_id: available_in.split(","),
+          product_id: id,
+        })
+        .then(({ data }) => {
+          var value = {};
+          data.forEach((d) => {
+            value[d.country_id] = d;
+          });
+          setCheckboxValues({
+            ...checkboxValues,
+            ...value,
+          });
+        })
+        .catch((err) => alert(err.message));
+      }
+    axios
+      .get("http://localhost:3001/category")
+      .then(({ data }) => setCategory(data))
+      .catch((err) => alert(err.message));
+
+  }, []);
+
   const initialValues = {
     cattegory_name: cattegory_name || "",
     google_cattegory: google_cattegory || "",
@@ -50,15 +88,6 @@ function Form({ setFormshow, dataTable }) {
     title: title || "",
     code: code || "",
     purchase_price: purchase_price || "",
-    price_1: price || "",
-    old_price_1: old_price || "",
-    price_list_1: price_list || "",
-    price_1: price || "",
-    old_price_1: old_price || "",
-    price_list_1: price_list || "",
-    price_1: price || "",
-    old_price_1: old_price || "",
-    price_list_1: price_list || "",
     color: color || "",
     size: size ? size : "",
     delivery_charges: delivery_charges || "",
@@ -68,7 +97,6 @@ function Form({ setFormshow, dataTable }) {
     rank: rank || "",
     description: description || "",
     status: status || "",
-    image: "",
   };
   return (
     <div className="bg-gray-700 z-50 rounded-sm py-0  h-fit w-fit px-7 pb-0 shadow-lg shadow-gray-600 text-white">
@@ -82,12 +110,88 @@ function Form({ setFormshow, dataTable }) {
 
       <Formik
         initialValues={initialValues}
-        onSubmit={(values, actions) => {
+        onSubmit={async (values, actions) => {
+          let prices = [];
+          if (
+            checkboxValues["1"].price !== 0 &&
+            checkboxValues["1"].old_price &&
+            checkboxValues["1"].price_list
+          ) {
+            prices.push({
+              ...checkboxValues["1"],
+              country_id: 1,
+            });
+          }
+          if (
+            checkboxValues["2"].price !== 0 &&
+            checkboxValues["2"].old_price &&
+            checkboxValues["2"].price_list
+          ) {
+            prices.push({
+              ...checkboxValues["2"],
+              country_id: 2,
+            });
+          }
+          if (
+            checkboxValues["3"].price !== 0 &&
+            checkboxValues["3"].old_price &&
+            checkboxValues["3"].price_list
+          ) {
+            prices.push({
+              ...checkboxValues["3"],
+              country_id: 3,
+            });
+          }
           actions.resetForm();
-          console.log({
-            ...values,
-            countries: checkboxes.join(","),
-          });
+          if (!id) {
+            axios
+              .post("http://localhost:3001/products", {
+                ...values,
+                pricing: prices,
+                price: prices[0].price,
+                old_price: prices[0].old_price,
+                price_list: prices[0].price_list,
+                available_in: checkboxes.join(","),
+                image: imageName,
+              })
+              .then(({ data }) => {
+                id = data.insertId
+                alert(data.insertId)
+                alert("Product added");
+                setFormshow(false);
+              })
+              .catch((err) => alert(err.message));
+          } else {
+            axios
+              .patch("http://localhost:3001/products", {
+                ...values,
+                pricing: prices,
+                price: prices[0].price,
+                old_price: prices[0].old_price,
+                price_list: prices[0].price_list,
+                available_in: checkboxes.join(","),
+                image: image,
+                id,
+              })
+              .then(({ data }) => {
+                alert("Product updated");
+                setFormshow(false);
+              })
+              .catch((err) => alert(err.message));
+          }
+          
+          if (multiImages[0]) {
+            axios.delete("http://localhost:3001/productImages/"+id).then(({data})=>{
+              for (let i = 0 ; i < multiImages.length; i++) {
+                const formData = new FormData();
+                formData.append("files", multiImages[i]);
+                 axios
+                  .post("http://localhost:3001/productImages/"+id, formData)
+                  .catch((err) => alert(err.message));
+              }
+            }).catch((err) => console.log(err.message));
+            
+          }
           setFormshow(false);
         }}
       >
@@ -106,28 +210,19 @@ function Form({ setFormshow, dataTable }) {
                       onBlur={props.handleBlur("cattegory_name")}
                       className="w-80 p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
                     >
-                      <option value="" className="text-gray-800 bg-gray-200">
+                      <option value="" className="text-gray-200 bg-gray-800">
                         -Select Category-
                       </option>
-                      <option value="" className="text-gray-800 bg-gray-200">
-                        Category 1
-                      </option>
-                      <option value="" className="text-gray-800 bg-gray-200">
-                        Category 2
-                      </option>
-                      <option value="" className="text-gray-800 bg-gray-200">
-                        Category 3
-                      </option>
+                      {category.map((c) => (
+                        <option
+                          key={c.id}
+                          value={c.name}
+                          className="text-gray-200 bg-gray-800"
+                        >
+                          {c.name}
+                        </option>
+                      ))}
                     </select>
-                    {/* <input
-                      type="text"
-                      name="category"
-                      value={props.values.name}
-                      onChange={props.handleChange("name")}
-                      placeholder="Name"
-                      onBlur={props.handleBlur("name")}
-                      className="w-80 p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
-                    /> */}
                   </div>
                   <div className="flex flex-col">
                     <label className="text-white">Google Category</label>
@@ -197,7 +292,7 @@ function Form({ setFormshow, dataTable }) {
                 <div className="flex items-center space-x-3">
                   <div className="flex flex-col">
                     <label className="text-white">Status</label>
-                    <input
+                    <select
                       type="text"
                       name="status"
                       value={props.values.status}
@@ -205,7 +300,14 @@ function Form({ setFormshow, dataTable }) {
                       onBlur={props.handleBlur("status")}
                       placeholder="Status"
                       className="w-80 p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
-                    />
+                    >
+                      <option value="1" className="text-gray-200 bg-gray-800">
+                        Enable
+                      </option>
+                      <option value="0" className="text-gray-200 bg-gray-800">
+                        Disable
+                      </option>
+                    </select>
                   </div>
 
                   <div className="flex flex-col">
@@ -301,64 +403,240 @@ function Form({ setFormshow, dataTable }) {
                 </div>
 
                 <div className="flex flex-col">
-                  
-                <label className="text-white">Countries</label>
-               
-                          <div className="flex justify-between space-x-2 border border-gray-200 p-2 my-1">
-                            <div className="flex items-center">
-                              <input
-                                type="checkbox"
-                                name="United Arab Emirates"
-                                value={"United Arab Emirates"}
-                                onChange={(e) => {
-                                  if(e.target.checked){
-                                    setCheckboxes(checkboxes.concat(1))
-                                    }
-                                    else { 
-                                      setCheckboxes(checkboxes.filter((check) => check !== 1));
-                                    }
-                                }}
-                                onBlur={props.handleBlur("checkboxes")}
-                                className="mr-2"
-                              />
-                              <label className="text-white">
-                              UAE
-                              </label>
-                            </div>
-                        
-                              
-                                <input
-                                  type="text"
-                                  name="price"
-                                  value={props.values.price}
-                                  onChange={e => {
-                                    setCheckboxValues([])
-                                  }}
-                                  placeholder="Price"
-                                  onBlur={props.handleBlur("price")}
-                                  className="w-20 p-1 rounded-sm bg-inherit border border-gray-200 outline-none"
-                                />
-                            
-                                <input
-                                  type="text"
-                                  name="old_price"
-                                  value={props.values.old_price}
-                                  onChange={props.handleChange("old_price")}
-                                  placeholder="Old Price"
-                                  onBlur={props.handleBlur("old_price")}
-                                  className="w-20 p-1 rounded-sm bg-inherit border border-gray-200 outline-none"
-                                />
-                            
-                                <input
-                                  type="text"
-                                  name="price_list"
-                                  value={props.values.price_list}
-                                  onChange={props.handleChange("price_list")}
-                                  onBlur={props.handleBlur("price_list")}
-                                  placeholder="Price List"
-                                  className="w-80 p-1 rounded-sm bg-inherit border border-gray-200 outline-none"
-                                /> 
-                          </div>
+                  <label className="text-white">Countries</label>
+                  <div className="flex justify-between space-x-2 border border-gray-200 p-2 my-1">
+                    <div className="flex items-center">
+                      <input
+                        type="checkbox"
+                        name="United Arab Emirates"
+                        value={"1"}
+                        checked={checkboxes.indexOf("1") !== -1}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setCheckboxes(checkboxes.concat("1"));
+                          } else {
+                            setCheckboxes(
+                              checkboxes.filter((check) => check !== "1")
+                            );
+                          }
+                        }}
+                        onBlur={props.handleBlur("checkboxes")}
+                        className="mr-2"
+                      />
+                      <label className="text-white">UAE</label>
+                    </div>
+
+                    <input
+                      type="text"
+                      name="price"
+                      value={checkboxValues["1"]["price"]}
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                        const price = e.target.value;
+                        console.log(checkboxValues["1"]);
+                        setCheckboxValues({
+                          ...checkboxValues,
+                          1: {
+                            ...checkboxValues["1"],
+                            price,
+                          },
+                        });
+                      }}
+                      placeholder="Price"
+                      className="w-20 p-1 rounded-sm bg-inherit border border-gray-200 outline-none"
+                    />
+
+                    <input
+                      type="text"
+                      name="old_price"
+                      value={checkboxValues["1"]["old_price"]}
+                      onChange={(e) => {
+                        const old_price = e.target.value;
+                        setCheckboxValues({
+                          ...checkboxValues,
+                          1: {
+                            ...checkboxValues["1"],
+                            old_price,
+                          },
+                        });
+                      }}
+                      placeholder="Old Price"
+                      className="w-20 p-1 rounded-sm bg-inherit border border-gray-200 outline-none"
+                    />
+
+                    <input
+                      type="text"
+                      name="price_list"
+                      value={checkboxValues["1"]["price_list"]}
+                      onChange={(e) => {
+                        const price_list = e.target.value;
+                        setCheckboxValues({
+                          ...checkboxValues,
+                          "1": {
+                            ...checkboxValues["1"],
+                            price_list,
+                          },
+                        });
+                      }}
+                      placeholder="Price List"
+                      className="w-80 p-1 rounded-sm bg-inherit border border-gray-200 outline-none"
+                    />
+                  </div>
+
+
+                  <div className="flex justify-between space-x-2 border border-gray-200 p-2 my-1">
+                    <div className="flex items-center">
+                      <input
+                        type="checkbox"
+                        name="QATAR"
+                        value={"2"}
+                        checked={checkboxes.indexOf("2") !== -1}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setCheckboxes(checkboxes.concat("2"));
+                          } else {
+                            setCheckboxes(
+                              checkboxes.filter((check) => check !== "2")
+                            );
+                          }
+                        }}
+                        onBlur={props.handleBlur("checkboxes")}
+                        className="mr-2"
+                      />
+                      <label className="text-white">QATAR</label>
+                    </div>
+
+                    <input
+                      type="text"
+                      name="price"
+                      value={checkboxValues["2"]["price"]}
+                      onChange={(e) => {
+                        const price = e.target.value;
+                        setCheckboxValues({
+                          ...checkboxValues,
+                          "2": {
+                            ...checkboxValues["2"],
+                            price,
+                          },
+                        });
+                      }}
+                      placeholder="Price"
+                      className="w-20 p-1 rounded-sm bg-inherit border border-gray-200 outline-none"
+                    />
+
+                    <input
+                      type="text"
+                      name="old_price"
+                      value={checkboxValues["2"]["old_price"]}
+                      onChange={(e) => {
+                        const old_price = e.target.value;
+                        setCheckboxValues({
+                          ...checkboxValues,
+                          "2": {
+                            ...checkboxValues["2"],
+                            old_price,
+                          },
+                        });
+                      }}
+                      placeholder="Old Price"
+                      className="w-20 p-1 rounded-sm bg-inherit border border-gray-200 outline-none"
+                    />
+
+                    <input
+                      type="text"
+                      name="price_list"
+                      value={checkboxValues["2"]["price_list"]}
+                      onChange={(e) => {
+                        const price_list = e.target.value;
+                        setCheckboxValues({
+                          ...checkboxValues,
+                          "2": {
+                            ...checkboxValues["2"],
+                            price_list,
+                          },
+                        });
+                      }}
+                      placeholder="Price List"
+                      className="w-80 p-1 rounded-sm bg-inherit border border-gray-200 outline-none"
+                    />
+                  </div>
+
+                  <div className="flex justify-between space-x-2 border border-gray-200 p-2 my-1">
+                    <div className="flex items-center">
+                      <input
+                        type="checkbox"
+                        name="OMAN"
+                        value={"3"}
+                        checked={checkboxes.indexOf("3") !== -1}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setCheckboxes(checkboxes.concat("3"));
+                          } else {
+                            setCheckboxes(
+                              checkboxes.filter((check) => check !== "3")
+                            );
+                          }
+                        }}
+                        onBlur={props.handleBlur("checkboxes")}
+                        className="mr-2"
+                      />
+                      <label className="text-white">OMAN</label>
+                    </div>
+
+                    <input
+                      type="text"
+                      name="price"
+                      value={checkboxValues["3"]["price"]}
+                      onChange={(e) => {
+                        const price = e.target.value;
+                        setCheckboxValues({
+                          ...checkboxValues,
+                          "3": {
+                            ...checkboxValues["3"],
+                            price,
+                          },
+                        });
+                      }}
+                      placeholder="Price"
+                      className="w-20 p-1 rounded-sm bg-inherit border border-gray-200 outline-none"
+                    />
+
+                    <input
+                      type="text"
+                      name="old_price"
+                      value={checkboxValues["3"]["old_price"]}
+                      onChange={(e) => {
+                        const old_price = e.target.value;
+                        setCheckboxValues({
+                          ...checkboxValues,
+                          "3": {
+                            ...checkboxValues["3"],
+                            old_price,
+                          },
+                        });
+                      }}
+                      placeholder="Old Price"
+                      className="w-20 p-1 rounded-sm bg-inherit border border-gray-200 outline-none"
+                    />
+
+                    <input
+                      type="text"
+                      name="price_list"
+                      value={checkboxValues["3"]["price_list"]}
+                      onChange={(e) => {
+                        const price_list = e.target.value;
+                        setCheckboxValues({
+                          ...checkboxValues,
+                          "3": {
+                            ...checkboxValues["3"],
+                            price_list,
+                          },
+                        });
+                      }}
+                      placeholder="Price List"
+                      className="w-80 p-1 rounded-sm bg-inherit border border-gray-200 outline-none"
+                    />
+                  </div>
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="flex flex-col w-full">
@@ -382,8 +660,17 @@ function Form({ setFormshow, dataTable }) {
                   <input
                     type="file"
                     name="image"
-                    value={props.values.image}
-                    onChange={props.handleChange("image")}
+                    onChange={(e) => {
+                      const formData = new FormData();
+                      setImageName(e.target.files[0].name);
+                      formData.append("file", e.target.files[0]);
+                      axios
+                        .post(
+                          "http://localhost:3001/products/productImage",
+                          formData
+                        )
+                        .catch((err) => alert(err.message));
+                    }}
                     onBlur={props.handleBlur("image")}
                     className="w-80 p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
                   />
@@ -393,9 +680,8 @@ function Form({ setFormshow, dataTable }) {
                   <input
                     type="file"
                     name="extra_image"
-                    value={props.values.extra_image}
-                    onChange={props.handleChange("extra_image")}
-                    onBlur={props.handleBlur("extra_image")}
+                    multiple
+                    onChange={(e) => setMultiImages(e.target.files)}
                     placeholder="Extra Image"
                     className="w-80 p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
                   />
@@ -404,7 +690,10 @@ function Form({ setFormshow, dataTable }) {
               <div className="flex justify-end space-x-3 py-2">
                 {dataTable.id && (
                   <button
-                    onClick={() => setFormshow(false)}
+                    onClick={() => {
+                      axios.delete("http://localhost:3001/products/" + dataTable.id).then(({data}) => alert("product deleted")).catch(err => alert(err.message));
+                      setFormshow(false)
+                    }}
                     className="bg-inherit border border-gray-200  active:animate-ping transition ease-linear duration-100 text-white p-1 px-5 rounded-sm"
                   >
                     DELETE

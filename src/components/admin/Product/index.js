@@ -2,14 +2,21 @@ import React, { useState } from "react";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 import MUIDataTable from "mui-datatables";
+import axios from "axios";
 import columns from "./column";
-import data from "./data";
+// import data from "./data";
 import { TiPlus } from "react-icons/ti";
 import Form from "./Form";
 
 const Product = () => {
   const [formshow, setFormshow] = useState(false);
   const [dataTable, setDataTable] = useState({});
+  const [data, setData] = useState([]);
+
+  React.useEffect(() => {
+    axios.get('http://localhost:3001/products/true').then(res=>{setData(res.data)}).catch(err=>alert(err.message))
+  }, [data])
+
   const options = {
     selectableRows: "none",
 
