@@ -5,7 +5,7 @@ import { CgClose } from "react-icons/cg";
 
 function Form({ setFormshow, dataTable }) {
   const { name, phone, address, city, title } = dataTable;
-  console.log(dataTable);
+
   return (
     <div className="bg-gray-700 z-50 rounded-md  h-fit w-fit px-4 pb-4 shadow-lg shadow-gray-600 text-white">
       <div className="flex justify-end pt-2 ">

@@ -18,10 +18,10 @@ function Header({ title }) {
           <MdSpaceDashboard className="text-2xl text-gray-800" />
         )}
         {title === "orders" && (
-          <RiShoppingBasket2Fill className="text-2xl text-gray-800" />
+          <RiShoppingBag2Fill className="text-2xl text-gray-800" />
         )}
         {title === "missing_order" && (
-          <RiShoppingBag2Fill className="text-2xl text-gray-800" />
+          <RiShoppingBasket2Fill className="text-2xl text-gray-800" />
         )}
         {title === "products" && <BsImage className="text-2xl text-gray-800" />}
         {title === "contact" && (

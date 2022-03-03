@@ -9,8 +9,8 @@ function AddToCart() {
   const { product } = state;
   return (
     <div>
-      <Breedcrumb location={product.id} />
-      <div className="grid md:grid-cols-2 gap-3 py-10 px-2 pt-12">
+        {/*<Breedcrumb location={product.id} />*/}
+      <div className="grid md:grid-cols-2 gap-3 py-10 px-2 pt-6">
         {/* images ************ */}
         <ImagesCard product={product} />
         <Form product={product} />

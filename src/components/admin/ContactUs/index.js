@@ -15,7 +15,7 @@ const ContactUs = () => {
     axios.get("http://localhost:3001/contacts").then(res => {
       setData(res.data);
     }).catch(err => alert(err.message));
-  }, [data]);
+  }, []);
   // const data = [
   //   {
   //     id: 1,

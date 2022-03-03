@@ -51,8 +51,8 @@ function Footer() {
       <hr className=" w-60 mx-auto mb-5" />
       <div className="grid grid-cols-2 md:flex justify-between items-baseline">
         {/* contact us **************/}
-        {data.map((data) => (
-          <div className="space-y-3">
+        {data.map((data, index) => (
+          <div className="space-y-3" key={index}>
             <p className="text-sm md:text-lg mt-2 lg:mt-0">
               {data.country_name}
             </p>

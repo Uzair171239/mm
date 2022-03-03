@@ -28,7 +28,7 @@ function ImagesCard({ product }) {
   }, []);
   const { discount } = product;
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col h-fit">
       <div className="flex-1 border border-gray-300  shadow-sm  bg-white relative">
       <div className="flex justify-between items-center absolute w-full">
       <span className="text-white bg-green-500 px-3 w-fit text-sm">
@@ -46,9 +46,9 @@ function ImagesCard({ product }) {
           />
         </div>
        
-      </div>
+      
 
-      <div className="flex   items-center space-x-1 mt-2 ">
+      <div className="flex items-center space-x-1 mt-2 ">
         <div className="border-2 border-green-400 w-16 md:w-28 cursor-pointer">
           <img
             src={`http://localhost:3001${product.image}`}
@@ -71,6 +71,7 @@ function ImagesCard({ product }) {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 }

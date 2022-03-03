@@ -15,7 +15,7 @@ const Product = () => {
 
   React.useEffect(() => {
     axios.get('http://localhost:3001/products/true').then(res=>{setData(res.data)}).catch(err=>alert(err.message))
-  }, [data])
+  }, [])
 
   const options = {
     selectableRows: "none",
@@ -30,7 +30,7 @@ const Product = () => {
     <div className="flex ">
       {/* crud operation form */}
       {formshow && (
-        <div className=" flex w-full h-screen absolute justify-center pt-2 backdrop-blur-sm  bg-white/5 custom_class_zindex">
+        <div className=" flex w-full h-screen pb-3 absolute justify-center pt-2 backdrop-blur-sm  bg-white/5 custom_class_zindex">
           <Form setFormshow={setFormshow} dataTable={dataTable} />
         </div>
       )}

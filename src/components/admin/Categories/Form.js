@@ -1,9 +1,17 @@
-import axios from "axios";
-import { Formik } from "formik";
 import React from "react";
+
+import { Formik } from "formik";
+import * as yup from "yup";
+import axios from "axios";
 
 import { CgClose } from "react-icons/cg";
 
+
+const schema = yup.object({
+  category_name: yup.string().required('category name is required').min(3),
+  description: yup.string().required('category description is required').min(5),
+});
+ 
 function Form({ setFormshow, dataTable }) {
   const { name, description } = dataTable;
   return (
@@ -21,6 +29,7 @@ function Form({ setFormshow, dataTable }) {
           category_name: name ? name : "",
           description: description ? description : "",
         }}
+        validationSchema={schema} 
         onSubmit={(values, actions) => {
           actions.resetForm();
           if (dataTable.id) {
@@ -48,8 +57,11 @@ function Form({ setFormshow, dataTable }) {
           <form onSubmit={props.handleSubmit}>
             <div className="flex flex-col space-y-4 pt-5">
               <div className="flex flex-col">
-                <label className="text-white">Category Name</label>
-                <input
+              <div className="flex justify-between items-center">
+              <label className="text-white">Category Name</label>
+              <p className="text-red-500 text-sm">{props.touched.category_name && props.errors.category_name}</p>  
+              </div>
+                  <input
                   type="text"
                   name="category_name"
                   value={props.values.category_name}
@@ -60,7 +72,10 @@ function Form({ setFormshow, dataTable }) {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-white">Description</label>
+              <div className="flex justify-between items-center">
+              <label className="text-white">Description</label>
+              <p className="text-red-500 text-sm">{props.touched.description && props.errors.description}</p>
+              </div>
                 <textarea
                   name="description"
                   value={props.values.description}

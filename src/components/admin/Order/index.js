@@ -17,7 +17,7 @@ const Order = () => {
 
   React.useEffect(() => {
     axios.get("http://localhost:3001/orders").then((res) => setData(res.data)).catch((err) => alert(err.message));
-  }, [data])
+  }, [])
  
   const options = {
     selectableRows: "none",

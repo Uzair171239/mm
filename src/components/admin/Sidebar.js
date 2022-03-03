@@ -111,17 +111,7 @@ function Sidebar() {
           <HiLocationMarker className=" text-xl" />{" "}
           <span className="text-lg font-semibold ">Status</span>
         </Link>
-        <Link
-          to={"/admin-settings"}
-          className={`flex items-center pl-3 lg:pl-8 space-x-3 w-full  py-2 ${
-            title.pathname === "/admin-settings"
-              ? "bg-slate-500 text-white"
-              : "bg-slate-200 text-gray-800"
-          }`}
-        >
-          <AiFillSetting className=" text-xl" />{" "}
-          <span className="text-lg font-semibold">Settings</span>
-        </Link>
+      
       </div>
     </div>
   );

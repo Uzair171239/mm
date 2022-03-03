@@ -14,7 +14,7 @@ const Categories = () => {
 
   React.useEffect(() => {
     axios.get("http://localhost:3001/category").then((res) => setData(res.data)).catch((err) => alert(err.message));
-  }, [data])
+  }, [])
   // const data = [
   //   {
   //     id: 1,

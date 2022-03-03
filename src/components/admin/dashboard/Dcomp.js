@@ -40,8 +40,8 @@ function DComp() {
         {/* today order */}
         <div className="flex justify-between items-center w-1/2 border border-gray-200 bg-white rounded-md shadow-lg p-10">
           <div className="">
-            <p className="font-semibold text-lg">TODAY'S ORDERS</p>
-            <p className="font-semibold text-lg">0</p>
+            <p className="font-semibold text-lg">Missing Orders</p>
+            <p className="font-semibold text-lg">{dashboard.missing_orders}</p>
           </div>
           <div>
             <div className="flex justify-center items-center w-14 h-14 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">

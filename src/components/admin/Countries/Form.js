@@ -1,7 +1,19 @@
-import { Formik } from "formik";
 import React from "react";
+
+import { Formik } from "formik";
+import * as yup from 'yup';
 import axios from "axios";
 import { CgClose } from "react-icons/cg";
+
+
+const schema = yup.object({
+  country: yup.string().required('country name is required').min(3),
+  country_code: yup.string().required('country code is required').min(2),
+  currency: yup.string().required('currency is required'),
+  with_vat:yup.string().required('with vat is required'),
+  view_vat:yup.string().required('view vat is required'),
+});
+
 
 function Form({ setFormshow, dataTable }) {
   const { country, country_code, currency, with_vat, view_vat } =
@@ -24,6 +36,7 @@ function Form({ setFormshow, dataTable }) {
           with_vat: with_vat ? with_vat : "",
           view_vat: view_vat ? view_vat : "",
         }}
+        validationSchema={schema}
         onSubmit={(values, actions) => {
 
           if(dataTable.id){
@@ -43,7 +56,10 @@ function Form({ setFormshow, dataTable }) {
           <form onSubmit={props.handleSubmit}>
             <div className="flex flex-col space-y-4 pt-5">
               <div className="flex flex-col">
-                <label className="text-white">Country Name</label>
+              <div className="flex justify-between items-center">
+              <label className="text-white">Country Name</label>
+              <p className="text-red-500 text-sm">{props.touched.country && props.errors.country}</p>         
+              </div>
                 <input
                   type="text"
                   name="title"
@@ -55,7 +71,11 @@ function Form({ setFormshow, dataTable }) {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-white">Country Code</label>
+              <div className="flex justify-between items-center">
+              <label className="text-white">Country Code</label>
+              <p className="text-red-500 text-sm">{props.touched.country_code && props.errors.country_code}</p>         
+              </div>
+                
                 <input
                   type="text"
                   name="color"
@@ -67,7 +87,10 @@ function Form({ setFormshow, dataTable }) {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-white">Currency Symbol</label>
+              <div className="flex justify-between items-center">
+              <label className="text-white">Currency Symbol</label>
+              <p className="text-red-500 text-sm">{props.touched.currency && props.errors.currency}</p>         
+              </div>
                 <input
                   type="text"
                   name="currency"
@@ -79,7 +102,10 @@ function Form({ setFormshow, dataTable }) {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-white">With Vat</label>
+              <div className="flex justify-between items-center">
+              <label className="text-white">With Vat</label>
+              <p className="text-red-500 text-sm">{props.touched.with_vat && props.errors.with_vat}</p>         
+              </div>
                 <input
                   type="text"
                   name="with_vat"
@@ -91,7 +117,10 @@ function Form({ setFormshow, dataTable }) {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-white">View Vat</label>
+              <div className="flex justify-between items-center">
+              <label className="text-white">View Vat</label>
+              <p className="text-red-500 text-sm">{props.touched.view_vat && props.errors.view_vat}</p>         
+              </div>
                 <input
                   type="text"
                   name="view_vat"

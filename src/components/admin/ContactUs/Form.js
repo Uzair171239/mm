@@ -1,11 +1,23 @@
-import axios from "axios";
-import { Formik } from "formik";
 import React from "react";
 
-import { CgClose } from "react-icons/cg";
+import { Formik } from "formik";
+import * as yup from "yup";
+import axios from "axios";
+import { CgClose, CgPushChevronUpO } from "react-icons/cg";
+
+
+const schema = yup.object({
+  country_name: yup.string().required('country name is required').min(3),
+  address: yup.string().required('country address is required').min(5),
+  facebook: yup.string().required('facebook is required').min(5),
+  instagram: yup.string().required('instagram is required').min(5),
+  email: yup.string().email('Must be a valid email').max(255).required('Email is required'),
+  whatsapp: yup.string().required('whatsapp is required').min(10),
+});
+
 
 function Form({ setFormshow, dataTable }) {
-  const { id, country_name, address, facebook, instagram, email, whatsapp } =
+  const {  country_name, address, facebook, instagram, email, whatsapp } =
     dataTable;
   return (
     <div className="bg-gray-700 z-50 rounded-sm py-2  h-fit w-fit px-4 pb-4 shadow-lg shadow-gray-600 text-white">
@@ -15,7 +27,7 @@ function Form({ setFormshow, dataTable }) {
           onClick={() => setFormshow(false)}
         />
       </div>
-      <h1 className="text-center -mt-3 text-lg">Add / Edit Country</h1>
+      <h1 className="text-center -mt-3 text-lg">Add / Edit Contact</h1>
 
       <Formik
         initialValues={{
@@ -26,6 +38,7 @@ function Form({ setFormshow, dataTable }) {
           email: email ? email : "",
           whatsapp: whatsapp ? whatsapp : "",
         }}
+        validationSchema={schema}
         onSubmit={(values, actions) => {
           actions.resetForm();
           if(dataTable.id){
@@ -42,7 +55,10 @@ function Form({ setFormshow, dataTable }) {
           <form onSubmit={props.handleSubmit}>
             <div className="flex flex-col space-y-4 pt-5">
               <div className="flex flex-col">
-                <label className="text-white">Country Name</label>
+              <div className="flex justify-between items-center">            
+              <label className="text-white">Country Name</label>
+              <p className="text-red-500 text-sm">{props.touched.country_name && props.errors.country_name}</p>
+              </div>
                 <input
                   type="text"
                   name="country_name"
@@ -54,7 +70,10 @@ function Form({ setFormshow, dataTable }) {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-white">Address</label>
+              <div className="flex justify-between items-center">             
+              <label className="text-white">Address</label>
+              <p className="text-red-500 text-sm">{props.touched.address && props.errors.address}</p>
+              </div>
                 <textarea
                   name="address"
                   value={props.values.address}
@@ -65,7 +84,10 @@ function Form({ setFormshow, dataTable }) {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-white">Facebook</label>
+              <div className="flex justify-between items-center">           
+              <label className="text-white">Facebook</label>
+              <p className="text-red-500 text-sm">{props.touched.facebook && props.errors.facebook}</p>
+              </div>
                 <input
                   type="text"
                   name="facebook"
@@ -77,7 +99,10 @@ function Form({ setFormshow, dataTable }) {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-white">Instagram</label>
+              <div className="flex justify-between items-center">
+              <label className="text-white">Instagram</label>
+              <p className="text-red-500 text-sm">{props.touched.instagram && props.errors.instagram}</p>
+              </div>
                 <input
                   type="text"
                   name="instagram"
@@ -89,7 +114,10 @@ function Form({ setFormshow, dataTable }) {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-white">Email</label>
+              <div className="flex justify-between items-center">             
+              <label className="text-white">Email</label>
+              <p className="text-red-500 text-sm">{props.touched.email && props.errors.email}</p>
+              </div>
                 <input
                   type="email"
                   name="email"
@@ -101,7 +129,10 @@ function Form({ setFormshow, dataTable }) {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-white">WhatsApp</label>
+              <div className="flex justify-between items-center"> 
+              <label className="text-white">WhatsApp</label>
+              <p className="text-red-500 text-sm">{props.touched.whatsapp && props.errors.whatsapp}</p>
+              </div>
                 <input
                   type="text"
                   name="whatsapp"

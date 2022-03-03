@@ -1,11 +1,21 @@
-import { Formik } from "formik";
 import React, { useState } from "react";
+
+import { Formik } from "formik";
+import * as yup from "yup";
 import { SketchPicker } from "react-color";
 import axios from "axios";
 import { CgClose } from "react-icons/cg";
 
+const schema = yup.object({
+  status: yup.string().required("Status is required"),
+  description: yup.string().required("Description is required").min(5),
+  color: yup.string().required("Color is required"),
+});
+
 function Form({ setFormshow, dataTable }) {
-  const [colorPicker, setColorPicker] = useState(dataTable.color);
+  const [colorPicker, setColorPicker] = useState(
+    dataTable.color ? dataTable.color : "#ffffff"
+  );
   const [colorshow, setColorshow] = useState(false);
 
   return (
@@ -22,18 +32,28 @@ function Form({ setFormshow, dataTable }) {
         initialValues={{
           status: dataTable.status ? dataTable.status : "",
           description: dataTable.description ? dataTable.description : "",
-          color: dataTable.color ? dataTable.color : "#fff",
+          color: dataTable.color ? dataTable.color : "#ffffff",
         }}
+        validationSchema={schema}
         onSubmit={(values, actions) => {
           actions.resetForm();
-          if(dataTable.id){
-            axios.patch('http://localhost:3001/status',{
-              ...values,
-              id: dataTable.id,
-            }).then(res=>{alert('status updated')}).catch(err=>alert(err.message))
-          }
-          else{
-              axios.post('http://localhost:3001/status',values).then(res=>{alert('status inserted')}).catch(err=>alert(err.message))
+          if (dataTable.id) {
+            axios
+              .patch("http://localhost:3001/status", {
+                ...values,
+                id: dataTable.id,
+              })
+              .then((res) => {
+                alert("status updated");
+              })
+              .catch((err) => alert(err.message));
+          } else {
+            axios
+              .post("http://localhost:3001/status", values)
+              .then((res) => {
+                alert("status inserted");
+              })
+              .catch((err) => alert(err.message));
           }
           setFormshow(false);
         }}
@@ -42,7 +62,13 @@ function Form({ setFormshow, dataTable }) {
           <form onSubmit={props.handleSubmit}>
             <div className="flex flex-col space-y-4 pt-5">
               <div className="flex flex-col">
-                <label className="text-white">Status</label>
+                <div className="flex justify-between items-center">
+                  <label className="text-white">Status</label>
+                  <p className="text-red-500 text-sm">
+                    {props.touched.status && props.errors.status}
+                  </p>
+                </div>
+
                 <input
                   type="text"
                   name="status"
@@ -55,7 +81,12 @@ function Form({ setFormshow, dataTable }) {
               </div>
 
               <div className="flex flex-col">
-                <label className="text-white">Description</label>
+              <div className="flex justify-between items-center">
+                  <label className="text-white">Description</label>
+                  <p className="text-red-500 text-sm">
+                    {props.touched.description && props.errors.description}
+                  </p>
+                </div>
                 <textarea
                   rows={3}
                   name="description"
@@ -67,7 +98,12 @@ function Form({ setFormshow, dataTable }) {
                 />
               </div>
               <div className=" flex flex-col">
-                <label className="text-white">Color</label>
+              <div className="flex justify-between items-center">
+              <label className="text-white">Color</label>
+              <p className="text-red-500 text-sm">
+                {props.touched.color && props.errors.color}
+              </p>
+            </div>
                 <div className="border border-gray-200 p-2 flex flex-col justify-center py-3">
                   <div
                     onClick={() => setColorshow(!colorshow)}
@@ -103,8 +139,11 @@ function Form({ setFormshow, dataTable }) {
                 {dataTable.id && (
                   <button
                     onClick={() => {
-                      axios.delete('http://localhost:3001/status/'+dataTable.id).then(res => alert("Status deleted")).catch(err => alert(err));
-                      setFormshow(false)
+                      axios
+                        .delete("http://localhost:3001/status/" + dataTable.id)
+                        .then((res) => alert("Status deleted"))
+                        .catch((err) => alert(err));
+                      setFormshow(false);
                     }}
                     className="bg-inherit border border-gray-200  active:animate-ping transition ease-linear duration-100 text-white p-1 px-5 rounded-sm"
                   >
