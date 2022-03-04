@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
+import axios from "axios";
 import { useNavigate } from "react-router";
 
 const schema = yup.object({
@@ -20,7 +21,17 @@ function LoginForm() {
           validationSchema={schema}
           onSubmit={(values, actions) => {
             actions.resetForm();
-            navigate("/admin-dashboard");
+            axios.post("http://localhost:3001/admin/login", values).then(({data}) => {
+              if(data !== "user name or password is incorrect"){
+              localStorage.setItem("admin_user", JSON.stringify(data));
+              navigate("/admin-dashboard");
+              }
+              else {
+                alert("Invalid User Name or Password");
+              }
+            }).catch((err) => {
+                alert(err.message);
+            })
           }}
         >
           {(props) => (

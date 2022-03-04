@@ -12,6 +12,7 @@ import ContactUs from "./components/admin/ContactUs";
 import Product from "./components/admin/Product";
 import MissingOrder from "./components/admin/MissingOrder";
 import Categories from "./components/admin/Categories";
+import ProtectedRoute from "./components/admin/routes/Protected";
 
 function App() {
   return (
@@ -19,14 +20,14 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="cart" element={<AddToCart />} />
       <Route path="admin" element={<Admin />} />
-      <Route path="admin-dashboard" element={<Dashboard />} />
-      <Route path="admin-orders" element={<Order />} />
-      <Route path="admin-missingorder" element={<MissingOrder />} />
-      <Route path="admin-categories" element={<Categories />} />
-      <Route path="admin-product" element={<Product />} />
-      <Route path="admin-contactus" element={<ContactUs />} />
-      <Route path="admin-countries" element={<Countries />} />
-      <Route path="admin-status" element={<Status />} />
+      <Route path="admin-dashboard" element={<ProtectedRoute Component={Dashboard}/>} />
+      <Route path="admin-orders" element={<ProtectedRoute Component={Order}/>} />
+      <Route path="admin-missingorder" element={<ProtectedRoute Component={MissingOrder}/>} />
+      <Route path="admin-categories" element={<ProtectedRoute Component={Categories}/>} />
+      <Route path="admin-product" element={<ProtectedRoute Component={Product}/>} />
+      <Route path="admin-contactus" element={<ProtectedRoute Component={ContactUs}/>} />
+      <Route path="admin-countries" element={<ProtectedRoute Component={Countries}/>} />
+      <Route path="admin-status" element={<ProtectedRoute Component={Status}/>} />
     </Routes>
   );
 }
