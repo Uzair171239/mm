@@ -91,7 +91,7 @@ function Form({ product }) {
         }}
         validationSchema={schema}
         onSubmit={(values, actions) => {
-          // actions.resetForm();
+          actions.resetForm();
           if (fullName && Mobile && quantity) {
             axios
               .post("http://localhost:3001/orders", {
@@ -103,7 +103,9 @@ function Form({ product }) {
                 Mobile,
               })
               .then((res) => {
-                // actions.resetForm()
+                setFullName("");
+                setMobile("");
+                setQuantitty("");
                 res.status === 200 && alert("Order Placed Successfully");
               })
               .catch((err) => console.log(err.message));

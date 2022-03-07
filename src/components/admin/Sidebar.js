@@ -17,7 +17,7 @@ function Sidebar() {
   return (
     <div className="flex flex-col">
       <img
-        src="/company_logo.png"
+        src="/AshoplogoBlackhandle.png"
         alt="logo"
         className="w-28 h-28 bg-contain  mx-auto "
       />
@@ -111,7 +111,6 @@ function Sidebar() {
           <HiLocationMarker className=" text-xl" />{" "}
           <span className="text-lg font-semibold ">Status</span>
         </Link>
-      
       </div>
     </div>
   );

@@ -34,9 +34,9 @@ function ImagesCard({ product }) {
           <span className="text-white bg-green-500 px-3 w-fit text-sm">
             Free delivery
           </span>
-          <span className="bg-red-600 px-3 text-white text-sm w-fit">
+          {/* <span className="bg-red-600 px-3 text-white text-sm w-fit">
             {discount}% OFF
-          </span>
+          </span> */}
         </div>
         <div className="flex-1">
           <img

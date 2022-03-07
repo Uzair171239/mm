@@ -14,9 +14,9 @@ function ProductCard({ product, country }) {
       className="w-full h-64 md:h-96 bg-white hover:scale-105 transition duration-400 shadow-sm hover:shadow-2xl border border-gray-200 rounded-sm px-3  cursor-pointer my-2"
     >
       <div className="relative">
-        <span className="absolute bg-red-600 px-2 rounded-md m-1 md:m-2 -ml-3 z-10 text-white text-xs md:text-sm">
+        {/* <span className="absolute bg-red-600 px-2 rounded-md m-1 md:m-2 -ml-3 z-10 text-white text-xs md:text-sm">
           {offer_percentage}% OFF
-        </span>
+        </span> */}
         <img
           src={`http://localhost:3001${image}`}
           alt="product"
