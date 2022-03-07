@@ -6,26 +6,15 @@ import * as yup from "yup";
 // import countryList from "react-select-country-list";
 import { BsCartCheckFill } from "react-icons/bs";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 const schema = yup.object({
-  fullName: yup
-    .string()
-    .required("Please enter Your Full Name ")
-    .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
-  Mobile: yup
-    .string()
-    .required("Mobile Number is Required")
-    .matches(
-      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-      "Phone number is not valid"
-    ),
   city: yup.string().required("City is required"),
   deliveryAddress: yup
     .string()
     .required("Delivery Address is required")
     .min(12),
-    quantity: yup.number().required("Quantity is required"),
-    color: yup.string().required("Color is required"),
+  color: yup.string().required("Color is required"),
 });
 
 function Form({ product }) {
@@ -37,7 +26,9 @@ function Form({ product }) {
   const [price, setPrice] = React.useState(product.price);
   const [old_price, set_old_price] = React.useState(product.old_price);
   const [quantity, setQuantitty] = React.useState("--Select--");
-  const [currency, setCurrency] = React.useState(JSON.parse(localStorage.getItem("country")).currency || "");
+  const [currency, setCurrency] = React.useState(
+    JSON.parse(localStorage.getItem("country")).currency || ""
+  );
   const [Mobile, setMobile] = React.useState("");
   const [fullName, setFullName] = React.useState("");
   const [price_list, set_price_list] = React.useState(
@@ -48,6 +39,7 @@ function Form({ product }) {
   // const [country, set_Country] = React.useState("");
   // const country = Country.getCountryByCode("IN");
   // console.log(City.getCitiesOfCountry("QA"));
+  const Navigate = useNavigate();
 
   React.useEffect(() => {
     axios
@@ -61,28 +53,34 @@ function Form({ product }) {
       .catch((err) => console.log(err));
   }, []);
 
-  React.useEffect(() => {
-    return () => {
-      console.log(fullName && Mobile);
-      if (fullName && Mobile) {
-        axios
-          .post("http://localhost:3001/orders/missing_orders", {
-            id: product.id,
-            client_name: fullName,
-            phone_number: Mobile,
-            quantity,
-          })
-          .catch((err) => alert(err));
-      }
-    };
-  }, [fullName, Mobile]);
+  const missingOrder = () => {
+    if (fullName && Mobile) {
+      axios
+        .post("http://localhost:3001/orders/missing_orders", {
+          id: product.id,
+          client_name: fullName,
+          phone_number: Mobile,
+          quantity,
+        })
+        .catch((err) => alert(err));
+    }
+    Navigate("/");
+  };
   // const options = useMemo(() => countryList().getData(), []);
   return (
     <div className="flex flex-col space-y-1 px-3 bg-white border border-gray-300 shadow-sm py-2 h-fit">
+      <button
+        onClick={missingOrder}
+        className="absolute top left-0 -mt-14 bg-green-600 rounded-sm shadow-md text-white  py-1 px-10  ml-2"
+      >
+        Go to Home
+      </button>
       <h1 className="text-3xl font-semibold ">IVD Glucometer Set</h1>
       <div className="flex space-x-4 py-1">
         <h2 className="font-semibold">{price + " " + currency}</h2>
-        <p className="text-gray-500 line-through">{old_price + " " + currency}</p>
+        <p className="text-gray-500 line-through">
+          {old_price + " " + currency}
+        </p>
       </div>
       <Formik
         initialValues={{
@@ -94,18 +92,22 @@ function Form({ product }) {
         validationSchema={schema}
         onSubmit={(values, actions) => {
           // actions.resetForm();
-          axios
-            .post("http://localhost:3001/orders", {
-              ...product,
-              ...values,
-              country,
-              quantity,
-            })
-            .then((res) => {
-              // actions.resetForm()
-              res.status === 200 && alert("Order Placed Successfully");
-            })
-            .catch((err) => console.log(err.message));
+          if (fullName && Mobile && quantity) {
+            axios
+              .post("http://localhost:3001/orders", {
+                ...product,
+                ...values,
+                country,
+                quantity,
+                fullName,
+                Mobile,
+              })
+              .then((res) => {
+                // actions.resetForm()
+                res.status === 200 && alert("Order Placed Successfully");
+              })
+              .catch((err) => console.log(err.message));
+          } else alert("Please enter the missing details");
         }}
       >
         {(props) => (
@@ -178,7 +180,7 @@ function Form({ product }) {
                   className="border border-gray-300 rounded-sm p-2 outline-none"
                   onBlur={props.handleBlur("city")}
                 >
-                  <option>-Select-</option>
+                  <option>-Select City-</option>
                   {cities.map((city) => {
                     return (
                       <option key={city.name} value={city.name}>
@@ -192,9 +194,7 @@ function Form({ product }) {
                 <label htmlFor="fullName">
                   Full Name<span className="text-red-500">*</span>
                 </label>
-                <p className="text-red-500 ">
-                  { props.errors.fullName}
-                </p>
+                <p className="text-red-500 ">{props.errors.fullName}</p>
               </div>
               <input
                 type="text"
@@ -206,15 +206,13 @@ function Form({ product }) {
               />
             </div>
             <div className="flex flex-col space-y-1">
-                <div className="flex justify-between items-center">
-                  <label htmlFor="fullName">
-                    Mobile<span className="text-red-500">*</span>
-                  </label>
-                  <p className="text-red-500">
-                    { props.errors.Mobile}
-                  </p>
-                </div>
-             
+              <div className="flex justify-between items-center">
+                <label htmlFor="fullName">
+                  Mobile<span className="text-red-500">*</span>
+                </label>
+                <p className="text-red-500">{props.errors.Mobile}</p>
+              </div>
+
               <input
                 type="text"
                 onChange={(e) => setMobile(e.target.value)}

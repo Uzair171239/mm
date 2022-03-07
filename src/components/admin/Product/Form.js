@@ -56,7 +56,7 @@ function Form({ setFormshow, dataTable }) {
   });
 
   React.useEffect(() => {
-    if(available_in) {
+    if (available_in) {
       setCheckboxes(available_in.split(","));
       axios
         .post("http://localhost:3001/products/pricing", {
@@ -74,12 +74,11 @@ function Form({ setFormshow, dataTable }) {
           });
         })
         .catch((err) => alert(err.message));
-      }
+    }
     axios
       .get("http://localhost:3001/category")
       .then(({ data }) => setCategory(data))
       .catch((err) => alert(err.message));
-
   }, []);
 
   const initialValues = {
@@ -157,8 +156,8 @@ function Form({ setFormshow, dataTable }) {
                 image: imageName,
               })
               .then(({ data }) => {
-                id = data.insertId
-                alert(data.insertId)
+                id = data.insertId;
+                alert(data.insertId);
                 alert("Product added");
                 setFormshow(false);
               })
@@ -172,7 +171,7 @@ function Form({ setFormshow, dataTable }) {
                 old_price: prices[0].old_price,
                 price_list: prices[0].price_list,
                 available_in: checkboxes.join(","),
-                image: image,
+                image: "/images/products/" + imageName,
                 id,
               })
               .then(({ data }) => {
@@ -181,19 +180,21 @@ function Form({ setFormshow, dataTable }) {
               })
               .catch((err) => alert(err.message));
           }
-          
+
           if (multiImages[0]) {
-            axios.delete("http://localhost:3001/productImages/"+id).then(({data})=>{
-              for (let i = 0 ; i < multiImages.length; i++) {
-                const formData = new FormData();
-                formData.append("files", multiImages[i]);
-                formData.append("filename", `${code}_image_${i+1}`);
-                 axios
-                  .post("http://localhost:3001/productImages/"+id, formData)
-                  .catch((err) => alert(err.message));
-              }
-            }).catch((err) => console.log(err.message));
-            
+            axios
+              .delete("http://localhost:3001/productImages/" + id)
+              .then(({ data }) => {
+                for (let i = 0; i < multiImages.length; i++) {
+                  const formData = new FormData();
+                  formData.append("files", multiImages[i]);
+                  formData.append("filename", `${code}_image_${i + 1}`);
+                  axios
+                    .post("http://localhost:3001/productImages/" + id, formData)
+                    .catch((err) => alert(err.message));
+                }
+              })
+              .catch((err) => console.log(err.message));
           }
           setFormshow(false);
         }}
@@ -204,10 +205,13 @@ function Form({ setFormshow, dataTable }) {
               <div className="space-y-2  px-2">
                 <div className="flex items-center space-x-3">
                   <div className="flex flex-col">
-                  <div className="flex justify-between items-center">
-                  <label className="text-white">Category</label>
-                  <p className="text-red-500 text-xs">{props.touched.cattegory_name && props.errors.cattegory_name}</p>
-                  </div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-white">Category</label>
+                      <p className="text-red-500 text-xs">
+                        {props.touched.cattegory_name &&
+                          props.errors.cattegory_name}
+                      </p>
+                    </div>
                     <select
                       name="cattegory_name"
                       id=""
@@ -231,10 +235,13 @@ function Form({ setFormshow, dataTable }) {
                     </select>
                   </div>
                   <div className="flex flex-col">
-                  <div className="flex justify-between items-center">
-                  <label className="text-white">Google Category</label>
-                  <p className="text-red-500 text-xs">{props.touched.google_cattegory && props.errors.google_cattegory}</p>
-                  </div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-white">Google Category</label>
+                      <p className="text-red-500 text-xs">
+                        {props.touched.google_cattegory &&
+                          props.errors.google_cattegory}
+                      </p>
+                    </div>
                     <input
                       type="text"
                       name="google_cattegory"
@@ -248,10 +255,12 @@ function Form({ setFormshow, dataTable }) {
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="flex flex-col">
-                  <div className="flex justify-between items-center">
-                  <label className="text-white">Brand</label>
-                  <p className="text-red-500 text-xs">{props.touched.brand && props.errors.brand}</p>
-                  </div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-white">Brand</label>
+                      <p className="text-red-500 text-xs">
+                        {props.touched.brand && props.errors.brand}
+                      </p>
+                    </div>
                     <input
                       type="text"
                       name="brand"
@@ -263,10 +272,12 @@ function Form({ setFormshow, dataTable }) {
                     />
                   </div>
                   <div className="flex flex-col">
-                  <div className="flex justify-between items-center">
-                  <label className="text-white">Title</label>
-                  <p className="text-red-500 text-xs">{props.touched.title && props.errors.title}</p>
-                  </div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-white">Title</label>
+                      <p className="text-red-500 text-xs">
+                        {props.touched.title && props.errors.title}
+                      </p>
+                    </div>
                     <input
                       type="text"
                       name="title"
@@ -280,10 +291,12 @@ function Form({ setFormshow, dataTable }) {
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="flex flex-col">
-                  <div className="flex justify-between items-center">
-                  <label className="text-white">Code</label>
-                  <p className="text-red-500 text-xs">{props.touched.code && props.errors.code}</p>
-                  </div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-white">Code</label>
+                      <p className="text-red-500 text-xs">
+                        {props.touched.code && props.errors.code}
+                      </p>
+                    </div>
                     <input
                       type="text"
                       name="code"
@@ -295,10 +308,13 @@ function Form({ setFormshow, dataTable }) {
                     />
                   </div>
                   <div className="flex flex-col">
-                  <div className="flex justify-between items-center">
-                  <label className="text-white">Purchase Price</label>
-                  <p className="text-red-500 text-xs">{props.touched.purchase_price && props.errors.purchase_price}</p>
-                  </div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-white">Purchase Price</label>
+                      <p className="text-red-500 text-xs">
+                        {props.touched.purchase_price &&
+                          props.errors.purchase_price}
+                      </p>
+                    </div>
                     <input
                       type="text"
                       name="purchase_price"
@@ -312,10 +328,12 @@ function Form({ setFormshow, dataTable }) {
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="flex flex-col">
-                  <div className="flex justify-between items-center">
-                  <label className="text-white">Status</label>
-                  <p className="text-red-500 text-xs">{props.touched.status && props.errors.status}</p>
-                  </div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-white">Status</label>
+                      <p className="text-red-500 text-xs">
+                        {props.touched.status && props.errors.status}
+                      </p>
+                    </div>
                     <select
                       type="text"
                       name="status"
@@ -338,10 +356,12 @@ function Form({ setFormshow, dataTable }) {
                   </div>
 
                   <div className="flex flex-col">
-                  <div className="flex justify-between items-center">
-                  <label className="text-white">Color</label>
-                  <p className="text-red-500 text-xs">{props.touched.color && props.errors.color}</p>
-                  </div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-white">Color</label>
+                      <p className="text-red-500 text-xs">
+                        {props.touched.color && props.errors.color}
+                      </p>
+                    </div>
                     <input
                       type="text"
                       name="color"
@@ -355,10 +375,12 @@ function Form({ setFormshow, dataTable }) {
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="flex flex-col">
-                  <div className="flex justify-between items-center">
-                  <label className="text-white">Size</label>
-                  <p className="text-red-500 text-xs">{props.touched.size && props.errors.size}</p>
-                  </div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-white">Size</label>
+                      <p className="text-red-500 text-xs">
+                        {props.touched.size && props.errors.size}
+                      </p>
+                    </div>
                     <input
                       type="text"
                       name="size"
@@ -370,10 +392,13 @@ function Form({ setFormshow, dataTable }) {
                     />
                   </div>
                   <div className="flex flex-col">
-                  <div className="flex justify-between items-center">
-                  <label className="text-white">Delivery Charges</label>
-                  <p className="text-red-500 text-xs">{props.touched.delivery_charges && props.errors.delivery_charges}</p>
-                  </div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-white">Delivery Charges</label>
+                      <p className="text-red-500 text-xs">
+                        {props.touched.delivery_charges &&
+                          props.errors.delivery_charges}
+                      </p>
+                    </div>
                     <input
                       type="text"
                       name="delivery_charges"
@@ -387,10 +412,12 @@ function Form({ setFormshow, dataTable }) {
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="flex flex-col">
-                  <div className="flex justify-between items-center">
-                  <label className="text-white">Quantity</label>
-                  <p className="text-red-500 text-xs">{props.touched.quantity && props.errors.quantity}</p>
-                  </div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-white">Quantity</label>
+                      <p className="text-red-500 text-xs">
+                        {props.touched.quantity && props.errors.quantity}
+                      </p>
+                    </div>
                     <input
                       type="text"
                       name="quantity"
@@ -402,11 +429,14 @@ function Form({ setFormshow, dataTable }) {
                     />
                   </div>
                   <div className="flex flex-col">
-                  <div className="flex justify-between items-center">
-                  <label className="text-white">Quantity Text</label>
-                  <p className="text-red-500 text-xs">{props.touched.quantity_text && props.errors.quantity_text}</p>
-                  </div>
-                    
+                    <div className="flex justify-between items-center">
+                      <label className="text-white">Quantity Text</label>
+                      <p className="text-red-500 text-xs">
+                        {props.touched.quantity_text &&
+                          props.errors.quantity_text}
+                      </p>
+                    </div>
+
                     <input
                       type="text"
                       name="quantity_text"
@@ -420,10 +450,13 @@ function Form({ setFormshow, dataTable }) {
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="flex flex-col">
-                  <div className="flex justify-between items-center">
-                  <label className="text-white">Fake Order Sold</label>
-                  <p className="text-red-500 text-xs">{props.touched.fake_order_sold && props.errors.fake_order_sold}</p>
-                  </div>  
+                    <div className="flex justify-between items-center">
+                      <label className="text-white">Fake Order Sold</label>
+                      <p className="text-red-500 text-xs">
+                        {props.touched.fake_order_sold &&
+                          props.errors.fake_order_sold}
+                      </p>
+                    </div>
                     <input
                       type="text"
                       name="fake_order_sold"
@@ -435,10 +468,12 @@ function Form({ setFormshow, dataTable }) {
                     />
                   </div>
                   <div className="flex flex-col">
-                  <div className="flex justify-between items-center">
-                  <label className="text-white">Rank</label>
-                  <p className="text-red-500 text-xs">{props.touched.rank && props.errors.rank}</p>
-                  </div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-white">Rank</label>
+                      <p className="text-red-500 text-xs">
+                        {props.touched.rank && props.errors.rank}
+                      </p>
+                    </div>
                     <input
                       type="text"
                       name="rank"
@@ -521,7 +556,7 @@ function Form({ setFormshow, dataTable }) {
                         const price_list = e.target.value;
                         setCheckboxValues({
                           ...checkboxValues,
-                          "1": {
+                          1: {
                             ...checkboxValues["1"],
                             price_list,
                           },
@@ -531,7 +566,6 @@ function Form({ setFormshow, dataTable }) {
                       className="w-80 p-1 rounded-sm bg-inherit border border-gray-200 outline-none"
                     />
                   </div>
-
 
                   <div className="flex justify-between space-x-2 border border-gray-200 p-2 my-1">
                     <div className="flex items-center">
@@ -563,7 +597,7 @@ function Form({ setFormshow, dataTable }) {
                         const price = e.target.value;
                         setCheckboxValues({
                           ...checkboxValues,
-                          "2": {
+                          2: {
                             ...checkboxValues["2"],
                             price,
                           },
@@ -581,7 +615,7 @@ function Form({ setFormshow, dataTable }) {
                         const old_price = e.target.value;
                         setCheckboxValues({
                           ...checkboxValues,
-                          "2": {
+                          2: {
                             ...checkboxValues["2"],
                             old_price,
                           },
@@ -599,7 +633,7 @@ function Form({ setFormshow, dataTable }) {
                         const price_list = e.target.value;
                         setCheckboxValues({
                           ...checkboxValues,
-                          "2": {
+                          2: {
                             ...checkboxValues["2"],
                             price_list,
                           },
@@ -640,7 +674,7 @@ function Form({ setFormshow, dataTable }) {
                         const price = e.target.value;
                         setCheckboxValues({
                           ...checkboxValues,
-                          "3": {
+                          3: {
                             ...checkboxValues["3"],
                             price,
                           },
@@ -658,7 +692,7 @@ function Form({ setFormshow, dataTable }) {
                         const old_price = e.target.value;
                         setCheckboxValues({
                           ...checkboxValues,
-                          "3": {
+                          3: {
                             ...checkboxValues["3"],
                             old_price,
                           },
@@ -676,7 +710,7 @@ function Form({ setFormshow, dataTable }) {
                         const price_list = e.target.value;
                         setCheckboxValues({
                           ...checkboxValues,
-                          "3": {
+                          3: {
                             ...checkboxValues["3"],
                             price_list,
                           },
@@ -689,10 +723,12 @@ function Form({ setFormshow, dataTable }) {
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="flex flex-col w-full">
-                  <div className="flex justify-between items-center">
-                  <label className="text-white">Description</label>
-                  <p className="text-red-500 text-xs">{props.touched.description && props.errors.description}</p>
-                  </div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-white">Description</label>
+                      <p className="text-red-500 text-xs">
+                        {props.touched.description && props.errors.description}
+                      </p>
+                    </div>
                     <textarea
                       rows={3}
                       name="description"
@@ -743,8 +779,13 @@ function Form({ setFormshow, dataTable }) {
                 {dataTable.id && (
                   <button
                     onClick={() => {
-                      axios.delete("http://localhost:3001/products/" + dataTable.id).then(({data}) => alert("product deleted")).catch(err => alert(err.message));
-                      setFormshow(false)
+                      axios
+                        .delete(
+                          "http://localhost:3001/products/" + dataTable.id
+                        )
+                        .then(({ data }) => alert("product deleted"))
+                        .catch((err) => alert(err.message));
+                      setFormshow(false);
                     }}
                     className="bg-inherit border border-gray-200  active:animate-ping transition ease-linear duration-100 text-white p-1 px-5 rounded-sm"
                   >

@@ -9,10 +9,13 @@ function AddToCart() {
   const { product } = state;
   return (
     <div>
-        {/*<Breedcrumb location={product.id} />*/}
-      <div className="grid md:grid-cols-2 gap-3 py-10 px-2 pt-6">
+      {/*<Breedcrumb location={product.id} />*/}
+      {/* back button */}
+
+      <div className="grid md:grid-cols-2 gap-3 py-10 px-2 pt-14">
         {/* images ************ */}
         <ImagesCard product={product} />
+        {/* order form */}
         <Form product={product} />
       </div>
       {/* Description ********** */}
@@ -29,12 +32,12 @@ function AddToCart() {
   );
 }
 
-const Breedcrumb = ({ location }) => {
-  return (
-    <div className="w-full py-3 px-3 bg-gray-800 shadow-md ">
-      <p className="text-white bg-gray-800">Home / cart / {location}</p>
-    </div>
-  );
-};
+// const Breedcrumb = ({ location }) => {
+//   return (
+//     <div className="w-full py-3 px-3 bg-gray-800 shadow-md ">
+//       <p className="text-white bg-gray-800">Home / cart / {location}</p>
+//     </div>
+//   );
+// };
 
 export default AddToCart;
