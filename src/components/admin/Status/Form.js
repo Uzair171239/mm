@@ -60,9 +60,9 @@ function Form({ setFormshow, dataTable }) {
               <div className=" flex flex-col">
                 <label className="text-white">Color</label>
                 <div className="border border-gray-200 p-2 flex flex-col justify-center py-3">
-                  <button
-                    onClick={() => setColorshow(true)}
-                    className={`w-20 h-5`}
+                  <div
+                    onClick={() => setColorshow(!colorshow)}
+                    className={`w-20 h-5 cursor-pointer `}
                     style={{
                       backgroundColor: colorPicker,
                     }}

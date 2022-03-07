@@ -3,23 +3,22 @@ import { GrFormSearch } from "react-icons/gr";
 
 function Searchbar() {
   return (
-    <div className="md:flex justify-between items-center border-b border-gray-200 pb-4">
-      <div>
-        <img
-          src="https://www.ashop.tv/frontend/images/home_logo.svg"
-          alt="logo"
-          className="w-28"
-        />
-      </div>
-      <div className="flex items-center group hover:shadow-md shadow-red-600 flex-1 border-2 border-red-600 rounded-md px-3 md:mx-2 md:ml-8 py-2 my-2 md:my-0">
+    <div className="md:flex justify-between items-center border-b border-gray-200 ">
+      <img
+        src="/AshoplogoBlackhandle.png"
+        alt="logo"
+        className="w-32 aspect-ratio-1/1 "
+      />
+
+      <div className="flex items-center group hover:shadow-md shadow-red-600 flex-1 border-2 border-red-600 rounded-md px-3 md:mx-2 md:ml-4 py-2 ">
         <GrFormSearch className="w-6 h-6" color="gray" />
         <input
           type="text"
-          className="flex-1 pl-2   placeholder:text-gray-300  placeholder:font-sance outline-none"
+          className="flex-1 pl-2 placeholder:text-gray-300  placeholder:font-sance outline-none"
           placeholder="Search"
         />
       </div>
-      <div>
+      <div className="my-2 md:my-0">
         <button className="inline-block px-6 py-3 bg-red-500 text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">
           Search
         </button>

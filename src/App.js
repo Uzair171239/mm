@@ -13,6 +13,7 @@ import ContactUs from "./components/admin/ContactUs";
 import Product from "./components/admin/Product";
 import MissingOrder from "./components/admin/MissingOrder";
 import Categories from "./components/admin/Categories";
+import ChangePassword from "./components/admin/ChangePassword";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
       <Route path="admin-countries" element={<Countries />} />
       <Route path="admin-status" element={<Status />} />
       <Route path="admin-settings" element={<Settings />} />
+      <Route path="change_password" element={<ChangePassword />} />
     </Routes>
   );
 }

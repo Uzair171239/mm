@@ -1,10 +1,10 @@
 import { Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 
 import { CgClose } from "react-icons/cg";
 
 function Form({ setFormshow, dataTable }) {
-  console.log(dataTable);
+  const [checkboxes, setCheckboxes] = useState([]);
   const {
     price,
     description,
@@ -24,8 +24,21 @@ function Form({ setFormshow, dataTable }) {
     fake_order_sold,
     rank,
     status,
-    image,
   } = dataTable;
+  const check = [
+    {
+      id: 1,
+      country_name: "India",
+    },
+    {
+      id: 2,
+      country_name: "Pakistan",
+    },
+    {
+      id: 3,
+      country_name: "UAE",
+    },
+  ];
   const initialValues = {
     cattegory_name: cattegory_name || "",
     google_cattegory: google_cattegory || "",
@@ -61,7 +74,10 @@ function Form({ setFormshow, dataTable }) {
         initialValues={initialValues}
         onSubmit={(values, actions) => {
           actions.resetForm();
-          console.log(values);
+          console.log({
+            ...values,
+            countries: checkboxes.join(","),
+          });
           setFormshow(false);
         }}
       >
@@ -298,18 +314,41 @@ function Form({ setFormshow, dataTable }) {
                     />
                   </div>
                 </div>
+
                 <div className="flex items-center space-x-3">
-                  <div className="flex flex-col">
-                    <label className="text-white">Description</label>
-                    <textarea
-                      name="description"
-                      value={props.values.description}
-                      onChange={props.handleChange("description")}
-                      placeholder="Description"
-                      onBlur={props.handleBlur("description")}
-                      className="w-80 p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
-                    />
+                  <div className="flex flex-col w-80">
+                    <label className="text-white">Checkboxes</label>
+                    <div className="flex justify-between space-x-2 border border-gray-200 p-2">
+                      {check.map((item, index) => {
+                        return (
+                          <div key={index} className="flex items-center">
+                            <input
+                              type="checkbox"
+                              name={item.country_name}
+                              value={item.id}
+                              onChange={(e) => {
+                                e.target.checked
+                                  ? setCheckboxes(
+                                      checkboxes.concat(e.target.name)
+                                    )
+                                  : setCheckboxes(
+                                      checkboxes.filter(
+                                        (check) => check !== e.target.name
+                                      )
+                                    );
+                              }}
+                              onBlur={props.handleBlur("checkboxes")}
+                              className="mr-2"
+                            />
+                            <label className="text-white">
+                              {item.country_name}
+                            </label>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
+
                   <div className="flex flex-col">
                     <label className="text-white">Status</label>
                     <input
@@ -323,6 +362,7 @@ function Form({ setFormshow, dataTable }) {
                     />
                   </div>
                 </div>
+
                 <div className="flex items-center space-x-3">
                   <div className="flex flex-col">
                     <label className="text-white">View Image</label>
@@ -345,6 +385,20 @@ function Form({ setFormshow, dataTable }) {
                       onBlur={props.handleBlur("extra_image")}
                       placeholder="Extra Image"
                       className="w-80 p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
+                    />
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="flex flex-col w-full">
+                    <label className="text-white">Description</label>
+                    <textarea
+                      rows={3}
+                      name="description"
+                      value={props.values.description}
+                      onChange={props.handleChange("description")}
+                      placeholder="Description"
+                      onBlur={props.handleBlur("description")}
+                      className="w-full p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
                     />
                   </div>
                 </div>

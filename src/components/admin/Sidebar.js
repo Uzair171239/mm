@@ -25,7 +25,7 @@ function Sidebar() {
       <div className="flex flex-1 flex-col space-y-2 px-2">
         <Link
           to={"/admin-dashboard"}
-          className={`flex items-center pl-3 lg:pl-8 space-x-3 w-full  py-2 ${
+          className={`flex items-center pl-3 lg:pl-8  space-x-3 w-full py-2 ${
             title.pathname === "/admin-dashboard"
               ? "bg-slate-500 text-white"
               : "bg-slate-200 text-gray-800"
