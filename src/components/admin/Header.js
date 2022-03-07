@@ -60,7 +60,7 @@ function Header({ title }) {
           <p className="font-mono ">Super Admin</p>
         </div>
         {showProfile && (
-          <div className="absolute right-0 rounded-md top-16 shadow-xl shadow-gray-400 ">
+          <div className="absolute right-0 rounded-md top-16 shadow-xl shadow-gray-400 z-2000">
             <Profile setShowProfile={setShowProfile} />
           </div>
         )}
