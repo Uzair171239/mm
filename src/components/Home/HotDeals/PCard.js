@@ -2,8 +2,9 @@ import React from "react";
 import { BsFillCartFill } from "react-icons/bs";
 import { useNavigate } from "react-router";
 
-function PCard({ product }) {
+function PCard({ product, country }) {
   const {price, offer_percentage, image, title, old_price } = product;
+  const currency = {country}
 
   const navigate = useNavigate();
   return (
@@ -26,10 +27,10 @@ function PCard({ product }) {
         </p>
       </div>
       <div className="flex items-center justify-between">
-        <p className="text-sm font-semibold">{price} AED</p>
+        <p className="text-sm font-semibold">{price + " " + currency}</p>
 
         <p className="text-sm text-gray-600 font-semibold line-through">
-          {old_price} AED
+          {old_price + " " + currency} 
         </p>
         <BsFillCartFill className="text-lg text-orange-600" />
       </div>

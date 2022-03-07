@@ -82,11 +82,11 @@ function Home() {
       {/* Banner ******************** */}
       <Banner />
       {/* Hot Deals *************************/}
-      {filteredData[0] ?  <AllProduct data = {filteredData}/> 
+      {filteredData[0] ?  <AllProduct data = {filteredData} country={country}/> 
       :<>
-      <HotDeals data = {hotDeals} />
+      <HotDeals data = {hotDeals} country={country}/>
       {/* All products **************** */}
-      <AllProduct data = {genralProducts}/>
+      <AllProduct data = {genralProducts} country={country}/>
       </>}
       {/* Footer ******************** */}
       <Footer />

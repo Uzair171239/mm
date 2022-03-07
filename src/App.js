@@ -13,6 +13,7 @@ import Product from "./components/admin/Product";
 import MissingOrder from "./components/admin/MissingOrder";
 import Categories from "./components/admin/Categories";
 import ProtectedRoute from "./components/admin/routes/Protected";
+import ChangePassword from "./components/admin/ChangePassword";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
       <Route path="admin-contactus" element={<ProtectedRoute Component={ContactUs}/>} />
       <Route path="admin-countries" element={<ProtectedRoute Component={Countries}/>} />
       <Route path="admin-status" element={<ProtectedRoute Component={Status}/>} />
+      <Route path="change-password" element={<ProtectedRoute Component={ChangePassword}/>} />
     </Routes>
   );
 }

@@ -26,18 +26,18 @@ const schema = yup.object({
     .min(12),
     quantity: yup.number().required("Quantity is required"),
     color: yup.string().required("Color is required"),
-    select_country: yup.string().required("Country is required"),
 });
 
 function Form({ product }) {
+  const { color } = product;
   const [cities, setCities] = React.useState([]);
   const [countries, setCountries] = React.useState([]);
   const [select_country, set_select_country] = React.useState("");
   const [country, setCountry] = React.useState("Select");
-  const [price, setPrice] = React.useState("");
-  const [old_price, set_old_price] = React.useState("");
+  const [price, setPrice] = React.useState(product.price);
+  const [old_price, set_old_price] = React.useState(product.old_price);
   const [quantity, setQuantitty] = React.useState("--Select--");
-  const [currency, setCurrency] = React.useState("");
+  const [currency, setCurrency] = React.useState(JSON.parse(localStorage.getItem("country")).currency || "");
   const [Mobile, setMobile] = React.useState("");
   const [fullName, setFullName] = React.useState("");
   const [price_list, set_price_list] = React.useState(
@@ -77,17 +77,12 @@ function Form({ product }) {
     };
   }, [fullName, Mobile]);
   // const options = useMemo(() => countryList().getData(), []);
-  const { color } = product;
   return (
     <div className="flex flex-col space-y-1 px-3 bg-white border border-gray-300 shadow-sm py-2 h-fit">
       <h1 className="text-3xl font-semibold ">IVD Glucometer Set</h1>
-      <p className="text-green-500 text-sm font-semibold flex items-baseline ">
-        <BsCartCheckFill className="mr-2" />
-        671 sold
-      </p>
       <div className="flex space-x-4 py-1">
-        <h2 className="font-semibold">{price}</h2>
-        <p className="text-gray-500 line-through">{old_price}</p>
+        <h2 className="font-semibold">{price + " " + currency}</h2>
+        <p className="text-gray-500 line-through">{old_price + " " + currency}</p>
       </div>
       <Formik
         initialValues={{
@@ -141,8 +136,8 @@ function Form({ product }) {
                     const find = countries.find(
                       (item) => item.country_code === e.target.value
                     );
-                    setPrice(find.price + " " + find.currency);
-                    set_old_price(find.old_price + " " + find.currency);
+                    setPrice(find.price);
+                    set_old_price(find.old_price);
                     setCurrency(find.currency);
                     set_price_list(
                       find.price_list

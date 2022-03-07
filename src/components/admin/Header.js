@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+
+import Profile from "./Profile";
 
 import { MdSpaceDashboard } from "react-icons/md";
 import { RiShoppingBasket2Fill } from "react-icons/ri";
@@ -11,6 +13,7 @@ import { MdCategory } from "react-icons/md";
 import { BiWorld } from "react-icons/bi";
 
 function Header({ title }) {
+  const [showProfile, setShowProfile] = useState(false);
   return (
     <div className="w-full py-4 bg-white shadow-md flex justify-between items-center px-2">
       <div className="flex items-center space-x-1 flex-1">
@@ -18,10 +21,10 @@ function Header({ title }) {
           <MdSpaceDashboard className="text-2xl text-gray-800" />
         )}
         {title === "orders" && (
-          <RiShoppingBag2Fill className="text-2xl text-gray-800" />
+          <RiShoppingBasket2Fill className="text-2xl text-gray-800" />
         )}
         {title === "missing_order" && (
-          <RiShoppingBasket2Fill className="text-2xl text-gray-800" />
+          <RiShoppingBag2Fill className="text-2xl text-gray-800" />
         )}
         {title === "products" && <BsImage className="text-2xl text-gray-800" />}
         {title === "contact" && (
@@ -44,7 +47,10 @@ function Header({ title }) {
       </div>
       <div>
         <div className="flex items-center space-x-1 pr-3">
-          <div className=" w-10 h-10 rounded-full border border-red-600">
+          <div
+            className=" w-10 h-10 rounded-full border border-red-600 cursor-pointer"
+            onClick={() => setShowProfile(!showProfile)}
+          >
             <img
               src="https://thumbs.dreamstime.com/z/flat-male-avatar-image-beard-hairstyle-businessman-profile-icon-vector-179285629.jpg"
               alt=""
@@ -53,6 +59,11 @@ function Header({ title }) {
           </div>
           <p className="font-mono ">Super Admin</p>
         </div>
+        {showProfile && (
+          <div className="absolute right-0 rounded-md top-16 shadow-xl shadow-gray-400 ">
+            <Profile setShowProfile={setShowProfile} />
+          </div>
+        )}
       </div>
     </div>
   );
