@@ -43,7 +43,7 @@ function Form({ setFormshow, dataTable }) {
           address: dataTable.address ? dataTable.address : "",
           city: dataTable.city ? dataTable.city : "",
           product: dataTable.title ? dataTable.title : "",
-          status: dataTable.status,
+          status: dataTable.status_id ? dataTable.status_id : "",
         }}
         validationSchema={shema}
         onSubmit={(values, actions) => {
@@ -57,6 +57,7 @@ function Form({ setFormshow, dataTable }) {
             .then((res) => {
               alert("order updated successfully");
               setFormshow(false);
+              window.location.reload();
             })
             .catch((err) => alert(err.message));
         }}
@@ -188,6 +189,7 @@ function Form({ setFormshow, dataTable }) {
                         )
                         .then((res) => {
                           alert("Order Deleted");
+                          window.location.reload();
                         })
                         .catch((err) => alert(err.message));
                       setFormshow(false);

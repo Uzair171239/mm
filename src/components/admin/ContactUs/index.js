@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 import { MdContactMail } from "react-icons/md";
@@ -12,9 +12,12 @@ const ContactUs = () => {
   const [dataTable, setDataTable] = useState({});
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:3001/contacts").then(res => {
-      setData(res.data);
-    }).catch(err => alert(err.message));
+    axios
+      .get("http://localhost:3001/contacts")
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((err) => alert(err.message));
   }, []);
   // const data = [
   //   {
@@ -75,7 +78,7 @@ const ContactUs = () => {
             <table className="w-full border-collapse">
               <thead>
                 <tr className="border-b-2 border-gray-200">
-                  <th className="px-1 py-2 text-sm">Country Name</th>
+                  <th className="px-1 py-2 text-sm">ID</th>
                   <th className="px-1 py-2 text-sm">ADDRESS</th>
                   <th className="px-1 py-2 text-sm">FACEBOOK</th>
                   <th className="px-1 py-2 text-sm">INSTAGRAM</th>

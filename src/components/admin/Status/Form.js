@@ -45,6 +45,7 @@ function Form({ setFormshow, dataTable }) {
               })
               .then((res) => {
                 alert("status updated");
+                window.location.reload();
               })
               .catch((err) => alert(err.message));
           } else {
@@ -52,6 +53,7 @@ function Form({ setFormshow, dataTable }) {
               .post("http://localhost:3001/status", values)
               .then((res) => {
                 alert("status inserted");
+                window.location.reload();
               })
               .catch((err) => alert(err.message));
           }
@@ -81,7 +83,7 @@ function Form({ setFormshow, dataTable }) {
               </div>
 
               <div className="flex flex-col">
-              <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center">
                   <label className="text-white">Description</label>
                   <p className="text-red-500 text-sm">
                     {props.touched.description && props.errors.description}
@@ -98,12 +100,12 @@ function Form({ setFormshow, dataTable }) {
                 />
               </div>
               <div className=" flex flex-col">
-              <div className="flex justify-between items-center">
-              <label className="text-white">Color</label>
-              <p className="text-red-500 text-sm">
-                {props.touched.color && props.errors.color}
-              </p>
-            </div>
+                <div className="flex justify-between items-center">
+                  <label className="text-white">Color</label>
+                  <p className="text-red-500 text-sm">
+                    {props.touched.color && props.errors.color}
+                  </p>
+                </div>
                 <div className="border border-gray-200 p-2 flex flex-col justify-center py-3">
                   <div
                     onClick={() => setColorshow(!colorshow)}
@@ -141,7 +143,10 @@ function Form({ setFormshow, dataTable }) {
                     onClick={() => {
                       axios
                         .delete("http://localhost:3001/status/" + dataTable.id)
-                        .then((res) => alert("Status deleted"))
+                        .then((res) => {
+                          alert("Status deleted");
+                          window.location.reload();
+                        })
                         .catch((err) => alert(err));
                       setFormshow(false);
                     }}

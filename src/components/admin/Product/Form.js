@@ -157,7 +157,6 @@ function Form({ setFormshow, dataTable }) {
               })
               .then(({ data }) => {
                 id = data.insertId;
-                alert(data.insertId);
                 alert("Product added");
                 setFormshow(false);
               })
@@ -196,6 +195,7 @@ function Form({ setFormshow, dataTable }) {
               })
               .catch((err) => console.log(err.message));
           }
+          window.location.reload();
           setFormshow(false);
         }}
       >
@@ -783,7 +783,10 @@ function Form({ setFormshow, dataTable }) {
                         .delete(
                           "http://localhost:3001/products/" + dataTable.id
                         )
-                        .then(({ data }) => alert("product deleted"))
+                        .then(({ data }) => {
+                          alert("product deleted");
+                          window.location.reload();
+                        })
                         .catch((err) => alert(err.message));
                       setFormshow(false);
                     }}

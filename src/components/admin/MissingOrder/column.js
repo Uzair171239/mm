@@ -16,7 +16,7 @@ const columns = [
     },
   },
   {
-    name: "full_name",
+    name: "client_name",
     label: "CLIENT",
     options: {
       filter: true,
@@ -24,7 +24,7 @@ const columns = [
     },
   },
   {
-    name: "description",
+    name: "phone_number",
     label: "PHONE",
     options: {
       filter: true,
@@ -32,16 +32,16 @@ const columns = [
     },
   },
   {
-    name: "description",
-    label: "CITY",
+    name: "quantity",
+    label: "Quantity",
     options: {
       filter: true,
       sort: false,
     },
   },
   {
-    name: "created_at",
-    label: "CREATED AT",
+    name: "amount",
+    label: "amount",
     options: {
       filter: true,
       sort: false,

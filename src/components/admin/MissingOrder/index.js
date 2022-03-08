@@ -1,24 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 
 import MUIDataTable from "mui-datatables";
 import columns from "./column";
-import data from "./data";
+// import data from "./data";
 import Form from "./Form";
+import axios from "axios";
 
 const MissingOrder = () => {
   const [formshow, setFormshow] = useState(false);
   const [dataTable, setDataTable] = useState({});
+  const [data, setData] = useState([]);
   const options = {
     selectableRows: "none",
- 
+
     rowsPerPage: 10,
     onRowClick: (rowData) => {
       setDataTable(data.find((data) => data.id === rowData[0]));
       setFormshow(!formshow);
     },
   };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/missingorders")
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((err) => alert(err.message));
+  }, []);
   return (
     <div className="flex relative">
       {/* crud operation form */}
