@@ -4,7 +4,7 @@ import { GrFormSearch } from "react-icons/gr";
 function Searchbar({ filter }) {
   const [value, setValue] = React.useState("");
   return (
-    <div className="md:flex justify-between items-center border-b border-gray-200 pb-4">
+    <div className="md:flex justify-between items-center border-b border-gray-200 ">
       <div>
         <img src="/AshoplogoBlackhandle.png" alt="logo" className="w-22 h-20" />
       </div>

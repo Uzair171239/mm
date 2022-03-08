@@ -3,7 +3,7 @@ import { BsInstagram } from "react-icons/bs";
 import { AiOutlineWhatsApp } from "react-icons/ai";
 import { FiMail } from "react-icons/fi";
 import { RiFacebookCircleLine } from "react-icons/ri";
-import axios from 'axios';
+import axios from "axios";
 
 // const data = [
 //   {
@@ -36,12 +36,16 @@ import axios from 'axios';
 // ];
 
 function Footer() {
-
   const [data, setData] = React.useState([]);
 
   React.useEffect(() => {
-    axios.get('http://localhost:3001/contacts').then(res=>{setData(res.data)}).catch(err=>alert(err.message))
-  },[])
+    axios
+      .get("http://localhost:3001/contacts")
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((err) => alert(err.message));
+  }, []);
 
   return (
     <div className="w-full bg-gray-900 text-white px-5 md:px-12 lg:px-28 py-10 pt-5 ">
@@ -66,7 +70,7 @@ function Footer() {
               </p>
             </a>
             <a
-              href="#"
+              href={data.instagram}
               className="flex items-center space-x-2 group cursor-pointer w-fit"
             >
               <FiMail className="w-6 h-6  text-red-500 group-hover:scale-105 group-hover:text-gray-400" />
@@ -84,7 +88,7 @@ function Footer() {
               </p>
             </a>
             <a
-              href={"#"}
+              href={data.whatsapp}
               className="flex items-center space-x-2 group cursor-pointer w-fit"
             >
               <AiOutlineWhatsApp className="w-6 h-6  text-red-500 group-hover:scale-105 group-hover:text-gray-400" />
@@ -134,7 +138,7 @@ function Footer() {
         <p className="text-center">
           Privacy Policy - Terms of Use - User Information Legal Enquiry Guide
         </p>
-        <p>© {new Date().getFullYear()} Ashop-oman.com, All rights reserved</p>
+        <p>© {new Date().getFullYear()} Ashop.com, All rights reserved</p>
       </div>
     </div>
   );
