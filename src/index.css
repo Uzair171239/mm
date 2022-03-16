@@ -34,6 +34,259 @@ body {
 .custom_class_zindex {
   z-index: 999;
 }
+._2iWL7 {
+  width: 360px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 12px 24px 0px;
+  flex-direction: column;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: rgb(255, 255, 255);
+  transform: translate3d(0px, 0px, 0px);
+  touch-action: auto;
+  margin-bottom: 15px;
+  display: none;
+  position: absolute;
+  margin: 20px;
+  bottom: 99px;
+  right: 30px;
+}
+._1fOYS {
+  display: flex;
+  -webkit-animation: _11FGp 250ms ease-in-out both;
+  animation: _11FGp 250ms ease-in-out both;
+}
+._bvAzs {
+  display: none;
+}
+
+@-webkit-keyframes _11FGp {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes _11FGp {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  ._2iWL7 {
+    right: 0;
+  }
+}
+
+._2rVjT {
+  background-color: rgb(9, 94, 84);
+  display: flex;
+}
+
+._1w7Ch {
+  color: #f0ffffa1;
+  cursor: pointer;
+  font-size: 1.5em;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+._10MlI {
+  align-items: center;
+  align-self: center;
+  background: #fff;
+  border-radius: 50%;
+  color: cadetblue;
+  display: flex;
+  font-size: 2em;
+  height: 45px;
+  margin: 5px;
+  justify-content: center;
+  padding: 10px;
+  width: 45px;
+}
+
+._1Ixzy {
+  color: rgb(255, 255, 255);
+  margin-left: 16px;
+  margin-right: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+._2C9-R {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  display: block;
+}
+
+._3B7os {
+  font-size: 13px;
+  line-height: 18px;
+  margin-top: 4px;
+}
+
+._3YWHv {
+  padding: 20px 20px 20px 20px;
+  background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
+  background-size: cover;
+  position: relative;
+  overflow: auto;
+  max-height: 382px;
+}
+
+._nYEjV {
+  padding: 7px 14px 6px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 0px 8px 8px;
+  position: relative;
+  transition: all 0.3s ease 0s;
+  transform-origin: center top;
+  box-shadow: rgba(0, 0, 0, 0.13) 0px 1px 0.5px;
+  margin-top: 4px;
+  max-width: calc(100% - 120px);
+}
+
+._jryeF {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 18px;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+._3CMpi {
+  font-size: 14px;
+  line-height: 19px;
+  margin-top: 4px;
+  color: rgb(17, 17, 17);
+  white-space: pre-wrap;
+}
+
+._eRm_Y {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 20px 20px 0;
+  border-color: transparent #ffffff transparent transparent;
+  position: absolute;
+  left: -10px;
+  top: 0;
+}
+
+._2x2HJ {
+  display: flex;
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 16px;
+  color: rgba(17, 17, 17, 0.5);
+  justify-content: flex-end;
+}
+
+._30mQ0 {
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+._2-mAj {
+  border-radius: 20px;
+  padding: 12px 12px;
+  border: none;
+  margin-bottom: 10px;
+  background-color: #fefefe;
+  color: rgb(17, 17, 17);
+}
+
+._2W95M {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: none;
+  background: rgb(79, 206, 93);
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+  cursor: pointer;
+  margin: 0 20px;
+  box-shadow: rgba(0, 0, 0, 0.13) 0px 1px 1px;
+}
+
+._1bpcM {
+  align-items: center;
+  align-self: flex-end;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 12px;
+  color: rgb(79, 206, 93);
+  cursor: pointer;
+  display: flex;
+  font-size: 2em;
+  height: 64px;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
+  outline: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 64px;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  position: absolute;
+  bottom: 15px;
+  right: 30px;
+}
+
+/*
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  ._1bpcM {
+    margin-right: 0;
+  }
+}
+
+/* .root {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 15px;
+  right: 25px;
+  z-index: 9999;
+}
+
+/*
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+/* @media (min-width: 320px) and (max-width: 480px) {
+  .root {
+    left: 50%;
+    right: 0;
+    transform: translateX(-50%);
+    width: 90%;
+  }
+}  */
 
 @import "react-slideshow-image/dist/styles.css";
 @tailwind components;

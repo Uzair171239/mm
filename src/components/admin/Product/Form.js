@@ -170,7 +170,7 @@ function Form({ setFormshow, dataTable }) {
                 old_price: prices[0].old_price,
                 price_list: prices[0].price_list,
                 available_in: checkboxes.join(","),
-                image: "/images/products/" + imageName,
+                image: imageName ? "/images/products/" + imageName : image,
                 id,
               })
               .then(({ data }) => {

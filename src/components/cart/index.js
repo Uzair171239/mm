@@ -21,13 +21,10 @@ function AddToCart() {
       {/* Description ********** */}
       <div className="w-full bg-slate-200 py-6 px-4">
         <h1 className="text-2xl font-semibold my-1">Description</h1>
-        <p className="">
-          IVD Branded Glucometer with Free 50 Strips and 50 Lancets plus Plastic
-          Carry Box
-        </p>
+        <p className="">{product.description}</p>
       </div>
       {/* Footer ******************** */}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

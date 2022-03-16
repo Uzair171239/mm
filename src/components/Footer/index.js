@@ -1,9 +1,12 @@
 import React from "react";
+import WhatsAppWidget from "react-whatsapp-widget";
+// import "react-whatsapp-widget/dist/index.css";
+import axios from "axios";
 import { BsInstagram } from "react-icons/bs";
 import { AiOutlineWhatsApp } from "react-icons/ai";
 import { FiMail } from "react-icons/fi";
 import { RiFacebookCircleLine } from "react-icons/ri";
-import axios from "axios";
+import "../../index.css";
 
 // const data = [
 //   {
@@ -49,6 +52,11 @@ function Footer() {
 
   return (
     <div className="w-full bg-gray-900 text-white px-5 md:px-12 lg:px-28 py-10 pt-5 ">
+      <WhatsAppWidget
+        phoneNumber="923333713843"
+        companyName="Ashop"
+        textReplyTime="Typically replies within a minute"
+      />
       <h1 className="text-xl md:text-2xl md:font-bold text-center mb-3">
         Contact Us
       </h1>

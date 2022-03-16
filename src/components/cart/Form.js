@@ -10,15 +10,12 @@ import { useNavigate } from "react-router";
 
 const schema = yup.object({
   city: yup.string().required("City is required"),
-  deliveryAddress: yup
-    .string()
-    .required("Delivery Address is required")
-    .min(12),
+  deliveryAddress: yup.string(),
   color: yup.string().required("Color is required"),
 });
 
 function Form({ product }) {
-  const { color } = product;
+  const { color, title } = product;
   const [cities, setCities] = React.useState([]);
   const [countries, setCountries] = React.useState([]);
   const [select_country, set_select_country] = React.useState("");
@@ -75,7 +72,7 @@ function Form({ product }) {
       >
         Go to Home
       </button>
-      <h1 className="text-3xl font-semibold ">IVD Glucometer Set</h1>
+      <h1 className="text-3xl font-semibold ">{title}</h1>
       <div className="flex space-x-4 py-1">
         <h2 className="font-semibold">{price + " " + currency}</h2>
         <p className="text-gray-500 line-through">
@@ -202,7 +199,8 @@ function Form({ product }) {
                 type="text"
                 onChange={(e) => setFullName(e.target.value)}
                 value={fullName}
-                placeholder="Full Name"
+                placeholder="Enter your full name"
+                required
                 className="border border-gray-300 rounded-sm p-2 outline-none"
                 onBlur={props.handleBlur("fullName")}
               />
@@ -210,16 +208,17 @@ function Form({ product }) {
             <div className="flex flex-col space-y-1">
               <div className="flex justify-between items-center">
                 <label htmlFor="fullName">
-                  Mobile<span className="text-red-500">*</span>
+                  Whatsapp<span className="text-red-500">*</span>
                 </label>
                 <p className="text-red-500">{props.errors.Mobile}</p>
               </div>
 
               <input
-                type="text"
+                type="number"
                 onChange={(e) => setMobile(e.target.value)}
                 value={Mobile}
-                placeholder="Mobile"
+                placeholder="Enter your whatsapp number"
+                required
                 className="border border-gray-300 rounded-sm p-2 outline-none"
                 onBlur={props.handleBlur("Mobile")}
               />
@@ -237,6 +236,7 @@ function Form({ product }) {
                 name="quantity"
                 onChange={(e) => setQuantitty(e.target.value)}
                 value={quantity}
+                required
                 className="border border-gray-300 rounded-sm p-2 outline-none"
               >
                 <option>-Select-</option>
