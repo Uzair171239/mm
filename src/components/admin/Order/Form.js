@@ -19,7 +19,7 @@ function Form({ setFormshow, dataTable }) {
 
   React.useEffect(() => {
     axios
-      .get("http://localhost:3001/status")
+      .get("http://localhost:3001/api/status")
       .then((res) => {
         setStatus(res.data);
       })
@@ -49,7 +49,7 @@ function Form({ setFormshow, dataTable }) {
         onSubmit={(values, actions) => {
           actions.resetForm();
           axios
-            .patch("http://localhost:3001/orders/", {
+            .patch("http://localhost:3001/api/orders/", {
               ...values,
               id: dataTable.client_id,
               prod_id: dataTable.product_id,
@@ -185,7 +185,7 @@ function Form({ setFormshow, dataTable }) {
                     onClick={() => {
                       axios
                         .delete(
-                          "http://localhost:3001/orders/" + dataTable.order_id
+                          "http://localhost:3001/api/orders/" + dataTable.order_id
                         )
                         .then((res) => {
                           alert("Order Deleted");

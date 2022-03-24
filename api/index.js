@@ -46,7 +46,7 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "./build")));
 
-app.get("/images/:cattegory/:image", (req, res) => {
+app.get("/api/images/:cattegory/:image", (req, res) => {
   var { cattegory, image } = req.params;
   res.sendFile(path.join(__dirname, `./images/${cattegory}/${image}`));
 });
@@ -56,42 +56,42 @@ app.get("/images/:cattegory/:image", (req, res) => {
 //   fs.unlink('./images/products/'+ );
 // })
 
-app.use("/", Dashboard);
-app.use("/admin", Admin);
+app.use("/api/", Dashboard);
+app.use("/api/admin", Admin);
 
-app.use("/product_images", getProductImages);
-app.use("/products", Select);
-app.use("/products", Insert_Product);
-app.use("/products", Update_Product);
-app.use("/products", DeleteProduct);
-app.use("/productImages", ProductImages);
+app.use("/api/product_images", getProductImages);
+app.use("/api/products", Select);
+app.use("/api/products", Insert_Product);
+app.use("/api/products", Update_Product);
+app.use("/api/products", DeleteProduct);
+app.use("/api/productImages", ProductImages);
 
-app.use("/orders", selectOrders);
-app.use("/orders", setOrder);
-app.use("/orders", UpdateOrder);
-app.use("/orders", DeleteOrder);
+app.use("/api/orders", selectOrders);
+app.use("/api/orders", setOrder);
+app.use("/api/orders", UpdateOrder);
+app.use("/api/orders", DeleteOrder);
 
-app.use("/category", GetCategories);
-app.use("/category", SetCategories);
-app.use("/category", UpdateCategories);
-app.use("/category", DeleteCategories);
+app.use("/api/category", GetCategories);
+app.use("/api/category", SetCategories);
+app.use("/api/category", UpdateCategories);
+app.use("/api/category", DeleteCategories);
 
-app.use("/countries", getCountries);
-app.use("/countries", setCountries);
-app.use("/countries", UpdateCountry);
-app.use("/countries", DeleteCountry);
+app.use("/api/countries", getCountries);
+app.use("/api/countries", setCountries);
+app.use("/api/countries", UpdateCountry);
+app.use("/api/countries", DeleteCountry);
 
-app.use("/status", getStatus);
-app.use("/status", set_status);
-app.use("/status", UpdateStatus);
-app.use("/status", DeleteStatus);
+app.use("/api/status", getStatus);
+app.use("/api/status", set_status);
+app.use("/api/status", UpdateStatus);
+app.use("/api/status", DeleteStatus);
 
-app.use("/contacts", GetContacts);
-app.use("/contacts", SetContact);
-app.use("/contacts", UpdateContact);
-app.use("/contacts", DeleteContact);
+app.use("/api/contacts", GetContacts);
+app.use("/api/contacts", SetContact);
+app.use("/api/contacts", UpdateContact);
+app.use("/api/contacts", DeleteContact);
 
-app.use("/missingorders", MISSING_ORDERS);
+app.use("/api/missingorders", MISSING_ORDERS);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server is running at port ${PORT}`));

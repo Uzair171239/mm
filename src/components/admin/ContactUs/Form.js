@@ -45,7 +45,7 @@ function Form({ setFormshow, dataTable }) {
           actions.resetForm();
           if (dataTable.id) {
             axios
-              .patch("http://localhost:3001/contacts", {
+              .patch("http://localhost:3001/api/contacts", {
                 ...values,
                 id: dataTable.id,
               })
@@ -56,7 +56,7 @@ function Form({ setFormshow, dataTable }) {
               .catch((err) => alert(err.message));
           } else {
             axios
-              .post("http://localhost:3001/contacts", values)
+              .post("http://localhost:3001/api/contacts", values)
               .then((res) => {
                 alert("Contact Added");
                 window.location.reload();
@@ -177,7 +177,7 @@ function Form({ setFormshow, dataTable }) {
                     onClick={() => {
                       axios
                         .delete(
-                          `http://localhost:3001/contacts/${dataTable.id}`
+                          `http://localhost:3001/api/contacts/${dataTable.id}`
                         )
                         .then((res) => {
                           alert("Contact Deleted");

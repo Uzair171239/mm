@@ -37,7 +37,7 @@ function Form({ setFormshow, dataTable }) {
         onSubmit={(values, actions) => {
           if (dataTable.id) {
             axios
-              .patch("http://localhost:3001/countries", {
+              .patch("http://localhost:3001/api/countries", {
                 ...values,
                 id: dataTable.id,
               })
@@ -48,7 +48,7 @@ function Form({ setFormshow, dataTable }) {
               .catch((err) => alert(err.message));
           } else {
             axios
-              .post("http://localhost:3001/countries", values)
+              .post("http://localhost:3001/api/countries", values)
               .then((res) => {
                 alert("Country Added");
                 window.location.reload();
@@ -154,7 +154,7 @@ function Form({ setFormshow, dataTable }) {
                     onClick={() => {
                       axios
                         .delete(
-                          `http://localhost:3001/countries/${dataTable.id}`
+                          `http://localhost:3001/api/countries/${dataTable.id}`
                         )
                         .then((res) => {
                           alert("Country Deleted");

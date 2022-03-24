@@ -6,7 +6,7 @@ import { MdCategory } from "react-icons/md";
 function DComp() {
   const [dashboard, setDashboard] = React.useState({});
   React.useEffect(() => {
-     axios.get("http://localhost:3001/dashboard").then(({data})=> setDashboard(data))
+     axios.get("http://localhost:3001/api/dashboard").then(({data})=> setDashboard(data))
   }, [])
   return (
     <div>

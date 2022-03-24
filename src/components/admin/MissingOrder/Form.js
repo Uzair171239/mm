@@ -62,7 +62,7 @@ function Form({ setFormshow, dataTable }) {
                     onClick={() => {
                       setFormshow(false);
                       axios
-                        .delete("http://localhost:3001/missingorders/" + id)
+                        .delete("http://localhost:3001/api/missingorders/" + id)
                         .then((res) => {
                           window.location.reload();
                         })

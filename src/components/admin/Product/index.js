@@ -14,7 +14,7 @@ const Product = () => {
   const [data, setData] = useState([]);
 
   React.useEffect(() => {
-    axios.get('http://localhost:3001/products/true').then(res=>{setData(res.data)}).catch(err=>alert(err.message))
+    axios.get('http://localhost:3001/api/products/true').then(res=>{setData(res.data)}).catch(err=>alert(err.message))
   }, [])
 
   const options = {

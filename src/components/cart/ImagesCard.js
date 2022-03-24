@@ -21,7 +21,7 @@ function ImagesCard({ product }) {
   const [images, setImages] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/product_images/${product.id}`)
+      .get(`http://localhost:3001/api/product_images/${product.id}`)
       .then(({ data }) => {
         setImages(data);
       });

@@ -40,7 +40,7 @@ function Form({ product }) {
 
   React.useEffect(() => {
     axios
-      .post("http://localhost:3001/countries", {
+      .post("http://localhost:3001/api/countries", {
         product_id: product.id,
         country_id: product.available_in,
       })
@@ -53,7 +53,7 @@ function Form({ product }) {
   const missingOrder = () => {
     if (fullName && Mobile) {
       axios
-        .post("http://localhost:3001/orders/missing_orders", {
+        .post("http://localhost:3001/api/orders/missing_orders", {
           id: product.id,
           client_name: fullName,
           phone_number: Mobile,
@@ -91,7 +91,7 @@ function Form({ product }) {
           actions.resetForm();
           if (fullName && Mobile && quantity) {
             axios
-              .post("http://localhost:3001/orders", {
+              .post("http://localhost:3001/api/orders", {
                 ...product,
                 ...values,
                 country,

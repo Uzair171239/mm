@@ -33,7 +33,7 @@ function Form({ setFormshow, dataTable }) {
           actions.resetForm();
           if (dataTable.id) {
             axios
-              .patch("http://localhost:3001/category/", {
+              .patch("http://localhost:3001/api/category/", {
                 ...values,
                 id: dataTable.id,
               })
@@ -44,7 +44,7 @@ function Form({ setFormshow, dataTable }) {
               .catch((err) => alert(err.message));
           } else {
             axios
-              .post("http://localhost:3001/category/", values)
+              .post("http://localhost:3001/api/category/", values)
               .then((res) => {
                 alert("category inserted");
                 window.location.reload();
@@ -97,7 +97,7 @@ function Form({ setFormshow, dataTable }) {
                     onClick={() => {
                       axios
                         .delete(
-                          "http://localhost:3001/category/" + dataTable.id
+                          "http://localhost:3001/api/category/" + dataTable.id
                         )
                         .then((res) => {
                           alert("category Deleted");

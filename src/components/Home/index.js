@@ -24,7 +24,7 @@ function Home() {
   
   useEffect(() => {
    if(country.id !== 0 && country !== "undefined"){
-    axios.get(`http://localhost:3001/products/${country.id}`).then(({data}) => {
+    axios.get(`http://localhost:3001/api/products/${country.id}`).then(({data}) => {
       set_initData(data);
       setHotDeals(data.filter((item)=>item.cattegory_name === "*Hot Deals*"));
       setGeneralProducts(data.filter((item)=>item.cattegory_name !== "*Hot Deals*"));
@@ -40,7 +40,7 @@ function Home() {
   useEffect(() => {
     const country = localStorage.getItem("country");
     if(!country && country !== "undefined"){
-      axios.get("http://localhost:3001/countries").then((res)=>{
+      axios.get("http://localhost:3001/api/countries").then((res)=>{
          setCountries(res.data);
       }).catch((err)=>{
         console.log(err);

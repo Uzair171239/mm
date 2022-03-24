@@ -24,7 +24,7 @@ const MissingOrder = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/missingorders")
+      .get("http://localhost:3001/api/missingorders")
       .then((res) => {
         setData(res.data);
       })

@@ -13,7 +13,7 @@ const Categories = () => {
   const [data, setData] = useState([]);
 
   React.useEffect(() => {
-    axios.get("http://localhost:3001/category").then((res) => setData(res.data)).catch((err) => alert(err.message));
+    axios.get("http://localhost:3001/api/category").then((res) => setData(res.data)).catch((err) => alert(err.message));
   }, [])
   // const data = [
   //   {

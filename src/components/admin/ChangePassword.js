@@ -37,7 +37,7 @@ function ChangePassword() {
             return errors;
           }}
           onSubmit={(values, action) => {
-            axios.patch("http://localhost:3001/admin/changepassword", {password: values.newPassword, user_name: JSON.parse(localStorage.getItem("admin_user")).user_name})
+            axios.patch("http://localhost:3001/api/admin/changepassword", {password: values.newPassword, user_name: JSON.parse(localStorage.getItem("admin_user")).user_name})
             .then(({data}) => {
               if(data === "user updated successfully") {
                  alert("Password Updated Successfully");

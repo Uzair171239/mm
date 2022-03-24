@@ -39,7 +39,7 @@ function Form({ setFormshow, dataTable }) {
           actions.resetForm();
           if (dataTable.id) {
             axios
-              .patch("http://localhost:3001/status", {
+              .patch("http://localhost:3001/api/status", {
                 ...values,
                 id: dataTable.id,
               })
@@ -50,7 +50,7 @@ function Form({ setFormshow, dataTable }) {
               .catch((err) => alert(err.message));
           } else {
             axios
-              .post("http://localhost:3001/status", values)
+              .post("http://localhost:3001/api/status", values)
               .then((res) => {
                 alert("status inserted");
                 window.location.reload();
@@ -142,7 +142,7 @@ function Form({ setFormshow, dataTable }) {
                   <button
                     onClick={() => {
                       axios
-                        .delete("http://localhost:3001/status/" + dataTable.id)
+                        .delete("http://localhost:3001/api/status/" + dataTable.id)
                         .then((res) => {
                           alert("Status deleted");
                           window.location.reload();

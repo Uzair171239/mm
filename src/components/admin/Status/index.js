@@ -13,7 +13,7 @@ const Status = () => {
   const [data, setData] = useState([]);
 
   React.useEffect(() => {
-    axios.get("http://localhost:3001/status").then((res) => setData(res.data)).catch((err) => alert(err.message));
+    axios.get("http://localhost:3001/api/status").then((res) => setData(res.data)).catch((err) => alert(err.message));
   }, [])
   // const data = [
   //   {

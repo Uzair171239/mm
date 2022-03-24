@@ -18,7 +18,7 @@ function ProductCard({ product, country }) {
           {offer_percentage}% OFF
         </span> */}
         <img
-          src={`http://localhost:3001${image}`}
+          src={`http://localhost:3001/api${image}`}
           alt="product"
           className="w-full h-32 md:h-60  "
         />

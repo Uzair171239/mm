@@ -59,7 +59,7 @@ function Form({ setFormshow, dataTable }) {
     if (available_in) {
       setCheckboxes(available_in.split(","));
       axios
-        .post("http://localhost:3001/products/pricing", {
+        .post("http://localhost:3001/api/products/pricing", {
           country_id: available_in.split(","),
           product_id: id,
         })
@@ -76,7 +76,7 @@ function Form({ setFormshow, dataTable }) {
         .catch((err) => alert(err.message));
     }
     axios
-      .get("http://localhost:3001/category")
+      .get("http://localhost:3001/api/category")
       .then(({ data }) => setCategory(data))
       .catch((err) => alert(err.message));
   }, []);
@@ -146,7 +146,7 @@ function Form({ setFormshow, dataTable }) {
           actions.resetForm();
           if (!id) {
             axios
-              .post("http://localhost:3001/products", {
+              .post("http://localhost:3001/api/products", {
                 ...values,
                 pricing: prices,
                 price: prices[0].price,
@@ -163,7 +163,7 @@ function Form({ setFormshow, dataTable }) {
               .catch((err) => alert(err.message));
           } else {
             axios
-              .patch("http://localhost:3001/products", {
+              .patch("http://localhost:3001/api/products", {
                 ...values,
                 pricing: prices,
                 price: prices[0].price,
@@ -182,14 +182,14 @@ function Form({ setFormshow, dataTable }) {
 
           if (multiImages[0]) {
             axios
-              .delete("http://localhost:3001/productImages/" + id)
+              .delete("http://localhost:3001/api/productImages/" + id)
               .then(({ data }) => {
                 for (let i = 0; i < multiImages.length; i++) {
                   const formData = new FormData();
                   formData.append("files", multiImages[i]);
                   formData.append("filename", `${code}_image_${i + 1}`);
                   axios
-                    .post("http://localhost:3001/productImages/" + id, formData)
+                    .post("http://localhost:3001/api/productImages/" + id, formData)
                     .catch((err) => alert(err.message));
                 }
               })
@@ -754,7 +754,7 @@ function Form({ setFormshow, dataTable }) {
                       formData.append("file", e.target.files[0]);
                       axios
                         .post(
-                          "http://localhost:3001/products/productImage",
+                          "http://localhost:3001/api/products/productImage",
                           formData
                         )
                         .catch((err) => alert(err.message));
@@ -781,7 +781,7 @@ function Form({ setFormshow, dataTable }) {
                     onClick={() => {
                       axios
                         .delete(
-                          "http://localhost:3001/products/" + dataTable.id
+                          "http://localhost:3001/api/products/" + dataTable.id
                         )
                         .then(({ data }) => {
                           alert("product deleted");

@@ -13,7 +13,7 @@ const Countries = () => {
   const [data, setData] = useState([]);
 
   React.useEffect(() => {
-    axios.get('http://localhost:3001/countries').then(res=>{setData(res.data)}).catch(err=>alert(err.message))
+    axios.get('http://localhost:3001/api/countries').then(res=>{setData(res.data)}).catch(err=>alert(err.message))
   }, [])
     // const data = [
   //   {

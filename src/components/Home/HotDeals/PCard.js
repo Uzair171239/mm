@@ -16,7 +16,7 @@ function PCard({ product, country }) {
     >
       <div className="relative">
         <img
-          src={`http://localhost:3001${image}`}
+          src={`http://localhost:3001/api${image}`}
           alt=""
           className="w-full h-24 md:h-32 "
         />

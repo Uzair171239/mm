@@ -43,7 +43,7 @@ function Footer() {
 
   React.useEffect(() => {
     axios
-      .get("http://localhost:3001/contacts")
+      .get("http://localhost:3001/api/contacts")
       .then((res) => {
         setData(res.data);
       })
