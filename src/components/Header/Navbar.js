@@ -8,7 +8,7 @@ function Navbar({ filter, data }) {
     >
       <button
         onClick={(e) => filter(e.target.name)}
-        className="hover:text-red-600 md:hover:scale-150 transition duration-300 ease-in-out "
+        className="hover:text-red-600 md:hover:scale-125 transition duration-300 ease-in-out "
         name="Home"
       >
         Home
@@ -17,9 +17,9 @@ function Navbar({ filter, data }) {
         return (
           <button
             onClick={(e) => filter(e.target.name)}
-            className="hover:text-red-600 md:hover:scale-150 transition duration-300 ease-in-out "
+            className="hover:text-red-600 md:hover:scale-125 hover:mx-10 transition duration-300 ease-in-out "
             name={name}
-            key={index} 
+            key={index}
           >
             {name}
           </button>

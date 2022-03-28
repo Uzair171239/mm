@@ -189,13 +189,19 @@ function Form({ setFormshow, dataTable }) {
                   formData.append("files", multiImages[i]);
                   formData.append("filename", `${code}_image_${i + 1}`);
                   axios
-                    .post("http://localhost:3001/api/productImages/" + id, formData)
+                    .post(
+                      "http://localhost:3001/api/productImages/" + id,
+                      formData
+                    )
                     .catch((err) => alert(err.message));
                 }
               })
+              .then(() => {
+                window.location.reload();
+              })
               .catch((err) => console.log(err.message));
           }
-          window.location.reload();
+          // window.location.reload();
           setFormshow(false);
         }}
       >

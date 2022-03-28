@@ -13,29 +13,29 @@ function LoginForm() {
   return (
     <div className="flex h-screen justify-center items-center bg-white">
       <div className="bg-gray-900 shadow-2xl shadow-gray-600 rounded-md py-16 px-14 pb-20">
-        <h1 className="text-white text-2xl text-center font-serif ">
-          SignIn
-        </h1>
+        <h1 className="text-white text-2xl text-center font-serif ">SignIn</h1>
         <Formik
           initialValues={{ username: "", password: "" }}
           validationSchema={schema}
           onSubmit={(values, actions) => {
             actions.resetForm();
-            axios.post("http://localhost:3001/api/admin/login", values).then(({data}) => {
-              if(data !== "user name or password is incorrect"){
-              localStorage.setItem("admin_user", JSON.stringify(data));
-              navigate("/admin-dashboard");
-              }
-              else {
-                alert("Invalid User Name or Password");
-              }
-            }).catch((err) => {
+            axios
+              .post("http://localhost:3001/api/admin/login", values)
+              .then(({ data }) => {
+                if (data !== "user name or password is incorrect") {
+                  localStorage.setItem("admin_user", JSON.stringify(data));
+                  navigate("/admin-dashboard");
+                } else {
+                  alert("Invalid User Name or Password");
+                }
+              })
+              .catch((err) => {
                 alert(err.message);
-            })
+              });
           }}
         >
           {(props) => (
-            <div className="flex flex-col mt-10">
+            <form className="flex flex-col mt-10" onSubmit={props.handleSubmit}>
               <div className="flex flex-col h-24 space-y-1">
                 <input
                   type="text"
@@ -72,7 +72,7 @@ function LoginForm() {
               >
                 LogIn
               </button>
-            </div>
+            </form>
           )}
         </Formik>
       </div>

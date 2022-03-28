@@ -1,42 +1,11 @@
 import React from "react";
 import WhatsAppWidget from "react-whatsapp-widget";
-// import "react-whatsapp-widget/dist/index.css";
 import axios from "axios";
 import { BsInstagram } from "react-icons/bs";
 import { AiOutlineWhatsApp } from "react-icons/ai";
 import { FiMail } from "react-icons/fi";
 import { RiFacebookCircleLine } from "react-icons/ri";
 import "../../index.css";
-
-// const data = [
-//   {
-//     id: 1,
-//     country_name: "United Arab Emirates",
-//     address: "A-Shop uae Muscat, Sultanate Of uae",
-//     facebook: "facebook.com/ashop02",
-//     instagram: "AShop",
-//     email: "info@ashop-uae.com",
-//     whatsapp: "+971 56 567 567",
-//   },
-//   {
-//     id: 2,
-//     country_name: "Oman",
-//     address: "A-Shop Oman Muscat, Sultanate Of Oman",
-//     facebook: "facebook.com/ashop02",
-//     instagram: "AShop",
-//     email: "info@ashop-oman.com",
-//     whatsapp: "+971 56 567 333",
-//   },
-//   {
-//     id: 3,
-//     country_name: "Qatar",
-//     address: "A-Shop qatar Muscat, Sultanate Of qatar",
-//     facebook: "facebook.com/ashop02",
-//     instagram: "AShop",
-//     email: "info@ashop-qatar.com",
-//     whatsapp: "+971 56 567 567",
-//   },
-// ];
 
 function Footer() {
   const [data, setData] = React.useState([]);
@@ -52,11 +21,13 @@ function Footer() {
 
   return (
     <div className="w-full bg-gray-900 text-white px-5 md:px-12 lg:px-28 py-10 pt-5 ">
-      <WhatsAppWidget
-        phoneNumber="923333713843"
-        companyName="Ashop"
-        textReplyTime="Typically replies within a minute"
-      />
+      <div className="absolute bottom-28 right-0 md:bottom-0 ml-10">
+        <WhatsAppWidget
+          phoneNumber="923333713843"
+          companyName="Ashop"
+          textReplyTime="Typically replies within a minute"
+        />
+      </div>
       <h1 className="text-xl md:text-2xl md:font-bold text-center mb-3">
         Contact Us
       </h1>
