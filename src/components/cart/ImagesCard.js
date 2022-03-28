@@ -40,7 +40,7 @@ function ImagesCard({ product }) {
         </div>
         <div className="flex-1">
           <img
-            src={`http://localhost:3001${prev}`}
+            src={`http://localhost:3001/api${prev}`}
             alt=""
             className="w-full h-full object-cover "
           />
@@ -49,7 +49,7 @@ function ImagesCard({ product }) {
         <div className="flex items-center space-x-1 mt-2 absolute bottom-0">
           <div className="border-2 border-green-400 w-16 md:w-28 cursor-pointer">
             <img
-              src={`http://localhost:3001${product.image}`}
+              src={`http://localhost:3001/api${product.image}`}
               alt=""
               className="w-full h-16 md:h-24 bg-contain"
               onClick={() => setPrev(product.image)}
@@ -61,7 +61,7 @@ function ImagesCard({ product }) {
               key={image.id}
             >
               <img
-                src={`http://localhost:3001${image.image}`}
+                src={`http://localhost:3001/api${image.image}`}
                 alt=""
                 className="w-full h-16 md:h-24 bg-contain"
                 onClick={() => setPrev(image.image)}
