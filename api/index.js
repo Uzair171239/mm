@@ -44,8 +44,6 @@ var fs = require("fs");
 app.use(cors());
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, "./build")));
-
 app.get("/api/images/:cattegory/:image", (req, res) => {
   var { cattegory, image } = req.params;
   res.sendFile(path.join(__dirname, `./images/${cattegory}/${image}`));
