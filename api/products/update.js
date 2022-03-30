@@ -28,7 +28,7 @@ router.patch("/", async (req, res) => {
     image,
   } = req.body;
 
-  var selectData = `UPDATE products SET cattegory_name='${cattegory_name}', google_cattegory='${google_cattegory}', brand='${brand}', purchase_price='${purchase_price}', code='${code}', title='${title}', status='${status}', price_list='${price_list}', price='${price}', old_price='${old_price}', description='${description}', color='${color}', size='${size}', delivery_charges='${delivery_charges}', quantity='${quantity}', quantity_text='${quantity_text}', fake_order_sold='${fake_order_sold}', rank='${rank}', image='${image}', available_in='${available_in}' where id='${id}'`;
+  var selectData = `UPDATE products SET cattegory_name='${cattegory_name}', google_cattegory='${google_cattegory}', brand='${brand}', purchase_price='${purchase_price}', code='${code}', title='${title}', status='${status}', price_list='${price_list}', price='${price}', old_price='${old_price}', description='${description}', color='${color}', size='${size}', delivery_charges='${delivery_charges}', quantity='${quantity}', quantity_text='${quantity_text}', offer_percentage='${fake_order_sold}', rank='${rank}', image='${image}', available_in='${available_in}' where id='${id}'`;
   connection.query(selectData, (err, result) => {
     if (err) console.log(err);
     else {

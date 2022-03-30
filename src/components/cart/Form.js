@@ -9,6 +9,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 
 const schema = yup.object({
+  phone_number: yup.string().required("Required"),
   city: yup.string().required("City is required"),
   deliveryAddress: yup.string(),
   color: yup.string().required("Color is required"),
@@ -56,7 +57,7 @@ function Form({ product }) {
         .post("http://localhost:3001/api/orders/missing_orders", {
           id: product.id,
           client_name: fullName,
-          phone_number: Mobile,
+          whatsapp: Mobile,
           quantity,
         })
         .catch((err) => alert(err));
@@ -81,6 +82,7 @@ function Form({ product }) {
       </div>
       <Formik
         initialValues={{
+          phone_number: "",
           color: "",
           quantity: "",
           city: "",
@@ -88,7 +90,7 @@ function Form({ product }) {
         }}
         validationSchema={schema}
         onSubmit={(values, actions) => {
-          actions.resetForm();
+          
           if (fullName && Mobile && quantity) {
             axios
               .post("http://localhost:3001/api/orders", {
@@ -97,12 +99,13 @@ function Form({ product }) {
                 country,
                 quantity,
                 fullName,
-                Mobile,
+                whatsapp: Mobile,
               })
               .then((res) => {
                 setFullName("");
                 setMobile("");
                 setQuantitty("");
+                actions.resetForm();
                 res.status === 200 && alert("Order Placed Successfully");
               })
               .catch((err) => console.log(err.message));
@@ -206,6 +209,23 @@ function Form({ product }) {
               />
             </div>
             <div className="flex flex-col space-y-1">
+            <div className="flex justify-between items-center">
+              <label htmlFor="phone_number">
+                Phone Number<span className="text-red-500">*</span>
+              </label>
+              <p className="text-red-500">{props.errors.phone_number}</p>
+            </div>
+
+            <input
+              type="number"
+              onChange={props.handleChange("phone_number")}
+              value={props.values.phone_number}
+              placeholder="Enter your phone number"
+              className="border border-gray-300 rounded-sm p-2 outline-none"
+              onBlur={props.handleBlur("Mobile")}
+            />
+          </div>
+            <div className="flex flex-col space-y-1">
               <div className="flex justify-between items-center">
                 <label htmlFor="fullName">
                   Whatsapp<span className="text-red-500">*</span>
@@ -286,8 +306,8 @@ function Form({ product }) {
                     props.errors.deliveryAddress}
                 </span>
               </div>
-              <textarea
-                rows={3}
+              <input
+                type="text"
                 name="deliveryAddress"
                 onChange={props.handleChange("deliveryAddress")}
                 value={props.values.deliveryAddress}

@@ -20,9 +20,9 @@ function PCard({ product, country }) {
           alt=""
           className="w-full h-24 md:h-32 "
         />
-        {/* <span className="absolute top-0 bg-red-500 px-0.5 md:p-0.5 md:px-2 md:m-1 -ml-2 md:ml-0 rounded-sm md:rounded-md text-white text-xs">
+        <span className="absolute top-0 bg-red-500 px-0.5 md:p-0.5 md:px-2 md:m-1 -ml-2 md:ml-0 rounded-sm md:rounded-md text-white text-xs">
           {offer_percentage}% OFF
-        </span> */}
+        </span>
       </div>
 
       <div className="mt-1">

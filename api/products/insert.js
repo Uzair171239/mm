@@ -48,7 +48,7 @@ router.post("/", async (req, res) => {
 
   var imgsrc = "/images/products/" + image;
   var selectData =
-    "INSERT INTO `products`(`cattegory_name`, `google_cattegory`, `brand`, `purchase_price`, `code`, `title`, `status`, `price_list`, `price`, `old_price`, `description`, `color`, `size`, `delivery_charges`, `quantity`, `quantity_text`, `fake_order_sold`, `rank`, `image`, `available_in`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    "INSERT INTO `products`(`cattegory_name`, `google_cattegory`, `brand`, `purchase_price`, `code`, `title`, `status`, `price_list`, `price`, `old_price`, `description`, `color`, `size`, `delivery_charges`, `quantity`, `quantity_text`, `offer_percentage`, `rank`, `image`, `available_in`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
   connection.query(
     selectData,
     [

@@ -12,13 +12,13 @@ const placeOrder = (orderProduct, res) => {
 };
 
 router.post("/", async (req, res) => {
-    var { fullName, Mobile, deliveryAddress, country, city } = req.body;
+    var { fullName, whatsapp, phone_number, deliveryAddress, country, city } = req.body;
     const { id, quantity, delivery_charges, quantity_text, color, status } =
       req.body;
     const [quan, amount] = quantity.split(":");
     var client_id;
-    var selectData = "SELECT * FROM users WHERE phone = ?";
-    await connection.query(selectData, [Number(Mobile)], (err, result) => {
+    var selectData = `SELECT * FROM users WHERE phone_number = '${Number(whatsapp)}' OR whatsapp = '${Number(whatsapp)}' OR phone_number = '${Number(phone_number)}' OR whatsapp = '${Number(phone_number)}' `;
+    connection.query(selectData, (err, result) => {
       if (err) throw err;
       else if (result[0]) {
         client_id = result[0].id;
@@ -36,12 +36,11 @@ router.post("/", async (req, res) => {
           res
         );
       } else {
-        console.log(country);
         var user =
-          "INSERT INTO `users`(`full_name`, `phone`, `address`, `country`, `city`) VALUES (?,?,?,?,?)";
+          "INSERT INTO `users`(`full_name`, `phone_number`, `address`, `country`, `city`, `whatsapp`) VALUES (?,?,?,?,?,?)";
         connection.query(
           user,
-          [fullName, Mobile, deliveryAddress, country, city],
+          [fullName, phone_number, deliveryAddress, country, city, whatsapp],
           (err, result) => {
             if (err) return err;
             else {
@@ -66,14 +65,15 @@ router.post("/", async (req, res) => {
     });
 });
 
+
 router.post("/missing_orders", async (req, res) => {
-    var { id ,client_name, phone_number, quantity} = req.body;
+    var { id , client_name, whatsapp, quantity} = req.body;
     const [quan, amount] = quantity !== "--Select--" ? quantity.split(":")  : [0,0];
     var query =
           "INSERT INTO `missing_orders`(`product_id`, `client_name`, `phone_number`, `quantity`, `amount`) VALUES (?,?,?,?,?)";
         connection.query(
           query,
-          [id , client_name, phone_number, quan, amount],
+          [id , client_name, whatsapp, quan, amount],
           (err, result) => {
             if (err) return err;
             res.send("done")

@@ -39,7 +39,6 @@ const DeleteCategories = require("./categories/Delete");
 const Admin = require("./admin/index");
 const MISSING_ORDERS = require("./MissingOrders/index");
 
-var fs = require("fs");
 
 app.use(cors());
 app.use(express.json());

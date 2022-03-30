@@ -24,10 +24,10 @@ function Form({ setFormshow, dataTable }) {
     delivery_charges,
     quantity,
     quantity_text,
-    fake_order_sold,
     rank,
     status,
     available_in,
+    offer_percentage,
     image,
   } = dataTable;
 
@@ -93,7 +93,7 @@ function Form({ setFormshow, dataTable }) {
     delivery_charges: delivery_charges || "",
     quantity: quantity || "",
     quantity_text: quantity_text || "",
-    fake_order_sold: fake_order_sold || "",
+    fake_order_sold: offer_percentage || "",
     rank: rank || "",
     description: description || "",
     status: status || "",
@@ -457,7 +457,7 @@ function Form({ setFormshow, dataTable }) {
                 <div className="flex items-center space-x-3">
                   <div className="flex flex-col">
                     <div className="flex justify-between items-center">
-                      <label className="text-white">Fake Order Sold</label>
+                      <label className="text-white">Offer Percentage</label>
                       <p className="text-red-500 text-xs">
                         {props.touched.fake_order_sold &&
                           props.errors.fake_order_sold}
@@ -468,7 +468,7 @@ function Form({ setFormshow, dataTable }) {
                       name="fake_order_sold"
                       value={props.values.fake_order_sold}
                       onChange={props.handleChange("fake_order_sold")}
-                      placeholder="Fake Order Sold"
+                      placeholder="Offer percentage"
                       onBlur={props.handleBlur("fake_order_sold")}
                       className="w-80 p-2 rounded-sm bg-inherit border border-gray-200 outline-none"
                     />
