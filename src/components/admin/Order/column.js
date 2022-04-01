@@ -32,7 +32,7 @@ const columns = [
     },
   },
   {
-    name: "phone",
+    name: "phone_number",
     label: "PHONE",
     options: {
       filter: true,

@@ -79,11 +79,11 @@ const ContactUs = () => {
               <thead>
                 <tr className="border-b-2 border-gray-200">
                   <th className="px-1 py-2 text-sm">ID</th>
+                  <th className="px-1 py-2 text-sm">COUNTRY</th>
                   <th className="px-1 py-2 text-sm">ADDRESS</th>
                   <th className="px-1 py-2 text-sm">FACEBOOK</th>
                   <th className="px-1 py-2 text-sm">INSTAGRAM</th>
-                  <th className="px-1 py-2 text-sm">Email</th>
-                  <th className="px-1 py-2 text-sm">WHATSAPP</th>
+                  <th className="px-1 py-2 text-sm">EMAIL</th>
                   <th className="px-1 py-2 text-sm">PHONE</th>
                   <th className="px-1 py-2 text-sm">ACTION</th>
                 </tr>
@@ -99,22 +99,22 @@ const ContactUs = () => {
                       </td>
                       <td className="px-1 py-2">
                         <p className=" font-mono text-gray-700 text-center">
-                          {d.country_name}
+                          {d.country_name.substring(0, 10)}...
                         </p>
                       </td>
                       <td className="px-1 py-2">
                         <p className=" font-mono text-gray-700 text-center">
-                          {d.address}
+                          {d.address.substring(0, 10)}...
                         </p>
                       </td>
                       <td className="px-1 py-2">
                         <p className=" font-mono text-gray-700 text-center">
-                          {d.facebook}
+                          {d.facebook.substring(0, 10)}...
                         </p>
                       </td>
                       <td className="px-1 py-2">
                         <p className=" font-mono text-gray-700 text-center">
-                          {d.instagram}
+                          {d.instagram.substring(0, 10)}...
                         </p>
                       </td>
                       <td className="px-1 py-2">

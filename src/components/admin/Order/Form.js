@@ -39,7 +39,7 @@ function Form({ setFormshow, dataTable }) {
       <Formik
         initialValues={{
           name: dataTable.full_name ? dataTable.full_name : "",
-          mobile: dataTable.phone ? dataTable.phone : "",
+          mobile: dataTable.phone_number ? dataTable.phone_number : "",
           address: dataTable.address ? dataTable.address : "",
           city: dataTable.city ? dataTable.city : "",
           product: dataTable.title ? dataTable.title : "",
