@@ -21,7 +21,7 @@ function Form({ setFormshow, dataTable }) {
           onClick={() => setFormshow(false)}
         />
       </div>
-      <h1 className="text-center -mt-3 text-lg">Add / Edit Country</h1>
+      <h1 className="text-center -mt-3 text-lg">Add / Edit Category</h1>
 
       <Formik
         initialValues={{
