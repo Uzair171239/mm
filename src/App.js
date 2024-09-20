@@ -21,6 +21,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="cart" element={<AddToCart />} />
       <Route path="admin" element={<Admin />} />
+      <Route path="change-password" element={<ChangePassword />} />
       <Route path="admin-dashboard" element={<ProtectedRoute Component={Dashboard}/>} />
       <Route path="admin-orders" element={<ProtectedRoute Component={Order}/>} />
       <Route path="admin-missingorder" element={<ProtectedRoute Component={MissingOrder}/>} />
@@ -29,7 +30,7 @@ function App() {
       <Route path="admin-contactus" element={<ProtectedRoute Component={ContactUs}/>} />
       <Route path="admin-countries" element={<ProtectedRoute Component={Countries}/>} />
       <Route path="admin-status" element={<ProtectedRoute Component={Status}/>} />
-      <Route path="change-password" element={<ProtectedRoute Component={ChangePassword}/>} />
+      {/* <Route path="change-password" element={<ProtectedRoute Component={ChangePassword}/>} /> */}
     </Routes>
   );
 }

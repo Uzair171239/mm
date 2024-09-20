@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 
 function PCard({ product, country }) {
   const { price, offer_percentage, image, title, old_price } = product;
-  const currency = { country };
+  const {currency} =  country;
 
   const navigate = useNavigate();
   return (

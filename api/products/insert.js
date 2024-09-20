@@ -5,7 +5,7 @@ const connection = require("../connections");
 
 var storage = multer.diskStorage({
   destination: function (req, file, callback) {
-    callback(null, "./images/products");
+    callback(null, "api/images/products");
   },
   filename: (req, file, callBack) => {
     callBack(null, file.originalname);

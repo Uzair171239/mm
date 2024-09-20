@@ -117,7 +117,7 @@ function Footer() {
         <p className="text-center">
           Privacy Policy - Terms of Use - User Information Legal Enquiry Guide
         </p>
-        <p>© {new Date().getFullYear()} Ashop.com, All rights reserved</p>
+        <p>© {new Date().getFullYear()} My Shopify App, All rights reserved</p>
       </div>
     </div>
   );

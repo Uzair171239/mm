@@ -33,10 +33,10 @@ function Home() {
         .then(({ data }) => {
           set_initData(data);
           setHotDeals(
-            data.filter((item) => item.cattegory_name === "*Hot deals*")
+            data.filter((item) => item.cattegory_name === "*hot deals")
           );
           setGeneralProducts(
-            data.filter((item) => item.cattegory_name !== "*Hot deals*")
+            data.filter((item) => item.cattegory_name !== "*hot deals")
           );
         })
         .catch((err) => {
